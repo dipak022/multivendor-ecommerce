@@ -20,9 +20,13 @@ Route::get('/', function () {
 Auth::routes(['register'=>false]);
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-
+// Admin Deshboard
 Route::group(['prefix'=>'admin/','middleware'=>'auth'],function(){
 
     Route::get('/', [App\Http\Controllers\AdminController::class, 'admin'])->name('admin');
+    
+    // Banner route here 
+    Route::resource('/banner', App\Http\Controllers\BannerController::class);
+
 
 });

@@ -10,11 +10,24 @@
 <link rel="stylesheet" href="{{asset('backend/assets/vendor/bootstrap/css/bootstrap.min.css')}}">
 <link rel="stylesheet" href="{{asset('backend/')}}/assets/vendor/font-awesome/css/font-awesome.min.css">
 
+<link rel="stylesheet" href="{{asset('backend/')}}/assets/vendor/summernote/dist/summernote.css"/>
+
 <link rel="stylesheet" href="{{asset('backend/')}}/assets/vendor/bootstrap-progressbar/css/bootstrap-progressbar-3.3.4.min.css">
 <link rel="stylesheet" href="{{asset('backend/')}}/assets/vendor/chartist/css/chartist.min.css">
 <link rel="stylesheet" href="{{asset('backend/')}}/assets/vendor/chartist-plugin-tooltip/chartist-plugin-tooltip.css">
 <link rel="stylesheet" href="{{asset('backend/')}}/assets/vendor/toastr/toastr.min.css">
 
+
+
+<link rel="stylesheet" href="{{asset('backend/')}}/assets/vendor/jquery-datatable/dataTables.bootstrap4.min.css">
+<link rel="stylesheet" href="{{asset('backend/')}}/assets/vendor/jquery-datatable/fixedeader/dataTables.fixedcolumns.bootstrap4.min.css">
+<link rel="stylesheet" href="{{asset('backend/')}}/assets/vendor/jquery-datatable/fixedeader/dataTables.fixedheader.bootstrap4.min.css">
+<link rel="stylesheet" href="{{asset('backend/')}}/assets/vendor/sweetalert/sweetalert.css"/>
 <!-- MAIN CSS -->
 <link rel="stylesheet" href="{{asset('backend/')}}/asset/css/main.css">
 <link rel="stylesheet" href="{{asset('backend/')}}/asset/css/color_skins.css">
+
+<link rel="stylesheet" href="{{asset('backend/')}}/asset/css/main.css">
+<link rel="stylesheet" href="{{asset('backend/')}}/asset/css/color_skins.css">
+
+

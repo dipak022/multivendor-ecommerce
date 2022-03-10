@@ -49,8 +49,8 @@
                             <li>
                                 <a href="#App" class="has-arrow"><i class="icon-picture"></i> <span>Banner Management</span></a>
                                 <ul>
-                                    <li><a href="app-inbox.html">Inbox</a></li>
-                                    <li><a href="app-chat.html">Chat</a></li>
+                                    <li><a href="{{ route('banner.index') }}">All Banner</a></li>
+                                    <li><a href="{{ route('banner.create') }}">Create Banner</a></li>
                                     
                                 </ul>
                             </li>
