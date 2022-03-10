@@ -5,11 +5,11 @@
             <div class="block-header">
                 <div class="row">
                     <div class="col-lg-5 col-md-8 col-sm-12">                        
-                        <h2><a href="javascript:void(0);" class="btn btn-xs btn-link btn-toggle-fullwidth"><i class="fa fa-arrow-left"></i></a> Blog Post</h2>
+                        <h2><a href="javascript:void(0);" class="btn btn-xs btn-link btn-toggle-fullwidth"><i class="fa fa-arrow-left"></i></a> Create Category</h2>
                         <ul class="breadcrumb">
-                            <li class="breadcrumb-item"><a href="index.html"><i class="icon-home"></i></a></li>                            
-                            <li class="breadcrumb-item">Blog</li>
-                            <li class="breadcrumb-item active">Blog Post</li>
+                            <li class="breadcrumb-item"><a href="{{route('admin')}}"><i class="icon-home"></i></a></li>                            
+                            <li class="breadcrumb-item">Home</li>
+                            <li class="breadcrumb-item active">Create Category</li>
                         </ul>
                     </div>            
                     <div class="col-lg-7 col-md-4 col-sm-12 text-right">
@@ -28,23 +28,26 @@
             </div>
 
             <div class="row clearfix">
+                
                 <div class="col-lg-12">
                     <div class="card">
                         <div class="body">
+                        <form class="add-contact-form" method="post" action="{{ route('banner.store') }}" enctype="multipart/form-data">
+                             @csrf
                             <div class="form-group">
                                 <input type="text" class="form-control" placeholder="Enter Blog title" name="title" value="{{old('title')}}" />
                             </div>
                             <select class="form-control show-tick" name="condition">
-                                <option>Select Condition</option>
+                                <option selected disable>-Select Condition--</option>
                                 <option value="banner" {{old("condition") == "banner" ? "selected" : "" }}>Banner</option>
                                 <option value="promo" {{old("condition") == "promo" ? "selected" : "" }}>Promote</option>
                                
                             </select>
                             </br>
                             <select class="form-control show-tick" name="status">
-                                <option>Select Status</option>
-                                <option value="banner" {{old("status") == "active" ? "selected" : "" }}>Active</option>
-                                <option value="promo" {{old("status") == "inactive" ? "selected" : "" }}>Inactive</option>
+                                <option selected disable>--Select Status--</option>
+                                <option value="active" {{old("status") == "active" ? "selected" : "" }}>Active</option>
+                                <option value="inactive" {{old("status") == "inactive" ? "selected" : "" }}>Inactive</option>
                                
                             </select>
                             <div class="form-group m-t-20 m-b-20">
@@ -54,7 +57,7 @@
                                         <i class="fa fa-picture-o"></i> Choose
                                         </a>
                                     </span>
-                                <input id="thumbnail" class="form-control" type="text" name="filepath">
+                                <input id="thumbnail" class="form-control" type="text" name="photo">
                                 </div>
                                 <div id="holder" style="margin-top:15px;max-height:100px;"></div>
                                
@@ -63,8 +66,9 @@
                             <div>
                             <textarea  class="summernote" name="product_details" placeholder="write some text ..." name="description">{{old('description')}}</textarea>
                             </div>
-                            <button type="button" class="btn btn-block btn-primary   m-t-20">Post</button>
-                        </div>
+                            <button type="submit" class="btn btn-block btn-primary  m-t-20">Create Category</button>
+                           </div>
+                         </form>
                     </div>
                 </div>            
             </div>

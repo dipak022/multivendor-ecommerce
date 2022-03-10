@@ -29,5 +29,6 @@
 
 <link rel="stylesheet" href="{{asset('backend/')}}/asset/css/main.css">
 <link rel="stylesheet" href="{{asset('backend/')}}/asset/css/color_skins.css">
+<link href="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.min.css" rel="stylesheet">
 
 
