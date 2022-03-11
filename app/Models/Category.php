@@ -16,6 +16,7 @@ class Category extends Model
         'is_parent',
         'sammary',
         'parent_id',
+        'status',
        
     ];
 }

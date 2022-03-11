@@ -58,8 +58,8 @@
                             <li>
                                 <a href="#App" class="has-arrow"><i class="icon-equalizer"></i> <span>Category Management</span></a>
                                 <ul>
-                                    <li><a href="app-inbox.html">Inbox</a></li>
-                                    <li><a href="app-chat.html">Chat</a></li>
+                                    <li><a href="{{ route('category.index') }}">All Category</a></li>
+                                    <li><a href="{{ route('category.create') }}">Create Category</a></li>
                                     
                                 </ul>
                             </li>
