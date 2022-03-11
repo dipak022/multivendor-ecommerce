@@ -15,14 +15,10 @@
                     </div>            
                     <div class="col-lg-7 col-md-4 col-sm-12 text-right">
                         <div class="inlineblock text-center m-r-15 m-l-15 hidden-sm">
-                            <div class="sparkline text-left" data-type="line" data-width="8em" data-height="20px" data-line-Width="1" data-line-Color="#00c5dc"
-                                data-fill-Color="transparent">3,5,1,6,5,4,8,3</div>
-                            <span>Visitors</span>
+                            <h3 > Total Banner :{{\App\Models\Banner::count()}} </h3>
                         </div>
                         <div class="inlineblock text-center m-r-15 m-l-15 hidden-sm">
-                            <div class="sparkline text-left" data-type="line" data-width="8em" data-height="20px" data-line-Width="1" data-line-Color="#f4516c"
-                                data-fill-Color="transparent">4,6,3,2,5,6,5,4</div>
-                            <span>Visits</span>
+                        <a class="btn btn-success" href="{{route('banner.create')}}">Add Banner</a>
                         </div>
                     </div>
                 </div>
