@@ -73,20 +73,20 @@
                                 </ul>
                             </li>
                             
+                           
+
+                            <li>
+                                <a href="#App" class="has-arrow"><i class="icon-briefcase"></i> <span>Product Management</span></a>
+                                <ul>
+                                    <li><a href="{{ route('product.index') }}">All Product</a></li>
+                                    <li><a href="{{ route('product.create') }}">Create Product</a></li>
+                                </ul>
+                            </li>
                             <li>
                                 <a href="#App" class="has-arrow"><i class="icon-layers"></i> <span>Order Management</span></a>
                                 <ul>
                                     <li><a href="app-inbox.html">Inbox</a></li>
                                     <li><a href="app-chat.html">Chat</a></li>
-                                </ul>
-                            </li>
-
-                            <li>
-                                <a href="#App" class="has-arrow"><i class="icon-briefcase"></i> <span>Products Management</span></a>
-                                <ul>
-                                    <li><a href="app-inbox.html">Inbox</a></li>
-                                    <li><a href="app-chat.html">Chat</a></li>
-                                    
                                 </ul>
                             </li>
 

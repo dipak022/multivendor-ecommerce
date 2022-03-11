@@ -17,7 +17,7 @@ class ProductFactory extends Factory
     public function definition()
     {
         return [
-            'title' => $this->faker->sentences(4,true),
+            'title' => $this->faker->sentences(1,true),
             'slug' => $this->faker->unique()->slug(),
             'sammary' => $this->faker->text,
             'description' => $this->faker->text,
