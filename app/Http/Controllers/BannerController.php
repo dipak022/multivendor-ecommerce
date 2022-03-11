@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Banner;
 use Illuminate\Support\Str;
+use DB;
 class BannerController extends Controller
 {
     /**
@@ -14,7 +15,31 @@ class BannerController extends Controller
      */
     public function index()
     {
-        return view('backend.banners.index');
+        $banners=Banner::orderBy('id','DESC')->get(); 
+        return view('backend.banners.index',compact('banners'));
+    }
+
+    public function bannerStatus(Request $request){
+        //dd($request->all());
+        if($request->mode == 'true'){
+            $status = DB::table('banners')->where('id',$request->id)->update(['status'=>'active']);
+        }else{
+            $status = DB::table('banners')->where('id',$request->id)->update(['status'=>'inactive']);
+        }
+        if ($status) {
+            $notification = array(
+                'message' => 'Status Change Successfully.',
+                'alert-type' => 'success'
+            );
+            return redirect()->back()->with($notification);
+        }else{
+            $notification = array(
+                'message' => 'Status Change Unuccessfully',
+                'alert-type' => 'danger'
+            );
+            return redirect()->back()->with($notification);
+        } 
+        
     }
 
     /**
@@ -87,7 +112,16 @@ class BannerController extends Controller
      */
     public function edit($id)
     {
-        //
+        $banner = Banner::find($id);
+        if($banner){
+            return view('backend.banners.edit',compact('banner'));
+        }else{
+            $notification = array(
+                'message' => 'Data Not Found',
+                'alert-type' => 'danger'
+            );
+            return redirect()->back()->with($notification);
+        }
     }
 
     /**
@@ -99,7 +133,39 @@ class BannerController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $banner = Banner::find($id);
+        if($banner){
+            $validated = $request->validate([
+                'title' => 'string|required',
+                'description' => 'string|nullable',
+                'photo'=> 'required',
+                'condition' => 'nullable|in:banner,promo',
+                'status' => 'nullable|in:active,inactive',
+            ]);
+            $data = $request->all();
+            
+            $status = $banner->fill($data)->save();
+    
+            if ($status) {
+                $notification = array(
+                    'message' => 'Banner Update Successfully.',
+                    'alert-type' => 'success'
+                );
+                return redirect()->route('banner.index')->with($notification);
+            }else{
+                $notification = array(
+                    'message' => 'Banner Update Unuccessfully',
+                    'alert-type' => 'danger'
+                );
+                return redirect()->back()->with($notification);
+            }
+        }else{
+            $notification = array(
+                'message' => 'Data Not Found',
+                'alert-type' => 'danger'
+            );
+            return redirect()->back()->with($notification);
+        }
     }
 
     /**
@@ -110,6 +176,22 @@ class BannerController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $banner = Banner::find($id);
+        if($banner){
+            $status = $banner->delete();
+            if ($status) {
+                $notification = array(
+                    'message' => 'Banner Delete Successfully.',
+                    'alert-type' => 'success'
+                );
+                return redirect()->route('banner.index')->with($notification);
+            }
+        }else{
+            $notification = array(
+                'message' => 'Banner Delete Unsuccessfully',
+                'alert-type' => 'danger'
+            );
+            return redirect()->back()->with($notification);
+        }
     }
 }

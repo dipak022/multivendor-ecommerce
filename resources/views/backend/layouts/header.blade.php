@@ -16,6 +16,7 @@
 <link rel="stylesheet" href="{{asset('backend/')}}/assets/vendor/chartist/css/chartist.min.css">
 <link rel="stylesheet" href="{{asset('backend/')}}/assets/vendor/chartist-plugin-tooltip/chartist-plugin-tooltip.css">
 <link rel="stylesheet" href="{{asset('backend/')}}/assets/vendor/toastr/toastr.min.css">
+<link href="https://cdn.jsdelivr.net/gh/gitbrent/bootstrap-switch-button@1.1.0/css/bootstrap-switch-button.min.css" rel="stylesheet">
 
 
 

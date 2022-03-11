@@ -17,7 +17,7 @@ return new class extends Migration
             $table->id();
             $table->string('title');
             $table->string('slug')->unique();
-            $table->mediumText('description')->nullable();
+            $table->Text('description')->nullable();
             $table->string('photo');
             $table->enum('status',['active','inactive'])->default('active');
             $table->enum('condition',['banner','promo'])->default('banner');

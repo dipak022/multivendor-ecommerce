@@ -24,6 +24,7 @@
 <script src="{{asset('backend/')}}/asset/js/index.js"></script>
 <script src="{{asset('backend/')}}/assets/vendor/summernote/dist/summernote.js"></script>
 <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/gitbrent/bootstrap-switch-button@1.1.0/dist/bootstrap-switch-button.min.js"></script>
 
 @yield('scripts')
 

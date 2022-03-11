@@ -5,25 +5,14 @@
             <div class="block-header">
                 <div class="row">
                     <div class="col-lg-5 col-md-8 col-sm-12">                        
-                        <h2><a href="javascript:void(0);" class="btn btn-xs btn-link btn-toggle-fullwidth"><i class="fa fa-arrow-left"></i></a> Create Category</h2>
+                        <h2><a href="javascript:void(0);" class="btn btn-xs btn-link btn-toggle-fullwidth"><i class="fa fa-arrow-left"></i></a> Create Banner</h2>
                         <ul class="breadcrumb">
                             <li class="breadcrumb-item"><a href="{{route('admin')}}"><i class="icon-home"></i></a></li>                            
                             <li class="breadcrumb-item">Home</li>
-                            <li class="breadcrumb-item active">Create Category</li>
+                            <li class="breadcrumb-item active">Create Banner</li>
                         </ul>
                     </div>            
-                    <div class="col-lg-7 col-md-4 col-sm-12 text-right">
-                        <div class="inlineblock text-center m-r-15 m-l-15 hidden-sm">
-                            <div class="sparkline text-left" data-type="line" data-width="8em" data-height="20px" data-line-Width="1" data-line-Color="#00c5dc"
-                                data-fill-Color="transparent">3,5,1,6,5,4,8,3</div>
-                            <span>Visitors</span>
-                        </div>
-                        <div class="inlineblock text-center m-r-15 m-l-15 hidden-sm">
-                            <div class="sparkline text-left" data-type="line" data-width="8em" data-height="20px" data-line-Width="1" data-line-Color="#f4516c"
-                                data-fill-Color="transparent">4,6,3,2,5,6,5,4</div>
-                            <span>Visits</span>
-                        </div>
-                    </div>
+                    
                 </div>
             </div>
 
@@ -64,9 +53,9 @@
                             </div>
                             
                             <div>
-                            <textarea  class="summernote" name="product_details" placeholder="write some text ..." name="description">{{old('description')}}</textarea>
+                            <textarea  class="summernote"  placeholder="write some text ..." name="description">{{old('description')}}</textarea>
                             </div>
-                            <button type="submit" class="btn btn-block btn-primary  m-t-20">Create Category</button>
+                            <button type="submit" class="btn btn-block btn-primary  m-t-20">Create Banner</button>
                            </div>
                          </form>
                     </div>
