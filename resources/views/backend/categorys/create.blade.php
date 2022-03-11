@@ -49,7 +49,10 @@
                             <div class="col-md-12 col-lg-12 col-md-12 col-sm-12 form-group d-none" id="parent_cat_div">
                                 <label mx-5>Is Parent</label>
                                 <select class="form-control show-tick" name="parent_id">
-                                    <option  disable></option>
+                                    <option  disable value="">Select Category</option>
+                                    @foreach($parant_category as $row)
+                                    <option  value="{{ $row->id }}" {{ old('parent_id') == $row->id ? 'selected' : ''}}>{{ $row->title }}</option>
+                                    @endforeach
                                 </select>
                             </div>
                             

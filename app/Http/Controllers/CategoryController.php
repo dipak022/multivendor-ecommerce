@@ -70,6 +70,7 @@ class CategoryController extends Controller
             $slug .= time().'_'.$slug;
         }
         $data['slug']= $slug;
+        $data['is_parent'] = $request->input('parent_id',0);
         $status = Category::create($data);
 
         if ($status) {
@@ -107,8 +108,9 @@ class CategoryController extends Controller
     public function edit($id)
     {
         $category = Category::find($id);
+        $parant_category = Category::where('is_parent',1)->orderBy('title','ASC')->get();
         if($category){
-            return view('backend.categorys.edit',compact('category'));
+            return view('backend.categorys.edit',compact(['category','parant_category']));
         }else{
             $notification = array(
                 'message' => 'Data Not Found',
@@ -127,7 +129,35 @@ class CategoryController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $category = Category::find($id);
+        if($category){
+            $data = $request->all();
+            if($request->is_parent==1){
+                $data['parent_id']=null;
+            }
+            $data['is_parent'] = $request->input('parent_id',0);
+            $status = $category->fill($data)->save();
+            if ($status) {
+                $notification = array(
+                    'message' => 'Category Update Successfully.',
+                    'alert-type' => 'success'
+                );
+                return redirect()->route('category.index')->with($notification);
+            }else{
+                $notification = array(
+                    'message' => 'Category Update Unuccessfully',
+                    'alert-type' => 'danger'
+                );
+                return redirect()->back()->with($notification);
+            } 
+            
+        }else{
+            $notification = array(
+                'message' => 'Data Not Found',
+                'alert-type' => 'danger'
+            );
+            return redirect()->back()->with($notification);
+        }
     }
 
     /**
@@ -139,9 +169,13 @@ class CategoryController extends Controller
     public function destroy($id)
     {
         $category = Category::find($id);
+        $child_cat_id = Category::where('parent_id',$id)->pluck('id');
         if($category){
             $status = $category->delete();
             if ($status) {
+                if(count($child_cat_id)>0){
+                    Category::shifChild($child_cat_id);
+                }
                 $notification = array(
                     'message' => 'Category Delete Successfully.',
                     'alert-type' => 'success'

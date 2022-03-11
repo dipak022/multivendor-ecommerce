@@ -65,7 +65,7 @@
                                             <span class="badge badge-primary">No</span>
                                             @endif
                                         </td>
-                                        <td>{{$item->parent_id}}</td>
+                                        <td>{{ \App\Models\Category::where('id',$item->	parent_id)->value('title') }}</td>
                                         <td>
                                         <input type="checkbox" name="toogle" value="{{$item->id}}" data-toggle="switchbutton" {{$item->status == 'active' ? 'checked' : ''}}  data-onlabel="Active" data-offlabel="Inactive" data-onstyle="success" data-size="sm" data-offstyle="danger">
                                         </td>
