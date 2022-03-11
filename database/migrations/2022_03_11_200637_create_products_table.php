@@ -17,7 +17,7 @@ return new class extends Migration
             $table->id();
             $table->string('title');
             $table->string('slug')->unique();
-            $table->mediumText('summary')->nullable();
+            $table->mediumText('sammary')->nullable();
             $table->longText('description')->nullable();
             $table->integer('strock')->default(0);
             $table->unsignedBigInteger('brand_id');
