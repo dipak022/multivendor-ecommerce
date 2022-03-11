@@ -63,6 +63,15 @@
                                     
                                 </ul>
                             </li>
+
+                            <li>
+                                <a href="#App" class="has-arrow"><i class="icon-equalizer"></i> <span>Brand Management</span></a>
+                                <ul>
+                                    <li><a href="{{ route('brand.index') }}">All Brand</a></li>
+                                    <li><a href="{{ route('brand.create') }}">Create Brand</a></li>
+                                    
+                                </ul>
+                            </li>
                             
                             <li>
                                 <a href="#App" class="has-arrow"><i class="icon-layers"></i> <span>Order Management</span></a>
