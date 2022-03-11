@@ -52,7 +52,7 @@ class BrandController extends Controller
      */
     public function create()
     {
-        //
+        return view('backend.brands.create');
     }
 
     /**
@@ -63,7 +63,28 @@ class BrandController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $data = $request->all();
+        $slug = Str::slug($request->input('title'));
+        $slug_count = Brand::where('slug',$slug)->count();
+        if($slug_count > 0){
+            $slug .= time().'_'.$slug;
+        }
+        $data['slug']= $slug;
+        $status = Brand::create($data);
+
+        if ($status) {
+            $notification = array(
+                'message' => 'Brand Created Successfully.',
+                'alert-type' => 'success'
+            );
+            return redirect()->route('brand.index')->with($notification);
+        }else{
+            $notification = array(
+                'message' => 'Brand Created Unuccessfully',
+                'alert-type' => 'danger'
+            );
+            return redirect()->back()->with($notification);
+        } 
     }
 
     /**
@@ -85,7 +106,16 @@ class BrandController extends Controller
      */
     public function edit($id)
     {
-        //
+        $brand = Brand::find($id);
+        if($brand){
+            return view('backend.brands.edit',compact('brand'));
+        }else{
+            $notification = array(
+                'message' => 'Data Not Found',
+                'alert-type' => 'danger'
+            );
+            return redirect()->back()->with($notification);
+        }
     }
 
     /**
@@ -97,7 +127,33 @@ class BrandController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $brand = Brand::find($id);
+        if($brand){
+            
+            $data = $request->all();
+            
+            $status = $brand->fill($data)->save();
+    
+            if ($status) {
+                $notification = array(
+                    'message' => 'Brand Update Successfully.',
+                    'alert-type' => 'success'
+                );
+                return redirect()->route('brand.index')->with($notification);
+            }else{
+                $notification = array(
+                    'message' => 'Brand Update Unuccessfully',
+                    'alert-type' => 'danger'
+                );
+                return redirect()->back()->with($notification);
+            }
+        }else{
+            $notification = array(
+                'message' => 'Data Not Found',
+                'alert-type' => 'danger'
+            );
+            return redirect()->back()->with($notification);
+        }
     }
 
     /**
@@ -108,6 +164,22 @@ class BrandController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $brand = Brand::find($id);
+        if($brand){
+            $status = $brand->delete();
+            if ($status) {
+                $notification = array(
+                    'message' => 'Brand Delete Successfully.',
+                    'alert-type' => 'success'
+                );
+                return redirect()->route('brand.index')->with($notification);
+            }
+        }else{
+            $notification = array(
+                'message' => 'Brand Delete Unsuccessfully',
+                'alert-type' => 'danger'
+            );
+            return redirect()->back()->with($notification);
+        }
     }
 }
