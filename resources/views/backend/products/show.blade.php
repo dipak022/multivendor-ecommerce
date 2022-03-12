@@ -53,6 +53,7 @@
                                     <tr>
                                         <td>{{$loop->iteration}}</td>
                                         <td>{{$item->title}}</td>
+                                        
                                         <td>
                                         <img src="{{$item->photo}}" id="holder" style="margin-top:15px;max-height:100px;"></img>
                                         </td>
@@ -73,7 +74,7 @@
 
                                         </td>
                                         <td>
-                                            <a type="button"  class="btn btn-secondary" href="#defaultModal" data-toggle="modal" data-target="#ProductID{{$item->id}}"><i class="float-left fa fa-eye"></i></a>
+                                            <a type="button" href="{{route('product.show',$item->id)}}" class="btn btn-secondary" title="Show"><i class="float-left fa fa-eye"></i></a>
                                             <a type="button" href="{{route('product.edit',$item->id)}}" class="btn btn-info" title="Edit"><i class="float-left fa fa-edit"></i></a>
                                             <form class="float-left px-2" action="{{ route('product.destroy',$item->id) }}" method="POST">
                                                 @csrf 
@@ -83,83 +84,6 @@
                                             </form>
                                             
                                         </td>
-
-                                        <!-- start Modal -->
-
-                                        <div class="modal fade" id="ProductID{{$item->id}}" tabindex="-1" role="dialog">
-                                            @php
-                                                $product = \App\Models\Product::where('id',$item->id)->first();
-                                            @endphp
-                                            <div class="modal-dialog" role="document">
-                                                <div class="modal-content">
-                                                    <div class="modal-header">
-                                                        <h4 class="text-center" id="defaultModalLabel">{{  \Illuminate\Support\Str::upper($product->title)  }}</h4>
-                                                    </div>
-                                                    <div class="modal-body">
-                                                        <div class="row">
-                                                            <div class="col-md-6">
-                                                                <strong>Sammary :</strong>
-                                                                <p>{!! html_entity_decode($product->sammary) !!}</p>
-                                                            </div>
-                                                            <div class="col-md-6">
-                                                                <strong>Description :</strong>
-                                                                <p>{!! html_entity_decode($product->description) !!}</p>
-                                                            </div>
-                                                        </div>
-                                                        <div class="row">
-                                                            <div class="col-md-4">
-                                                                <strong>Category :</strong>
-                                                                <p>{{ \App\Models\Category::where('id',$product->cat_id)->value('title') }}</p>
-                                                            </div>
-                                                            <div class="col-md-4">
-                                                                <strong>Child Category :</strong>
-                                                                <p>{{ \App\Models\Category::where('id',$product->clild_cat_id)->value('title') }}</p>
-                                                            </div>
-                                                            <div class="col-md-4">
-                                                                <strong>Brand :</strong>
-                                                                <p>{{ \App\Models\Category::where('id',$product->brand_id)->value('title') }}</p>
-                                                            </div>
-                                                        </div>
-                                                        <div class="row">
-                                                            <div class="col-md-4">
-                                                                <strong>Size :</strong>
-                                                                <p class="badge badge-success">{{  $product->size }} </p>
-                                                            </div>
-                                                            <div class="col-md-4">
-                                                                <strong>Status :</strong>
-                                                                <p class="badge badge-success">{{  $product->status }} </p>
-                                                            </div>
-                                                            <div class="col-md-4">
-                                                                <strong>Conditions :</strong>
-                                                                <p class="badge badge-success">{{  $product->conditions }} </p>
-                                                            </div>
-                                                        </div>
-                                                        <div class="row">
-                                                            <div class="col-md-4">
-                                                                <strong>Price :</strong>
-                                                                <p>{{ number_format($product->price,2) }} TK</p>
-                                                            </div>
-                                                            <div class="col-md-4">
-                                                                <strong>Offer Price :</strong>
-                                                                <p>{{ number_format($product->offer_price,2) }} TK</p>
-                                                            </div>
-                                                            <div class="col-md-4">
-                                                                <strong>Discount Price :</strong>
-                                                                <p>{{ number_format($product->discount,2) }} TK</p>
-                                                            </div>
-                                                        </div>
-      
-                                                    </div>
-                                                    <div class="modal-footer">
-                                                        <!--
-                                                        <button type="button" class="btn btn-primary">SAVE CHANGES</button>
-                                                        -->
-                                                        <button type="button" class="btn btn-success" data-dismiss="modal">CLOSE</button>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <!--end Modal -->
                                     </tr>
                                     @endforeach
                                   
@@ -175,8 +99,7 @@
            
 
         </div>
-</div>
-
+    </div>
 @endsection
 
 @section('scripts')
@@ -211,9 +134,6 @@
             )
         }
         })
-        
-        
-
     });
 
 </script>

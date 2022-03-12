@@ -98,7 +98,16 @@ class ProductController extends Controller
      */
     public function show($id)
     {
-        //
+        $product = Product::find($id);
+        if($product){
+            return view('backend.products.index',compact('product'));
+        }else{
+            $notification = array(
+                'message' => 'Data Not Found',
+                'alert-type' => 'danger'
+            );
+            return redirect()->back()->with($notification);
+        }
     }
 
     /**
