@@ -64,7 +64,7 @@
                             </br>
                             <div class="d-none" id="child_cat_div">
                                 <select id="child_cat_id" class="form-control show-tick" name="child_cat_id">
-                                    <option selected disable>--Select Child Category--</option>
+                                    
                                    
                                 </select>
                             </div>
@@ -139,7 +139,7 @@ $('#cat_id').change(function(){
     //alert(cat_id);
     if(cat_id !=null){
         $.ajax({
-            url : "",
+            url : "/admin/category/"+cat_id+"/child",
             type : "POST",
             data : {
                 _token:'{{csrf_token()}}',
@@ -147,9 +147,22 @@ $('#cat_id').change(function(){
                 cat_id : cat_id,
             },
             success:function(response){
-             console.log(response.status);
-            }
+             //console.log(response);
+             var html_option ="<option value=''>--Child Category--</option>";
+             if(response.status){
+                 $('#child_cat_div').removeClass('d-none');
+                 $.each(response.data,function(id,title){
+                     //alert(title);
+                    html_option +="<option value ='"+id+"'>"+title+"</option>";
 
+                 });
+             }else{
+                 //alert("Not Found Child Category");
+                 $('#child_cat_div').addClass('d-none');
+             }
+             //append option 
+             $('#child_cat_id').html(html_option);
+            }
         });
     }
 

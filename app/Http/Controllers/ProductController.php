@@ -63,7 +63,31 @@ class ProductController extends Controller
      */
     public function store(Request $request)
     {
-        
+        //return $request->all();
+        $data = $request->all();
+        $slug = Str::slug($request->input('title'));
+        $slug_count = Product::where('slug',$slug)->count();
+        if($slug_count > 0){
+            $slug .= time().'_'.$slug;
+        }
+        $data['slug']= $slug;
+        $data['offer_price'] = $request->price-(($request->price*$request->discount)/100);
+        //return $data;
+        $status = Product::create($data);
+
+        if ($status) {
+            $notification = array(
+                'message' => 'Product Created Successfully.',
+                'alert-type' => 'success'
+            );
+            return redirect()->route('product.index')->with($notification);
+        }else{
+            $notification = array(
+                'message' => 'Product Created Unuccessfully',
+                'alert-type' => 'danger'
+            );
+            return redirect()->back()->with($notification);
+        } 
     }
 
     /**

@@ -74,6 +74,7 @@
 
                                         </td>
                                         <td>
+                                            <a type="button" href="{{route('product.show',$item->id)}}" class="btn btn-info" title="Show"><i class="float-left fa fa-eye"></i></a>
                                             <a type="button" href="{{route('product.edit',$item->id)}}" class="btn btn-info" title="Edit"><i class="float-left fa fa-edit"></i></a>
                                             <form class="float-left px-2" action="{{ route('product.destroy',$item->id) }}" method="POST">
                                                 @csrf 
