@@ -17,4 +17,11 @@ class IndexController extends Controller
         $categorys = Category::where(['status'=>'active','is_parent'=>1])->orderBy('id','DESC')->limit('3')->get();
         return view('frontend.index',compact(['banners','categorys']));
     }
+
+    public function ProductCategory($slug){
+        //return $slug;
+        $category = Category::where('slug',$slug)->first();
+        return $category;
+
+    }
 }

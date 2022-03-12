@@ -13,7 +13,9 @@ use Illuminate\Support\Facades\Route;
 
 // Frontend route strat 
 Route::get('/', [App\Http\Controllers\Frontend\IndexController::class, 'home'])->name('home');
+//product category
 
+Route::get('product-category/{slug}/', [App\Http\Controllers\Frontend\IndexController::class, 'ProductCategory'])->name('product.category');
 // Frontend route end
 
 

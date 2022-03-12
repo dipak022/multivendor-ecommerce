@@ -40,7 +40,7 @@
                 <!-- Single Catagory -->
                 <div class="col-12 col-md-4">
                     <div class="single_catagory_area mt-50">
-                        <a href="#">
+                        <a href="{{ route('product.category',$category->slug) }}">
                             <img src="{{$category->photo }}" alt="{{$category->titel }}">
                         </a>
                     </div>
