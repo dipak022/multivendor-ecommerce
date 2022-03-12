@@ -10,6 +10,7 @@ use App\Models\Product;
 use App\Models\User;
 use Illuminate\Support\Str;
 use DB;
+use Illuminate\Support\Facades\Hash;
 
 class UserController extends Controller
 {
@@ -54,7 +55,7 @@ class UserController extends Controller
      */
     public function create()
     {
-        //
+        return view('backend.users.create');
     }
 
     /**
@@ -65,7 +66,26 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        //return $request->all();
+        $data = $request->all();
+        
+        $data['password']= Hash::make($request->password);
+        //return $data;
+        $status = User::create($data);
+
+        if ($status) {
+            $notification = array(
+                'message' => 'User Created Successfully.',
+                'alert-type' => 'success'
+            );
+            return redirect()->route('user.index')->with($notification);
+        }else{
+            $notification = array(
+                'message' => 'User Created Unuccessfully',
+                'alert-type' => 'danger'
+            );
+            return redirect()->back()->with($notification);
+        } 
     }
 
     /**
