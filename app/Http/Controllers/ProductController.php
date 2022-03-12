@@ -118,7 +118,17 @@ class ProductController extends Controller
      */
     public function edit($id)
     {
-        
+        $product = Product::find($id);
+        //$parant_category = Product::where('is_parent',1)->orderBy('title','ASC')->get();
+        if($product){
+            return view('backend.products.edit',compact(['product']));
+        }else{
+            $notification = array(
+                'message' => 'Data Not Found',
+                'alert-type' => 'danger'
+            );
+            return redirect()->back()->with($notification);
+        }
     }
 
     /**
@@ -130,7 +140,32 @@ class ProductController extends Controller
      */
     public function update(Request $request, $id)
     {
-        
+        $product = Product::find($id);
+        if($product){
+            $data = $request->all();
+            $data['offer_price'] = $request->price-(($request->price*$request->discount)/100);
+            $status = $product->fill($data)->save();
+            if ($status) {
+                $notification = array(
+                    'message' => 'Product Update Successfully.',
+                    'alert-type' => 'success'
+                );
+                return redirect()->route('product.index')->with($notification);
+            }else{
+                $notification = array(
+                    'message' => 'Product Update Unuccessfully',
+                    'alert-type' => 'danger'
+                );
+                return redirect()->back()->with($notification);
+            } 
+            
+        }else{
+            $notification = array(
+                'message' => 'Data Not Found',
+                'alert-type' => 'danger'
+            );
+            return redirect()->back()->with($notification);
+        }
     }
 
     /**
@@ -141,6 +176,22 @@ class ProductController extends Controller
      */
     public function destroy($id)
     {
-        
+        $product = Product::find($id);
+        if($product){
+            $status = $product->delete();
+            if ($status) {
+                $notification = array(
+                    'message' => 'Product Delete Successfully.',
+                    'alert-type' => 'success'
+                );
+                return redirect()->route('product.index')->with($notification);
+            }
+        }else{
+            $notification = array(
+                'message' => 'Product Delete Unsuccessfully',
+                'alert-type' => 'danger'
+            );
+            return redirect()->back()->with($notification);
+        }
     }
 }

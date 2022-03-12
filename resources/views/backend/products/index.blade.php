@@ -50,11 +50,14 @@
                                
                                 <tbody>
                                     @foreach($product as $item)
+                                       @php
+                                         $photo=explode(',',$item->photo);
+                                       @endphp
                                     <tr>
                                         <td>{{$loop->iteration}}</td>
                                         <td>{{$item->title}}</td>
                                         <td>
-                                        <img src="{{$item->photo}}" id="holder" style="margin-top:15px;max-height:100px;"></img>
+                                        <img src="{{$photo[0]}}" id="holder" style="margin-top:15px;max-height:100px;"></img>
                                         </td>
                                         <td>{{ number_format($item->price,2) }}</td>
                                         <td>{{ $item->discount }}%</td>
@@ -146,6 +149,19 @@
                                                             <div class="col-md-4">
                                                                 <strong>Discount Price :</strong>
                                                                 <p>{{ number_format($product->discount,2) }} TK</p>
+                                                            </div>
+                                                        </div>
+                                                        <div class="row">
+                                                            <div class="col-md-4">
+                                                                <strong>Vendor Name :</strong>
+                                                                <p>{{ \App\Models\User::where('id',$product->brand_id)->value('full_name') }}</p>
+                                                            </div>
+                                                            <div class="col-md-4">
+                                                                <strong>Stock :</strong>
+                                                                <p>{{ number_format($product->strock,2) }} Available</p>
+                                                            </div>
+                                                            <div class="col-md-4">
+                                                               
                                                             </div>
                                                         </div>
       

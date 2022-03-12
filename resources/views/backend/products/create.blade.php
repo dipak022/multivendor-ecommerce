@@ -43,13 +43,11 @@
                             <div class="form-group">
                                 <input type="number" step="any" class="form-control" placeholder="Discount" name="discount" value="{{old('discount')}}" />
                             </div>
-                            <div class="form-group">
-                                <input type="number" step="any" class="form-control" placeholder="Discount" name="discount" value="{{old('discount')}}" />
-                            </div>
+                            
                             <select class="form-control show-tick" name="brand_id">
                                 <option selected disable>--Select Brands--</option>
                                 @foreach(\App\Models\Brand::get() as $brand)
-                                    <option value="{{ $brand->id }}">{{$brand->title}}</option>
+                                    <option value="{{ $brand->id }}" {{ old('brand_id') == $brand->id ? 'selected' : ''}}>{{$brand->title}}</option>
                                 @endforeach
                             </select>
                             </br>
@@ -57,15 +55,14 @@
                                 <select id="cat_id" class="form-control show-tick" name="cat_id">
                                     <option selected disable>--Select Categorys--</option>
                                     @foreach(\App\Models\Category::where('is_parent',1)->get() as $cat)
-                                        <option value="{{ $cat->id }}">{{$cat->title}}</option>
+                                        <option value="{{ $cat->id }}" {{ old('cat_id') == $cat->id ? 'selected' : '' }}>{{$cat->title}}</option>
                                     @endforeach
                                 </select>
                             </div>
                             </br>
                             <div class="d-none" id="child_cat_div">
-                                <select id="child_cat_id" class="form-control show-tick" name="child_cat_id">
-                                    
-                                   
+                                <select id="child_cat_id" class="form-control show-tick" name="clild_cat_id ">
+                                
                                 </select>
                             </div>
                             </br>
@@ -78,17 +75,17 @@
                                 <option value="XL" {{old("size") == "XL" ? "selected" : "" }}>Extra Large</option>
                             </select>
                             </br>
-                            <select class="form-control show-tick" name="size">
+                            <select class="form-control show-tick" name="Conditions">
                                 <option selected disable>--Select Conditions--</option>
                                 <option value="new" {{old("conditions") == "new" ? "selected" : "" }}>New</option>
                                 <option value="popular" {{old("conditions") == "popular" ? "selected" : "" }}>Popular</option>
                                 <option value="winter" {{old("conditions") == "winter" ? "selected" : "" }}>Winter</option>
                             </select>
                             </br>
-                            <select class="form-control show-tick" name="child_cat_id">
+                            <select class="form-control show-tick" name="vandor_id">
                                 <option selected disable>--Select Vendors--</option>
                                 @foreach(\App\Models\User::where('role','vendor')->get() as $vendor)
-                                    <option value="{{ $vendor->id }}">{{$vendor->full_name}}</option>
+                                    <option value="{{ $vendor->id }}"  {{old('vandor_id') == $vendor->id ? 'selected' : '' }}>{{$vendor->full_name}}</option>
                                 @endforeach
                             </select>
                             </br>
