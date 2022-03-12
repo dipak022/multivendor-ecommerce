@@ -141,8 +141,8 @@
                             <li>
                                 <a href="#App" class="has-arrow"><i class="icon-star"></i> <span>User Management</span></a>
                                 <ul>
-                                    <li><a href="app-inbox.html">Inbox</a></li>
-                                    <li><a href="app-chat.html">Chat</a></li>
+                                <li><a href="{{ route('user.index') }}">All User</a></li>
+                                    <li><a href="{{ route('user.create') }}">Create User</a></li>
                                 </ul>
                             </li>
 
