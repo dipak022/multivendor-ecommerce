@@ -165,6 +165,22 @@ class UserController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $user = User::find($id);
+        if($user){
+            $status = $user->delete();
+            if ($status) {
+                $notification = array(
+                    'message' => 'user Delete Successfully.',
+                    'alert-type' => 'success'
+                );
+                return redirect()->route('user.index')->with($notification);
+            }
+        }else{
+            $notification = array(
+                'message' => 'User Delete Unsuccessfully',
+                'alert-type' => 'danger'
+            );
+            return redirect()->back()->with($notification);
+        }
     }
 }
