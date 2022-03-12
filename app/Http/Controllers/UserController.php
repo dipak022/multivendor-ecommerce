@@ -107,7 +107,16 @@ class UserController extends Controller
      */
     public function edit($id)
     {
-        //
+        $user = User::find($id);
+        if($user){
+            return view('backend.users.edit',compact('user'));
+        }else{
+            $notification = array(
+                'message' => 'Data Not Found',
+                'alert-type' => 'danger'
+            );
+            return redirect()->back()->with($notification);
+        }
     }
 
     /**
@@ -119,7 +128,33 @@ class UserController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $user = User::find($id);
+        if($user){
+            
+            $data = $request->all();
+            
+            $status = $user->fill($data)->save();
+    
+            if ($status) {
+                $notification = array(
+                    'message' => 'User Update Successfully.',
+                    'alert-type' => 'success'
+                );
+                return redirect()->route('user.index')->with($notification);
+            }else{
+                $notification = array(
+                    'message' => 'User Update Unuccessfully',
+                    'alert-type' => 'danger'
+                );
+                return redirect()->back()->with($notification);
+            }
+        }else{
+            $notification = array(
+                'message' => 'Data Not Found',
+                'alert-type' => 'danger'
+            );
+            return redirect()->back()->with($notification);
+        }
     }
 
     /**
