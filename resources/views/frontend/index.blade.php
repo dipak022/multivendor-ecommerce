@@ -18,7 +18,7 @@
                                 <p class="text-white" data-animation="fadeInUp" data-delay="0">100% Cotton</p>
                                 <h2 class="text-white" data-animation="fadeInUp" data-delay="300ms">{{ $banner->titel }}</h2>
                                 <h4 class="text-white" data-animation="fadeInUp" data-delay="600ms">{!! $banner->description !!}</h4>
-                                <a href="#" class="btn btn-primary" data-animation="fadeInUp" data-delay="900ms">Shop Now</a>
+                                <a href="{{ $banner->slug }}" class="btn btn-primary" data-animation="fadeInUp" data-delay="900ms">Shop Now</a>
                             </div>
                         </div>
                     </div>
