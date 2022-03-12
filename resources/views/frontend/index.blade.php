@@ -30,41 +30,29 @@
     
     <!-- Welcome Slides Area -->
     @endif
+   
+    @if(count($categorys)>0)
     <!-- Top Catagory Area -->
     <div class="top_catagory_area mt-50 clearfix">
         <div class="container">
             <div class="row">
+                @foreach($categorys as $category)
                 <!-- Single Catagory -->
                 <div class="col-12 col-md-4">
                     <div class="single_catagory_area mt-50">
                         <a href="#">
-                            <img src="{{asset('frontend/')}}/img/bg-img/c1.jpg" alt="">
+                            <img src="{{$category->photo }}" alt="{{$category->titel }}">
                         </a>
                     </div>
                 </div>
-
+                @endforeach
                 <!-- Single Catagory -->
-                <div class="col-12 col-md-4">
-                    <div class="single_catagory_area mt-50">
-                        <a href="#">
-                            <img src="{{asset('frontend/')}}/img/bg-img/c2.jpg" alt="">
-                        </a>
-                    </div>
-                </div>
-
-                <!-- Single Catagory -->
-                <div class="col-12 col-md-4">
-                    <div class="single_catagory_area mt-50">
-                        <a href="#">
-                            <img src="{{asset('frontend/')}}/img/bg-img/c3.jpg" alt="">
-                        </a>
-                    </div>
-                </div>
+               
             </div>
         </div>
     </div>
     <!-- Top Catagory Area -->
-
+    @endif
     <!-- Quick View Modal Area -->
     <div class="modal fade" id="quickview" tabindex="-1" role="dialog" aria-labelledby="quickview" aria-hidden="true">
         <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
