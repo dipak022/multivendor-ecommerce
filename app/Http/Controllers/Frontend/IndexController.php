@@ -26,9 +26,9 @@ class IndexController extends Controller
     }
 
     public function ProductDetail($slug){
-        $product = Product::where('slug',$slug)->first();
-        if($product){
-            return view('frontend.pages.product.product-detail',compact(['product']));
+        $products = Product::where('slug',$slug)->first();
+        if($products){
+            return view('frontend.pages.product.product-detail',compact(['products']));
         }else{
             return "Product details not found";
         }

@@ -15,8 +15,8 @@
                             <div class="row">
                                 <div class="col-12 col-lg-5">
                                     <div class="quickview_pro_img">
-                                        <img class="first_img" src="img/product-img/new-1-back.png" alt="">
-                                        <img class="hover_img" src="img/product-img/new-1.png" alt="">
+                                        <img class="first_img" src="{{asset('frontend/')}}/img/product-img/new-1-back.png" alt="">
+                                        <img class="hover_img" src="{{asset('frontend/')}}/img/product-img/new-1.png" alt="">
                                         <!-- Product Badge -->
                                         <div class="product_badge">
                                             <span class="badge-new">New</span>
@@ -101,54 +101,32 @@
 
                             <!-- Carousel Inner -->
                             <div class="carousel-inner">
-                                <div class="carousel-item active">
-                                    <a class="gallery_img" href="img/product-img/pd-big-thumb-1.png" title="First Slide">
-                                        <img class="d-block w-100" src="img/product-img/pd-big-thumb-1.png" alt="First slide">
-                                    </a>
-                                    <!-- Product Badge -->
-                                    <div class="product_badge">
-                                        <span class="badge-new">New</span>
-                                    </div>
-                                </div>
-                                <div class="carousel-item">
-                                    <a class="gallery_img" href="img/product-img/pd-big-thumb-2.png" title="Second Slide">
-                                        <img class="d-block w-100" src="img/product-img/pd-big-thumb-2.png" alt="Second slide">
-                                    </a>
-                                    <!-- Product Badge -->
-                                    <div class="product_badge">
-                                        <span class="badge-new">Sale</span>
-                                    </div>
-                                </div>
-                                <div class="carousel-item">
-                                    <a class="gallery_img" href="img/product-img/pd-big-thumb-3.png" title="Third Slide">
-                                        <img class="d-block w-100" src="img/product-img/pd-big-thumb-3.png" alt="Third slide">
-                                    </a>
-                                    <!-- Product Badge -->
-                                    <div class="product_badge">
-                                        <span class="badge-new">-20%</span>
-                                    </div>
-                                </div>
-                                <div class="carousel-item">
-                                    <a class="gallery_img" href="img/product-img/pd-big-thumb-4.png" title="Fourth Slide">
-                                        <img class="d-block w-100" src="img/product-img/pd-big-thumb-4.png" alt="Fourth slide">
-                                    </a>
-                                    <!-- Product Badge -->
-                                    <div class="product_badge">
-                                        <span class="badge-new">Hot</span>
-                                    </div>
-                                </div>
+                                @php
+                                    $photos = explode(',',$products->photo);
+                                @endphp
+                                    @foreach($photos as $key=>$photo)
+                                        <div class="carousel-item {{ $key == 0 ? 'active' : '' }}">
+                                            <a class="gallery_img" href="{{ $photo }}" title="{{ $products->titel }}">
+                                                <img class="d-block w-100" src="{{ $photo }}" alt="{{ $products->titel }}">
+                                            </a>
+                                            <!-- Product Badge -->
+                                            <div class="product_badge">
+                                                <span class="badge-new">New</span>
+                                            </div>
+                                        </div>
+                                    @endforeach
+                                
                             </div>
 
                             <!-- Carosel Indicators -->
                             <ol class="carousel-indicators">
-                                <li class="active" data-target="#product_details_slider" data-slide-to="0" style="background-image: url(img/product-img/pd-big-thumb-1.png);">
-                                </li>
-                                <li data-target="#product_details_slider" data-slide-to="1" style="background-image: url(img/product-img/pd-big-thumb-2.png);">
-                                </li>
-                                <li data-target="#product_details_slider" data-slide-to="2" style="background-image: url(img/product-img/pd-big-thumb-3.png);">
-                                </li>
-                                <li data-target="#product_details_slider" data-slide-to="3" style="background-image: url(img/product-img/pd-big-thumb-4.png);">
-                                </li>
+                                @php
+                                    $photos = explode(',',$products->photo);
+                                @endphp
+                                    @foreach($photos as $key=>$photo)
+                                    <li class="{{ $key == 0 ? 'active' : '' }}" data-target="#product_details_slider" data-slide-to="{{ $key }}" style="background-image: url({{ $photo }});">
+                                    </li>
+                                    @endforeach
                             </ol>
                         </div>
                     </div>
@@ -157,7 +135,7 @@
                 <!-- Single Product Description -->
                 <div class="col-12 col-lg-6">
                     <div class="single_product_desc">
-                        <h4 class="title mb-2">Floral V-Neck Dress</h4>
+                        <h4 class="title mb-2">{{ $products->titel }}</h4>
                         <div class="single_product_ratings mb-2">
                             <i class="fa fa-star" aria-hidden="true"></i>
                             <i class="fa fa-star" aria-hidden="true"></i>
@@ -166,12 +144,12 @@
                             <i class="fa fa-star" aria-hidden="true"></i>
                             <span class="text-muted">(8 Reviews)</span>
                         </div>
-                        <h4 class="price mb-4">$120.99 <span>$190</span></h4>
+                        <h4 class="price mb-4">{{number_format($products->offer_price,2)}} TK <span>{{number_format($products->price,2)}} TK</span></h4>
 
                         <!-- Overview -->
                         <div class="short_overview mb-4">
                             <h6>Overview</h6>
-                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ipsum dolores natus laboriosam accusantium, suscipit saepe eum deleniti mollitia at, odio, facere nisi aspernatur doloribus aperiam atque deserunt minima vitae rerum laudantium. Sapiente distinctio ipsam vitae dolorum odit, suscipit, aliquid.</p>
+                            <p>{{$products->sammary}}</p>
                         </div>
 
                         <!-- Color Option -->
@@ -234,11 +212,11 @@
                         <div class="sizeguide">
                             <h6>Size Guide</h6>
                             <div class="size_guide_thumb d-flex">
-                                <a class="size_guide_img" href="img/bg-img/size-1.png" style="background-image: url(img/bg-img/size-1.png);">
+                                <a class="size_guide_img" href="img/bg-img/size-1.png" style="background-image: url({{asset('frontend/')}}/img/bg-img/size-1.png);">
                                 </a>
-                                <a class="size_guide_img" href="img/bg-img/size-2.png" style="background-image: url(img/bg-img/size-2.png);">
+                                <a class="size_guide_img" href="img/bg-img/size-2.png" style="background-image: url({{asset('frontend/')}}/img/bg-img/size-2.png);">
                                 </a>
-                                <a class="size_guide_img" href="img/bg-img/size-3.png" style="background-image: url(img/bg-img/size-3.png);">
+                                <a class="size_guide_img" href="img/bg-img/size-3.png" style="background-image: url({{asset('frontend/')}}/img/bg-img/size-3.png);">
                                 </a>
                             </div>
                         </div>
@@ -271,17 +249,7 @@
                             <div role="tabpanel" class="tab-pane fade show active" id="description">
                                 <div class="description_area">
                                     <h5>Description</h5>
-                                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Pariatur nulla similique deserunt nemo ea eum expedita, et repellat repudiandae unde quia molestias deleniti incidunt, ad cupiditate. Corporis ipsam minus officiis neque magni harum accusantium nobis labore veritatis, consectetur ab rerum.</p>
-
-                                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ex cum dolore, adipisci vitae quidem. Quaerat tenetur explicabo tempore beatae dolor. Quo ipsa labore, itaque ea ratione. Ratione labore quae corporis.</p>
-
-                                    <div class="embed-responsive embed-responsive-16by9 mb-3">
-                                        <iframe class="embed-responsive-item" src="https://www.youtube.com/embed/tjvOOKx7Ytw?ecver=1" allowfullscreen></iframe>
-                                    </div>
-
-                                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Hic facere quos repudiandae ratione maiores accusantium suscipit, quod fugiat. Fugit quod laborum quidem, quos adipisci harum aspernatur, repudiandae, beatae expedita rerum ipsam dicta molestias et quis sapiente maiores amet laudantium minus nostrum. Nobis amet veritatis autem illo neque voluptas culpa vero iusto distinctio perspiciatis.</p>
-
-                                    <p class="mb-0">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Minima animi ab, quis atque, sed nulla veniam quisquam amet perspiciatis, aliquam dolore tempora, consequuntur beatae quae dolor rem repellendus! Vitae architecto sequi quo eaque iusto impedit suscipit non maxime sint totam, nesciunt necessitatibus iste nulla ab, veritatis assumenda.</p>
+                                   <p>{!!$products->description!!}</p>
                                 </div>
                             </div>
 
@@ -439,8 +407,8 @@
                         <div class="single-product-area">
                             <div class="product_image">
                                 <!-- Product Image -->
-                                <img class="normal_img" src="img/product-img/new-1-back.png" alt="">
-                                <img class="hover_img" src="img/product-img/new-1.png" alt="">
+                                <img class="normal_img" src="{{asset('frontend/')}}/img/product-img/new-1-back.png" alt="">
+                                <img class="hover_img" src="{{asset('frontend/')}}/img/product-img/new-1.png" alt="">
 
                                 <!-- Product Badge -->
                                 <div class="product_badge">
@@ -480,8 +448,8 @@
                         <div class="single-product-area">
                             <div class="product_image">
                                 <!-- Product Image -->
-                                <img class="normal_img" src="img/product-img/new-6.png" alt="">
-                                <img class="hover_img" src="img/product-img/new-6-back.png" alt="">
+                                <img class="normal_img" src="{{asset('frontend/')}}/img/product-img/new-6.png" alt="">
+                                <img class="hover_img" src="{{asset('frontend/')}}/img/product-img/new-6-back.png" alt="">
 
                                 <!-- Product Badge -->
                                 <div class="product_badge">
@@ -521,8 +489,8 @@
                         <div class="single-product-area">
                             <div class="product_image">
                                 <!-- Product Image -->
-                                <img class="normal_img" src="img/product-img/new-2.png" alt="">
-                                <img class="hover_img" src="img/product-img/new-2-back.png" alt="">
+                                <img class="normal_img" src="{{asset('frontend/')}}/img/product-img/new-2.png" alt="">
+                                <img class="hover_img" src="{{asset('frontend/')}}/img/product-img/new-2-back.png" alt="">
 
                                 <!-- Product Badge -->
                                 <div class="product_badge">
@@ -562,8 +530,8 @@
                         <div class="single-product-area">
                             <div class="product_image">
                                 <!-- Product Image -->
-                                <img class="normal_img" src="img/product-img/new-4.png" alt="">
-                                <img class="hover_img" src="img/product-img/new-4-back.png" alt="">
+                                <img class="normal_img" src="{{asset('frontend/')}}/img/product-img/new-4.png" alt="">
+                                <img class="hover_img" src="{{asset('frontend/')}}/img/product-img/new-4-back.png" alt="">
 
                                 <!-- Product Badge -->
                                 <div class="product_badge">
@@ -603,8 +571,8 @@
                         <div class="single-product-area">
                             <div class="product_image">
                                 <!-- Product Image -->
-                                <img class="normal_img" src="img/product-img/new-1-back.png" alt="">
-                                <img class="hover_img" src="img/product-img/new-1.png" alt="">
+                                <img class="normal_img" src="{{asset('frontend/')}}/img/product-img/new-1-back.png" alt="">
+                                <img class="hover_img" src="{{asset('frontend/')}}/img/product-img/new-1.png" alt="">
 
                                 <!-- Product Badge -->
                                 <div class="product_badge">
@@ -644,8 +612,8 @@
                         <div class="single-product-area">
                             <div class="product_image">
                                 <!-- Product Image -->
-                                <img class="normal_img" src="img/product-img/new-6.png" alt="">
-                                <img class="hover_img" src="img/product-img/new-6-back.png" alt="">
+                                <img class="normal_img" src="{{asset('frontend/')}}/img/product-img/new-6.png" alt="">
+                                <img class="hover_img" src="{{asset('frontend/')}}/img/product-img/new-6-back.png" alt="">
 
                                 <!-- Product Badge -->
                                 <div class="product_badge">
@@ -685,8 +653,8 @@
                         <div class="single-product-area">
                             <div class="product_image">
                                 <!-- Product Image -->
-                                <img class="normal_img" src="img/product-img/new-2.png" alt="">
-                                <img class="hover_img" src="img/product-img/new-2-back.png" alt="">
+                                <img class="normal_img" src="{{asset('frontend/')}}/img/product-img/new-2.png" alt="">
+                                <img class="hover_img" src="{{asset('frontend/')}}/img/product-img/new-2-back.png" alt="">
 
                                 <!-- Product Badge -->
                                 <div class="product_badge">
@@ -726,8 +694,8 @@
                         <div class="single-product-area">
                             <div class="product_image">
                                 <!-- Product Image -->
-                                <img class="normal_img" src="img/product-img/new-4.png" alt="">
-                                <img class="hover_img" src="img/product-img/new-4-back.png" alt="">
+                                <img class="normal_img" src="{{asset('frontend/')}}/img/product-img/new-4.png" alt="">
+                                <img class="hover_img" src="{{asset('frontend/')}}/img/product-img/new-4-back.png" alt="">
 
                                 <!-- Product Badge -->
                                 <div class="product_badge">
