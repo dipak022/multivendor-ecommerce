@@ -14,6 +14,10 @@ class Product extends Model
 
     public function brand(){
         return $this->beLongsTo('App\Models\Brand');
-
     }
+
+    public function rel_prods(){
+        return $this->hasMany('App\Models\Product','cat_id','cat_id')->where('status','active')->limit('10');
+    }
+
 }
