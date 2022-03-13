@@ -29,11 +29,11 @@ class UsersTableSeeder extends Seeder
             ],
             //vendor 
             [
-                'full_name'=> 'Dipak vendor',
-                'username'=> 'vendor',
-                'email'=> 'vendor@gmail.com',
+                'full_name'=> 'Dipak seller',
+                'username'=> 'seller',
+                'email'=> 'seller@gmail.com',
                 'password'=>Hash::make('11111111'),
-                'role'=> 'vendor',
+                'role'=> 'seller',
                 'status'=> 'active',
 
             ],
