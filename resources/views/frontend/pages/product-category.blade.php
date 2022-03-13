@@ -286,7 +286,7 @@
                                             <div class="product_image">
                                                 <!-- Product Image -->
                                                 <img class="normal_img" src="{{ $photo[0]}}" alt="{{$item->title}}">
-                                                <img class="hover_img" src="{{ $photo[0]}}" alt="">
+                                                <img class="hover_img" src="{{ $photo[0]}}" alt="{{$item->title}}">
 
                                                 <!-- Product Badge -->
                                                 <div class="product_badge">
