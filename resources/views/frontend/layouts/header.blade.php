@@ -65,12 +65,8 @@
                             <!-- Nav -->
                             <div class="classynav">
                                 <ul>
-                                    <li><a href="#">Home</a>
-                                        <ul class="dropdown">
-                                            <li><a href="index-1.html">Home - 1</a></li>
-                                            <li><a href="index-2.html">Home - 2</a></li>
-                                            <li><a href="index-3.html">Home - 3</a></li>
-                                        </ul>
+                                    <li><a href="{{ route('home') }}">Home</a>
+                                       
                                     </li>
                                     <li><a href="#">Shop</a>
                                         <ul class="dropdown">
@@ -263,11 +259,15 @@
                                     <img src="{{asset('frontend/')}}/img/bg-img/user.jpg" alt="">
                                 </div>
                                 <ul class="user-meta-dropdown">
+                                    @auth
                                     <li class="user-title"><span>Hello,</span> Lim Sarah</li>
                                     <li><a href="my-account.html">My Account</a></li>
                                     <li><a href="order-list.html">Orders List</a></li>
                                     <li><a href="wishlist.html">Wishlist</a></li>
                                     <li><a href="login.html"><i class="icofont-logout"></i> Logout</a></li>
+                                    @else
+                                    <li><a href="{{ route('user.auth') }}">Login & Register</a></li>
+                                    @endauth
                                 </ul>
                             </div>
                         </div>

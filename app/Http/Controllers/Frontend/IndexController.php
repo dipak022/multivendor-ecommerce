@@ -34,4 +34,8 @@ class IndexController extends Controller
         }
         
     }
+
+    public function UserAuth(){
+        return view('frontend.auth.auth');
+    }
 }

@@ -24,10 +24,14 @@ Route::get('product-detail/{slug}/', [App\Http\Controllers\Frontend\IndexControl
 // Frontend route end
 
 
+//authantication route
+Route::get('user/auth/', [App\Http\Controllers\Frontend\IndexController::class, 'UserAuth'])->name('user.auth');
+
+
 // Backend all route here 
 Auth::routes(['register'=>false]);
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+//Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 // Admin Deshboard
 Route::group(['prefix'=>'admin/','middleware'=>'auth'],function(){
 
