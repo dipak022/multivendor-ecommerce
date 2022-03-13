@@ -26,7 +26,7 @@ class ProductFactory extends Factory
             'vandor_id' => $this->faker->randomElement(\App\Models\User::pluck('id')->toArray()),
             'cat_id' => $this->faker->randomElement(\App\Models\Category::where('is_parent',1)->pluck('id')->toArray()),
             'clild_cat_id' => $this->faker->randomElement(\App\Models\Category::where('is_parent',0)->pluck('id')->toArray()),
-            'photo' => $this->faker->imageUrl('400','200'),
+            'photo' => $this->faker->imageUrl('400','400'),
             'price' => $this->faker->numberBetween(100,1000),
             'offer_price' => $this->faker->numberBetween(100,1000),
             'discount' => $this->faker->numberBetween(100,1000),
