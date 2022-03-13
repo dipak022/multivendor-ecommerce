@@ -16,6 +16,12 @@ class Seller
      */
     public function handle(Request $request, Closure $next)
     {
-        return $next($request);
+        //dd(auth()->user()->role);
+        if(auth()->user()->role == 'seller'){
+            return $next($request);
+        }else{
+            return redirect()->route(auth()->user()->role)->with('error',"You don't have access");
+        }
+       
     }
 }

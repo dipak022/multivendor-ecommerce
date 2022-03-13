@@ -33,7 +33,7 @@ Auth::routes(['register'=>false]);
 
 //Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 // Admin Deshboard
-Route::group(['prefix'=>'admin/','middleware'=>'auth'],function(){
+Route::group(['prefix'=>'admin','middleware'=>['auth','admin']],function(){
 
     Route::get('/', [App\Http\Controllers\AdminController::class, 'admin'])->name('admin');
     
@@ -64,3 +64,11 @@ Route::group(['prefix'=>'admin/','middleware'=>'auth'],function(){
 
 
 });
+
+
+
+// seller Deshboard
+Route::group(['prefix'=>'seller','middleware'=>['auth','seller']],function(){
+
+    Route::get('/', [App\Http\Controllers\AdminController::class, 'seller'])->name('seller');
+});    
