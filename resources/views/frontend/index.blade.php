@@ -183,7 +183,7 @@
                                     </div>
 
                                     <p class="brand_name">{{ \App\Models\Brand::where('id',$nproduct->brand_id)->value('title') }}</p>
-                                    <a href="{{ route('product.detail',$item->slug) }}">{{ucfirst($nproduct->title)}}</a>
+                                    <a href="{{ route('product.detail',$nproduct->slug) }}">{{ucfirst($nproduct->title)}}</a>
                                     <h6 class="product-price">{{number_format($nproduct->offer_price,2)}} TK <span><del class="text-danger">{{number_format($nproduct->price,2)}}</del></span></h6>
                                 </div>
                             </div>
