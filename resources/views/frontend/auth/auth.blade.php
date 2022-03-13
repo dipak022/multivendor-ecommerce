@@ -27,7 +27,8 @@
                     <div class="login_form mb-50">
                         <h5 class="mb-3">Login</h5>
 
-                        <form action="http://demo.designing-world.com/bigshop-2.3.0/my-account.html" method="post">
+                        <form action="{{ route('login.submit') }}" method="post">
+                            @csrf
                             <div class="form-group">
                                 <input type="email" class="form-control" name="email" id="username" placeholder="Email or Username">
                             </div>

@@ -38,4 +38,9 @@ class IndexController extends Controller
     public function UserAuth(){
         return view('frontend.auth.auth');
     }
+
+    public function LoginSubmit(Request $request){
+        return $request->all();
+
+    }
 }
