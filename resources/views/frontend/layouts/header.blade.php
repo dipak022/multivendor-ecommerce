@@ -6,7 +6,7 @@
                     <div class="col-6">
                         <div class="welcome-note">
                             <span class="popover--text" data-toggle="popover" data-content="Welcome to Bigshop ecommerce template."><i class="icofont-info-square"></i></span>
-                            <span class="text">Welcome to Bigshop ecommerce template.</span>
+                            <span class="text">Welcome E-comarce.</span>
                         </div>
                     </div>
                     <div class="col-6">
@@ -19,7 +19,6 @@
                                     </a>
                                     <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenu1">
                                         <a class="dropdown-item" href="#">Bangla</a>
-                                        <a class="dropdown-item" href="#">Arabic</a>
                                     </div>
                                 </div>
                             </div>
@@ -28,11 +27,11 @@
                             <div class="currency-dropdown">
                                 <div class="dropdown">
                                     <a class="btn btn-sm dropdown-toggle" href="#" role="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                        $ USD
+                                    ৳ BDT
                                     </a>
                                     <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenu2">
                                         <a class="dropdown-item" href="#">৳ BDT</a>
-                                        <a class="dropdown-item" href="#">€ Euro</a>
+                                        
                                     </div>
                                 </div>
                             </div>
@@ -49,7 +48,7 @@
                     <nav class="classy-navbar" id="bigshopNav">
 
                         <!-- Nav Brand -->
-                        <a href="index.html" class="nav-brand"><img src="{{asset('frontend/')}}/img/core-img/logo.png" alt="logo"></a>
+                        <a href="{{route('home')}}" class="nav-brand"><img src="{{asset('frontend/')}}/img/core-img/logo.png" alt="logo"></a>
 
                         <!-- Toggler -->
                         <div class="classy-navbar-toggler">

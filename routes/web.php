@@ -13,9 +13,14 @@ use Illuminate\Support\Facades\Route;
 
 // Frontend route strat 
 Route::get('/', [App\Http\Controllers\Frontend\IndexController::class, 'home'])->name('home');
-//product category
 
+//product category
 Route::get('product-category/{slug}/', [App\Http\Controllers\Frontend\IndexController::class, 'ProductCategory'])->name('product.category');
+
+//product.detail
+Route::get('product-detail/{slug}/', [App\Http\Controllers\Frontend\IndexController::class, 'ProductDetail'])->name('product.detail');
+
+
 // Frontend route end
 
 
