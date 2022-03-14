@@ -27,6 +27,8 @@ Route::get('product-detail/{slug}/', [App\Http\Controllers\Frontend\IndexControl
 //authantication route
 Route::get('user/auth/', [App\Http\Controllers\Frontend\IndexController::class, 'UserAuth'])->name('user.auth');
 Route::post('user/login/', [App\Http\Controllers\Frontend\IndexController::class, 'LoginSubmit'])->name('login.submit');
+Route::post('user/register/', [App\Http\Controllers\Frontend\IndexController::class, 'registerSubmit'])->name('register.submit');
+
 
 
 // Backend all route here 

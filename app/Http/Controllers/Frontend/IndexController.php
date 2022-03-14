@@ -8,6 +8,7 @@ use App\Models\Category;
 use App\Models\Banner;
 use App\Models\Brand;
 use App\Models\Product;
+use App\Models\User;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
@@ -73,4 +74,29 @@ class IndexController extends Controller
         }
 
     }
+
+    public function registerSubmit(Request $request){
+        $data = $request->all();
+        $check = $this->create($data);
+        if($check){
+            return redirect()->route('home');
+        }else{
+            $notification = array(
+                'message' => 'Please check your Credentials',
+                'alert-type' => 'success'
+            );
+            return redirect()->back()->with($notification);
+        }
+    }
+
+    private function create(array $data)
+    {
+        return User::create([
+            'full_name' => $data['full_name'],
+            'username' => $data['username'],
+            'email' => $data['email'],
+            'password' => Hash::make($data['password']),
+        ]);
+    }
+    
 }
