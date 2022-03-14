@@ -64,6 +64,10 @@ Route::group(['prefix'=>'admin','middleware'=>['auth','admin']],function(){
     Route::resource('/user', App\Http\Controllers\UserController::class);
     Route::post('/user_status', [App\Http\Controllers\UserController::class, 'userStatus'])->name('user.status');
 
+    //coupon route here 
+    Route::resource('/coupon', App\Http\Controllers\CouponController::class);
+    Route::post('/coupon_status', [App\Http\Controllers\CouponController::class, 'couponStatus'])->name('coupon.status');
+
 
 
 

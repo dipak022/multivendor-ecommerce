@@ -133,8 +133,8 @@
                             <li>
                                 <a href="#App" class="has-arrow"><i class="icon-star"></i> <span>Coupon Management</span></a>
                                 <ul>
-                                    <li><a href="app-inbox.html">Inbox</a></li>
-                                    <li><a href="app-chat.html">Chat</a></li>
+                                <li><a href="{{ route('coupon.index') }}">All Coupon</a></li>
+                                    <li><a href="{{ route('coupon.create') }}">Create Coupon</a></li>
                                 </ul>
                             </li>
 
