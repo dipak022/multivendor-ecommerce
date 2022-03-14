@@ -143,4 +143,16 @@ class IndexController extends Controller
         );
         return redirect()->route('home')->with($notification);
     }
+
+    //user UserDashboard
+    public function UserDashboard(){
+        $user = Auth::user();
+        return view('frontend.user.dashboard',compact('user'));
+    }
+
+    public function UserOrder(){
+        $user = Auth::user();
+        return view('frontend.user.order',compact('user'));
+    }
+
 }

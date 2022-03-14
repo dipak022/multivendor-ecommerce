@@ -75,3 +75,11 @@ Route::group(['prefix'=>'seller','middleware'=>['auth','seller']],function(){
 
     Route::get('/', [App\Http\Controllers\AdminController::class, 'seller'])->name('seller');
 });    
+
+
+//user dashboard 
+Route::group(['prefix'=>'user'],function(){
+
+    Route::get('/dashboard', [App\Http\Controllers\Frontend\IndexController::class, 'UserDashboard'])->name('user.dashboard');
+    Route::get('/order', [App\Http\Controllers\Frontend\IndexController::class, 'UserOrder'])->name('user.order');
+});  
