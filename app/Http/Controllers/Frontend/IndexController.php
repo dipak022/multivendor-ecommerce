@@ -52,6 +52,10 @@ class IndexController extends Controller
             }
         }
         $route = 'product-category';
+        if($request->ajax()){
+            $view = view('frontend.layouts.single-product',compact(['products']))->render();
+            return response()->json(['html'=>$view]);
+        }
         return view('frontend.pages.product.product-category',compact(['categorys','route','products']));
 
     }

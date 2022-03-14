@@ -281,64 +281,17 @@
                     </div>
 
                     <div class="shop_grid_product_area">
-                        <div class="row justify-content-center">
-                            @if(count($products)>0)
-                            <!-- Single Product -->
-                                @foreach($products as $item)
-                                    <div class="col-9 col-sm-6 col-md-4 col-lg-3">
-                                        <div class="single-product-area mb-30">
-                                            @php
-                                              $photo = explode(',',$item->photo)
-                                            @endphp
-                                            <div class="product_image">
-                                                <!-- Product Image -->
-                                                <img class="normal_img" src="{{ $photo[0]}}" alt="{{$item->title}}">
-                                                <img class="hover_img" src="{{ $photo[0]}}" alt="{{$item->title}}">
-
-                                                <!-- Product Badge -->
-                                                <div class="product_badge">
-                                                    <span>{{  $item->conditions }}</span>
-                                                </div>
-
-                                                <!-- Wishlist -->
-                                                <div class="product_wishlist">
-                                                    <a href="wishlist.html"><i class="icofont-heart"></i></a>
-                                                </div>
-
-                                                <!-- Compare -->
-                                                <div class="product_compare">
-                                                    <a href="compare.html"><i class="icofont-exchange"></i></a>
-                                                </div>
-                                            </div>
-
-                                            <!-- Product Description -->
-                                            <div class="product_description">
-                                                <!-- Add to cart -->
-                                                <div class="product_add_to_cart">
-                                                    <a href="#"><i class="icofont-shopping-cart"></i> Add to Cart</a>
-                                                </div>
-
-                                                <!-- Quick View -->
-                                                <div class="product_quick_view">
-                                                    <a href="#" data-toggle="modal" data-target="#quickview"><i class="icofont-eye-alt"></i> Quick View</a>
-                                                </div>
-
-                                                <p class="brand_name">{{ \App\Models\Brand::where('id',$item->brand_id)->value('title') }}</p>
-                                                <a href="{{ route('product.detail',$item->slug) }}">{{ucfirst($item->title)}}</a>
-                                                <h6 class="product-price">{{number_format($item->offer_price,2)}} TK <span><del class="text-danger">{{number_format($item->price,2)}} TK</del></span></h6>
-                                            </div>
-                                        </div>
-                                    </div>
-                                @endforeach
-                            <!-- Single Product -->
-                            @else
-                            <p>No product found</p>
-                            @endif
+                        <div class="row justify-content-center" id="product-data">
+                          @include('frontend.layouts.single-product')
                           
                         </div>
                     </div>
 
-                    <!-- Shop Pagination Area -->
+                    <div class="ajax-load text-center" style="display:none;">
+                        <img src="{{asset('frontend/loader.gif')}}" style="width:20%;">
+                    </div>
+
+                    <!-- Shop Pagination Area
                     <div class="shop_pagination_area mt-30">
                         <nav aria-label="Page navigation">
                             <ul class="pagination pagination-sm justify-content-center">
@@ -359,6 +312,7 @@
                             </ul>
                         </nav>
                     </div>
+                     -->
 
                 </div>
             </div>
@@ -377,6 +331,39 @@
         window.location = "{{url(''.$route.'')}}/{{$categorys->slug}}?sort="+sort;
 
     });
+
+</script>
+
+<script>
+   function loadmoreData(page){
+     $.ajax({
+        url:'?page='+page,
+        type:'get',
+        beforeSend:function(){
+            $('.ajax-load').show();
+        },
+     })
+     .done(function(data){
+         //console.log(data);
+         if(data.html == ''){
+             $('.ajax-load').html("No More Product Available");
+             return;
+         }
+         $('.ajax-load').hide();
+         $('#product-data').append(data.html);
+     })
+     .fail(function(){
+         alert('Something went to wrong !! Please try again');
+     });
+   }
+
+   var page=1;
+   $(window).scroll(function(){
+       if($(window).scrollTop()+$(window).height()+120>=$(document).height()){
+           page ++;
+           loadmoreData(page);
+       }
+   });
 
 </script>
 @endsection
