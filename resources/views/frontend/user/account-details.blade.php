@@ -37,25 +37,25 @@
                                 <div class="col-12 col-lg-6">
                                     <div class="form-group">
                                         <label for="firstName">First Name *</label>
-                                        <input type="text" class="form-control" id="firstName" placeholder="MD NAZRUL">
+                                        <input type="text" class="form-control" id="firstName" name="full_name" placeholder="Enter fullname" value="{{ $user->full_name }}"> 
                                     </div>
                                 </div>
                                 <div class="col-12 col-lg-6">
                                     <div class="form-group">
-                                        <label for="lastName">Last Name *</label>
-                                        <input type="text" class="form-control" id="lastName" placeholder="ISLAM">
+                                        <label for="firstName">User Name </label>
+                                        <input type="text" class="form-control" id="firstName" name="username" placeholder="Enter username" value="{{ $user->username }}">
                                     </div>
                                 </div>
                                 <div class="col-12">
                                     <div class="form-group">
-                                        <label for="displayName">Display Name *</label>
-                                        <input type="text" class="form-control" id="displayName" placeholder="Desinging World">
+                                        <label for="displayName">Phone Number</label>
+                                        <input type="number" class="form-control" id="displayName" placeholder="Enter phone number" name="phone" value="{{ $user->phone }}">
                                     </div>
                                 </div>
                                 <div class="col-12">
                                     <div class="form-group">
                                         <label for="emailAddress">Email Address *</label>
-                                        <input type="email" class="form-control" id="emailAddress" placeholder="care.designingworld@gmail.com">
+                                        <input type="email" class="form-control" id="emailAddress" placeholder="Enter your email" name="email" value="{{ $user->email }}" disabled>
                                     </div>
                                 </div>
                                 <div class="col-12">
