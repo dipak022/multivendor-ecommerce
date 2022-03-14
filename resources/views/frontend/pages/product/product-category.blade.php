@@ -322,8 +322,9 @@
 @endsection
 
 @section('scripts')
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 <script>
-    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+    
     
     $('#sortBy').change(function(){
 
@@ -397,6 +398,7 @@
            },
            success:function(data){
                //console.log(dara);
+               $('body #header-ajax').html(data['header'])
                if(data['status']){
                 swal({
                 title: "Good job!",
