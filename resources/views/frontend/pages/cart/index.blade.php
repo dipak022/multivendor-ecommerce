@@ -51,7 +51,8 @@
                                             <td>{{ number_format($item->price,2) }} TK</td>
                                             <td>
                                                 <div class="quantity">
-                                                    <input type="number" class="qty-text" id="qty2" step="1" min="1" max="99" name="quantity" value="{{ $item->qty }}">
+                                                    <input type="number" class="qty-text" data-id="{{ $item->rowId }}" id="qty-input-{{ $item->rowId }}" step="1" min="1" max="99" name="quantity" value="{{ $item->qty }}">
+                                                    <input type="hidden"  data-id="{{ $item->rowId }}" data-product-quantity="{{ $item->model->stock }}" id="update-cart-{{ $item->rowId }}" >
                                                 </div>
                                             </td>
                                             <td>{{ \Gloudemans\Shoppingcart\Facades\Cart::subtotal() }} TK</td>
@@ -153,5 +154,24 @@
        });
 
    });
+    </script>
+
+    <script>
+       $(document).on('click','.qty-text',function(){
+
+        var id = $(this).data('id');
+        //alert(id);
+        var spinner = $(this),input = spinner.closest("div.quantity").find('input[type="number"]');
+        //alert(input.val()); 
+        if(input.val()==1){
+            return false;
+        }
+        if(input.val() !=1){
+            var newVal= parseFloat(input.val());
+            $('#qty-input-'+id).val(newVal);
+        }
+
+
+       });
     </script>
 @endsection
