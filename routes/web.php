@@ -21,6 +21,7 @@ Route::get('product-category/{slug}/', [App\Http\Controllers\Frontend\IndexContr
 Route::get('product-detail/{slug}/', [App\Http\Controllers\Frontend\IndexController::class, 'ProductDetail'])->name('product.detail');
 
 //cart route here
+Route::get('cart', [App\Http\Controllers\Frontend\CartController::class, 'Cart'])->name('cart');
 Route::post('cart/store', [App\Http\Controllers\Frontend\CartController::class, 'CartStore'])->name('cart.store');
 Route::post('cart/delete', [App\Http\Controllers\Frontend\CartController::class, 'CartDelete'])->name('cart.delete');
 // Frontend route end

@@ -22,6 +22,9 @@ use DB;
 
 class CartController extends Controller
 {
+    public function Cart(){
+        return view('frontend.pages.cart.index');
+    }
     public function CartStore(Request $request){
         //dd($request->all());
         $product_id = $request->input('product_id');
@@ -64,4 +67,6 @@ class CartController extends Controller
         return json_encode($response);
 
     }
+
+    
 }
