@@ -201,7 +201,7 @@
 
                             <!-- Cart -->
                             <div class="cart-area">
-                                <div class="cart--btn"><i class="icofont-cart"></i> <span class="cart_quantity">2</span></div>
+                                <div class="cart--btn"><i class="icofont-cart"></i> <span class="cart_quantity" id="cart-counter">{{ \Gloudemans\Shoppingcart\Facades\Cart::instance('shopping')->count() }}</span></div>
 
                                 <!-- Cart Dropdown Content -->
                                 <div class="cart-dropdown-content">

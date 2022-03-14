@@ -1,4 +1,4 @@
-@if(count($products)>0)
+
 <!-- Single Product -->
     @foreach($products as $item)
         <div class="col-9 col-sm-6 col-md-4 col-lg-3">
@@ -31,7 +31,7 @@
                 <div class="product_description">
                     <!-- Add to cart -->
                     <div class="product_add_to_cart">
-                        <a href="#"><i class="icofont-shopping-cart"></i> Add to Cart</a>
+                        <a href="#" data-quantity="1" data-product-id="{{ $item->id }}" class="add_to_cart" id="add_to_cart{{ $item->id }}"><i class="icofont-shopping-cart"></i> Add to Cart</a>
                     </div>
 
                     <!-- Quick View -->
@@ -47,6 +47,3 @@
         </div>
     @endforeach
 <!-- Single Product -->
-@else
-<p>No product found</p>
-@endif

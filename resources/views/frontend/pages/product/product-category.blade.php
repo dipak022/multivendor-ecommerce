@@ -323,6 +323,7 @@
 
 @section('scripts')
 <script>
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
     
     $('#sortBy').change(function(){
 
@@ -365,6 +366,50 @@
        }
    });
 
+</script>
+
+<script>
+   
+
+   $(document).on('click','.add_to_cart',function(e){
+       e.preventDefault();
+       var product_id = $(this).data('product-id');
+       //alert(product_id);
+       var product_qty = $(this).data('quantity');
+       //alert(product_qty);
+       var token = "{{csrf_token()}}";
+       var path = "{{ route('cart.store') }}";
+
+       $.ajax({
+           url:path,
+           type:"POST",
+           dataType:"JSON",
+           data:{
+               product_id : product_id,
+               product_qty : product_qty,
+               _token : token,
+           },
+           beforeSend:function(){
+               $('#add_to_cart'+product_id).html('<i class="fa fa-spinner fa-spin"></i> Loaging...');
+           },
+           complete:function(){
+               $('#add_to_cart'+product_id).html('<i class="fa fa-cart-plus"></i> Add To Cart');
+           },
+           success:function(data){
+               //console.log(dara);
+               if(data['status']){
+                swal({
+                title: "Good job!",
+                text: data['message'],
+                icon: "success",
+                button: "ok!",
+                });
+               }
+           }
+
+       });
+
+   });
 </script>
 @endsection
 

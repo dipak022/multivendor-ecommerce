@@ -20,7 +20,8 @@ Route::get('product-category/{slug}/', [App\Http\Controllers\Frontend\IndexContr
 //product.detail
 Route::get('product-detail/{slug}/', [App\Http\Controllers\Frontend\IndexController::class, 'ProductDetail'])->name('product.detail');
 
-
+//cart route here
+Route::post('cart/store', [App\Http\Controllers\Frontend\CartController::class, 'CartStore'])->name('cart.store');
 // Frontend route end
 
 
