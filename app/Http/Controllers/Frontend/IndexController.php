@@ -24,10 +24,12 @@ class IndexController extends Controller
         return view('frontend.index',compact(['banners','categorys']));
     }
 
-    public function ProductCategory($slug){
+    public function ProductCategory(Request $request,$slug){
         //return $slug;
         $categorys = Category::with('products')->where('slug',$slug)->first();
-        return view('frontend.pages.product.product-category',compact(['categorys']));
+        $route = 'product-category';
+        return $request->all();
+        return view('frontend.pages.product.product-category',compact(['categorys','route']));
 
     }
 

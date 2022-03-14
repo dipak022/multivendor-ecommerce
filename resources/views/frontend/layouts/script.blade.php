@@ -38,3 +38,5 @@
             }
     @endif
 </script>
+
+@yield('scripts')
