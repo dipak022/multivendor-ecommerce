@@ -84,4 +84,5 @@ Route::group(['prefix'=>'user'],function(){
     Route::get('/order', [App\Http\Controllers\Frontend\IndexController::class, 'UserOrder'])->name('user.order');
     Route::get('/address', [App\Http\Controllers\Frontend\IndexController::class, 'UserAddress'])->name('user.address');
     Route::get('/account-detail', [App\Http\Controllers\Frontend\IndexController::class, 'UserAccountDetails'])->name('user.account.detail');
+    Route::post('/billing/address/{id}', [App\Http\Controllers\Frontend\IndexController::class, 'BillingAddress'])->name('billing.address');
 });  

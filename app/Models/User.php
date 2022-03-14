@@ -26,13 +26,11 @@ class User extends Authenticatable
         'phone',
         'role',
         'status',
-
         'country',
         'city',
         'postcode',
         'state',
         'address',
-
         'scountry',
         'scity',
         'spostcode',

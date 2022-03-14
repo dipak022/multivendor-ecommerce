@@ -165,6 +165,12 @@ class IndexController extends Controller
         return view('frontend.user.account-details',compact('user'));
     }
 
+    public function BillingAddress(Request $request,$id){
+        //return $request->all();
+        return $id;
+
+    }
+
     
 
     

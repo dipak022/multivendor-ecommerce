@@ -256,7 +256,11 @@
                             <!-- Account -->
                             <div class="account-area">
                                 <div class="user-thumbnail">
-                                    <img src="{{asset('frontend/')}}/img/bg-img/user.jpg" alt="">
+                                    @if(auth()->user()->photo)
+                                    <img src="{{ auth()->user()->photo }}" alt="">
+                                    @else
+                                    <img src="{{ Helpers::UserDefaultImage() }}" alt="">
+                                    @endif
                                 </div>
                                 <ul class="user-meta-dropdown">
                                     @auth
