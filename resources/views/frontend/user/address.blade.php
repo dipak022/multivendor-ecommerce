@@ -35,11 +35,10 @@
                             <div class="col-12 col-lg-6 mb-5 mb-lg-0">
                                 <h6 class="mb-3">Billing Address</h6>
                                 <address>
-                                    MD NAZRUL ISLAM <br>
-                                    Madhabdi, Narsingdi <br>
-                                    Madhabdi <br>
-                                    Narsingdi <br>
-                                    1600
+                                    {{$user->address}} <br>
+                                    {{$user->state}},  {{$user->city}} <br>
+                                    {{$user->country}} <br>
+                                    {{$user->postcode}}
                                 </address>
                                 <a href="#" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#editAddress">Edit Address</a>
                                 <!-- Address modal -->
@@ -58,23 +57,23 @@
                                             <div class="modal-body">
                                                     <div class="form-group">
                                                         <level for="">Address</level>
-                                                        <textarea class="form-control" name="address" placeholder="Enter your address" >{{ $user->address }}</textarea>
+                                                        <textarea  type="text" class="form-control" name="address" placeholder="Enter your address" >{{ $user->address }}</textarea>
                                                     </div>
                                                     <div class="form-group">
                                                         <level for="">Country</level>
-                                                        <input class="form-control" name="country" placeholder="Enter your country">{{ $user->country }}</input>
+                                                        <input type="text" class="form-control" name="country" placeholder="Enter your country">{{ $user->country }}</input>
                                                     </div>
                                                     <div class="form-group">
                                                         <level for="">Postcode</level>
-                                                        <input class="form-control" name="postcode" placeholder="Enter your postcode">{{ $user->postcode }}</input>
+                                                        <input  type="number" class="form-control" name="postcode" placeholder="Enter your postcode">{{ $user->postcode }}</input>
                                                     </div>
                                                     <div class="form-group">
                                                         <level for="">State</level>
-                                                        <input class="form-control" name="state" placeholder="Enter your state">{{ $user->state }}</input>
+                                                        <input type="text" class="form-control" name="state" placeholder="Enter your state">{{ $user->state }}</input>
                                                     </div>
                                                     <div class="form-group">
                                                         <level for="">City</level>
-                                                        <input class="form-control" name="city" placeholder="Enter your city">{{ $user->city }}</input>
+                                                        <input type="text" class="form-control" name="city" placeholder="Enter your city">{{ $user->city }}</input>
                                                     </div>
                                             </div>
                                             <div class="modal-footer">
@@ -108,23 +107,23 @@
                                         <div class="modal-body">
                                                 <div class="form-group">
                                                     <level for="">Shipping Address</level>
-                                                    <textarea class="form-control" name="saddress" placeholder="Enter your Shipping address" >{{ $user->saddress }}</textarea>
+                                                    <textarea type="text" class="form-control" name="saddress" placeholder="Enter your Shipping address" >{{ $user->saddress }}</textarea>
                                                 </div>
                                                 <div class="form-group">
                                                     <level for="">Shipping Country</level>
-                                                    <input class="form-control" name="scountry" placeholder="Enter your Shipping country">{{ $user->scountry }}</input>
+                                                    <input type="text" class="form-control" name="scountry" placeholder="Enter your Shipping country">{{ $user->scountry }}</input>
                                                 </div>
                                                 <div class="form-group">
                                                     <level for="">Shipping Postcode</level>
-                                                    <input class="form-control" name="spostcode" placeholder="Enter your Shipping postcode">{{ $user->spostcode }}</input>
+                                                    <input type="number" class="form-control" name="spostcode" placeholder="Enter your Shipping postcode">{{ $user->spostcode }}</input>
                                                 </div>
                                                 <div class="form-group">
                                                     <level for="">Shipping State</level>
-                                                    <input class="form-control" name="sstate" placeholder="Enter your Shipping state">{{ $user->sstate }}</input>
+                                                    <input type="text" class="form-control" name="sstate" placeholder="Enter your Shipping state">{{ $user->sstate }}</input>
                                                 </div>
                                                 <div class="form-group">
                                                     <level for="">Shipping City</level>
-                                                    <input class="form-control" name="scity" placeholder="Enter your Shipping city">{{ $user->scity }}</input>
+                                                    <input type="text" class="form-control" name="scity" placeholder="Enter your Shipping city">{{ $user->scity }}</input>
                                                 </div>
                                         </div>
                                         <div class="modal-footer">
@@ -145,4 +144,12 @@
     </section>
     <!-- My Account Area -->
 
-@endsection    
+@endsection   
+@section('styles')
+<style>
+.footer_area{
+    z-index:-1;
+}
+</style>
+
+@endsection  

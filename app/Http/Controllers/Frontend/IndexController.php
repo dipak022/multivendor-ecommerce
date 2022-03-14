@@ -167,8 +167,21 @@ class IndexController extends Controller
 
     public function BillingAddress(Request $request,$id){
         //return $request->all();
-        return $id;
-
+        $user = User::where('id',$id)->update(['country'=>$request->country,'city'=>$request->city,'state'=>$request->state,'postcode'=>$request->postcode,'address'=>$request->adderss]);
+        if($user){
+            $notification = array(
+                'message' => 'Address Update Successfully',
+                'alert-type' => 'success'
+            );
+            return redirect()->back()->with($notification);
+        }else{
+            $notification = array(
+                'message' => 'Address Update Unsuccessfully',
+                'alert-type' => 'error'
+            );
+            return redirect()->with($notification);
+        }
+        
     }
 
     
