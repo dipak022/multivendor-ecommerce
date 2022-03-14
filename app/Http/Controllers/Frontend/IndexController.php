@@ -78,8 +78,14 @@ class IndexController extends Controller
     public function registerSubmit(Request $request){
         $data = $request->all();
         $check = $this->create($data);
+        Session::put('user', $data['email']);
+        Auth::login($check);
         if($check){
-            return redirect()->route('home');
+            $notification = array(
+                'message' => 'Registation Successfully.',
+                'alert-type' => 'success'
+            );
+            return redirect()->route('home')->with($notification);
         }else{
             $notification = array(
                 'message' => 'Please check your Credentials',
@@ -98,5 +104,14 @@ class IndexController extends Controller
             'password' => Hash::make($data['password']),
         ]);
     }
-    
+
+    public function UserLogout(){
+        Session::forget('user');
+        Auth::logout();
+        $notification = array(
+            'message' => 'Successfully Logout',
+            'alert-type' => 'success'
+        );
+        return redirect()->route('home')->with($notification);
+    }
 }
