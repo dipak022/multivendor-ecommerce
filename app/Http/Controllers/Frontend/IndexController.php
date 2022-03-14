@@ -179,7 +179,7 @@ class IndexController extends Controller
                 'message' => 'Address Update Unsuccessfully',
                 'alert-type' => 'error'
             );
-            return redirect()->with($notification);
+            return redirect()->back()->with($notification);
         }
         
     }
@@ -198,10 +198,67 @@ class IndexController extends Controller
                 'message' => 'Shipping Address Update Unsuccessfully',
                 'alert-type' => 'error'
             );
-            return redirect()->with($notification);
+            return redirect()->back()->with($notification);
         }
         
     }
+
+    public function AccountUpdate(Request $request,$id){
+        $hashpassword = Auth::user()->password;
+        //return $hashpassword;
+        if($request->oldpassword == null && $request->newpassword == null){
+            $user = User::where('id',$id)->update(['full_name'=>$request->full_name,'username'=>$request->username,'phone'=>$request->phone]);
+            if($user){
+                $notification = array(
+                    'message' => 'Account Information Update Successfully',
+                    'alert-type' => 'success'
+                );
+                return redirect()->back()->with($notification);
+            }else{
+                $notification = array(
+                    'message' => 'Account Information Update Unsuccessfully',
+                    'alert-type' => 'error'
+                );
+                return redirect()->back()->with($notification);
+            }
+        }else{
+            if(\Hash::check($request->oldpassword,$hashpassword)){
+                if(!\Hash::check($request->newpassword,$hashpassword)){
+                    $user = User::where('id',$id)->update(['full_name'=>$request->full_name,'username'=>$request->username,'phone'=>$request->phone,'password'=>Hash::make($request->newpassword)]);
+                    if($user){
+                        $notification = array(
+                            'message' => 'Account Information and password Update Successfully',
+                            'alert-type' => 'success'
+                        );
+                        return redirect()->back()->with($notification);
+                    }else{
+                        $notification = array(
+                            'message' => 'Account Information and password Update Unsuccessfully',
+                            'alert-type' => 'error'
+                        );
+                        return redirect()->back()->with($notification);
+                    }
+                }else{
+                    $notification = array(
+                        'message' => 'New Password can not be same with old password !! try Again',
+                        'alert-type' => 'error'
+                    );
+                    return redirect()->back()->with($notification);
+                }
+
+            }else{
+                $notification = array(
+                    'message' => 'Old password dose not match !! try Again! ',
+                    'alert-type' => 'error'
+                );
+                return redirect()->back()->with($notification);
+            }
+        }
+        
+        
+    }
+
+    
 
     
 

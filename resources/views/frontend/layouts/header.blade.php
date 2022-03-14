@@ -264,7 +264,10 @@
                                 </div>
                                 <ul class="user-meta-dropdown">
                                     @auth
-                                    <li class="user-title"><span>Hello,</span> Lim Sarah</li>
+                                    @php 
+                                      $first_name = explode(' ',auth()->user()->full_name);
+                                    @endphp
+                                    <li class="user-title"><span>Hello,</span> {{ $first_name[0] }}</li>
                                     <li><a href="{{ route('user.dashboard') }}">My Account</a></li>
                                     <li><a href="{{ route('user.order') }}">Orders List</a></li>
                                     <li><a href="wishlist.html">Wishlist</a></li>

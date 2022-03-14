@@ -32,7 +32,8 @@
                     <div class="my-account-content mb-50">
                         <h5 class="mb-3">Account Details</h5>
 
-                        <form action="#" method="post">
+                        <form action="{{ route('account.update',$user->id) }}" method="post">
+                            @csrf
                             <div class="row">
                                 <div class="col-12 col-lg-6">
                                     <div class="form-group">
@@ -61,21 +62,16 @@
                                 <div class="col-12">
                                     <div class="form-group">
                                         <label for="currentPass">Current Password (Leave blank to leave unchanged)</label>
-                                        <input type="password" class="form-control" id="currentPass">
+                                        <input type="password" class="form-control" id="currentPass" name="oldpassword">
                                     </div>
                                 </div>
                                 <div class="col-12">
                                     <div class="form-group">
                                         <label for="newPass">New Password (Leave blank to leave unchanged)</label>
-                                        <input type="password" class="form-control" id="newPass">
+                                        <input type="password" class="form-control" id="newPass" name="newpassword">
                                     </div>
                                 </div>
-                                <div class="col-12">
-                                    <div class="form-group">
-                                        <label for="confirmPass">Confirm New Password</label>
-                                        <input type="password" class="form-control" id="confirmPass">
-                                    </div>
-                                </div>
+                               
                                 <div class="col-12">
                                     <button type="submit" class="btn btn-primary">Save Changes</button>
                                 </div>
