@@ -16,3 +16,4 @@
     <script src="{{asset('frontend/')}}/js/jquery.nice-select.min.js"></script>
     <script src="{{asset('frontend/')}}/js/wow.min.js"></script>
     <script src="{{asset('frontend/')}}/js/default/active.js"></script>
+    <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
