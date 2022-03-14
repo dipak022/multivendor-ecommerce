@@ -282,9 +282,9 @@
 
                     <div class="shop_grid_product_area">
                         <div class="row justify-content-center">
-                            @if(count($categorys->products)>0)
+                            @if(count($products)>0)
                             <!-- Single Product -->
-                                @foreach($categorys->products as $item)
+                                @foreach($products as $item)
                                     <div class="col-9 col-sm-6 col-md-4 col-lg-3">
                                         <div class="single-product-area mb-30">
                                             @php

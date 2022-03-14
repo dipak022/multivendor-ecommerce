@@ -27,9 +27,32 @@ class IndexController extends Controller
     public function ProductCategory(Request $request,$slug){
         //return $slug;
         $categorys = Category::with('products')->where('slug',$slug)->first();
+        $sort = '';
+        if($request->sort != null){
+            $sort =$request->sort;
+
+        }
+        if($categorys == null){
+            return view('errors.404');
+        }else{
+            if($sort=="priceAsc"){
+                $products = Product::where(['status'=>'active','cat_id'=>$categorys->id])->orderBy('offer_price','ASC')->paginate(12);
+            }elseif($sort=="priceDesc"){
+                $products = Product::where(['status'=>'active','cat_id'=>$categorys->id])->orderBy('offer_price','DESC')->paginate(12);
+            }elseif($sort=="discAsc"){
+                $products = Product::where(['status'=>'active','cat_id'=>$categorys->id])->orderBy('price','ASC')->paginate(12);
+            }elseif($sort=="discDesc"){
+                $products = Product::where(['status'=>'active','cat_id'=>$categorys->id])->orderBy('price','DESC')->paginate(12);
+            }elseif($sort=="titelAsc"){
+                $products = Product::where(['status'=>'active','cat_id'=>$categorys->id])->orderBy('title','ASC')->paginate(12);
+            }elseif($sort=="titelDesc"){
+                $products = Product::where(['status'=>'active','cat_id'=>$categorys->id])->orderBy('title','DESC')->paginate(12);
+            }else{
+                $products = Product::where(['status'=>'active','cat_id'=>$categorys->id])->paginate(12);
+            }
+        }
         $route = 'product-category';
-        return $request->all();
-        return view('frontend.pages.product.product-category',compact(['categorys','route']));
+        return view('frontend.pages.product.product-category',compact(['categorys','route','products']));
 
     }
 
