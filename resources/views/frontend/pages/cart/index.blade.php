@@ -37,96 +37,27 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr>
-                                        <th scope="row">
-                                            <i class="icofont-close"></i>
-                                        </th>
-                                        <td>
-                                            <img src="img/product-img/onsale-1.png" alt="Product">
-                                        </td>
-                                        <td>
-                                            <a href="#">Bluetooth Speaker</a>
-                                        </td>
-                                        <td>$9</td>
-                                        <td>
-                                            <div class="quantity">
-                                                <input type="number" class="qty-text" id="qty2" step="1" min="1" max="99" name="quantity" value="1">
-                                            </div>
-                                        </td>
-                                        <td>$9</td>
-                                    </tr>
-                                    <tr>
-                                        <th scope="row">
-                                            <i class="icofont-close"></i>
-                                        </th>
-                                        <td>
-                                            <img src="img/product-img/onsale-2.png" alt="Product">
-                                        </td>
-                                        <td>
-                                            <a href="#">Roof Lamp</a>
-                                        </td>
-                                        <td>$11</td>
-                                        <td>
-                                            <div class="quantity">
-                                                <input type="number" class="qty-text" id="qty3" step="1" min="1" max="99" name="quantity" value="1">
-                                            </div>
-                                        </td>
-                                        <td>$11</td>
-                                    </tr>
-                                    <tr>
-                                        <th scope="row">
-                                            <i class="icofont-close"></i>
-                                        </th>
-                                        <td>
-                                            <img src="img/product-img/onsale-6.png" alt="Product">
-                                        </td>
-                                        <td>
-                                            <a href="#">Cotton T-shirt</a>
-                                        </td>
-                                        <td>$6</td>
-                                        <td>
-                                            <div class="quantity">
-                                                <input type="number" class="qty-text" id="qty4" step="1" min="1" max="99" name="quantity" value="1">
-                                            </div>
-                                        </td>
-                                        <td>$6</td>
-                                    </tr>
-                                    <tr>
-                                        <th scope="row">
-                                            <i class="icofont-close"></i>
-                                        </th>
-                                        <td>
-                                            <img src="img/product-img/onsale-4.png" alt="Product">
-                                        </td>
-                                        <td>
-                                            <a href="#">Water Bottle</a>
-                                        </td>
-                                        <td>$17</td>
-                                        <td>
-                                            <div class="quantity">
-                                                <input type="number" class="qty-text" id="qty5" step="1" min="1" max="99" name="quantity" value="1">
-                                            </div>
-                                        </td>
-                                        <td>$17</td>
-                                    </tr>
-                                    <tr>
-                                        <th scope="row">
-                                            <i class="icofont-close"></i>
-                                        </th>
-                                        <td>
-                                            <img src="img/product-img/onsale-5.png" alt="Product">
-                                        </td>
-                                        <td>
-                                            <a href="#">Alka Sliper</a>
-                                        </td>
-                                        <td>$13</td>
-                                        <td>
-                                            <div class="quantity">
-                                                <input type="number" class="qty-text" id="qty6" step="1" min="1" max="99" name="quantity" value="1">
-                                            </div>
-                                        </td>
-                                        <td>$13</td>
-                                    </tr>
+                                    @foreach(\Gloudemans\Shoppingcart\Facades\Cart::instance('shopping')->content() as $item)
+                                        <tr>
+                                            <th scope="row">
+                                                <i class="icofont-close cart_delete" data-id="{{ $item->rowId }}"></i>
+                                            </th>
+                                            <td>
+                                                <img src="{{$item->model->photo}}" alt="{{ $item->model->slug }}">
+                                            </td>
+                                            <td>
+                                                <a href="{{ route('product.detail',$item->model->slug) }}">{{$item->name}}</a>
+                                            </td>
+                                            <td>{{ number_format($item->price,2) }} TK</td>
+                                            <td>
+                                                <div class="quantity">
+                                                    <input type="number" class="qty-text" id="qty2" step="1" min="1" max="99" name="quantity" value="{{ $item->qty }}">
+                                                </div>
+                                            </td>
+                                            <td>{{ \Gloudemans\Shoppingcart\Facades\Cart::subtotal() }} TK</td>
+                                        </tr>
+                                    @endforeach
+                                    
                                 </tbody>
                             </table>
                         </div>
@@ -180,4 +111,47 @@
     </div>
     <!-- Cart Area End -->
 
+@endsection
+
+@section('scripts')
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+    <script>
+     $(document).on('click','.cart_delete',function(e){
+       e.preventDefault();
+       var cart_id = $(this).data('id');
+       //alert(cart_id);
+       
+       var token = "{{csrf_token()}}";
+       var path = "{{ route('cart.delete') }}";
+
+       $.ajax({
+           url:path,
+           type:"POST",
+           dataType:"JSON",
+           data:{
+               cart_id : cart_id,
+               _token : token,
+           },
+           success:function(data){
+               //alert(data['cart_count']);
+               //console.log(dara);
+               if(data['status']){
+                $('body #header-ajax').html(data['header']);
+                $('body #cart_counter').html(data['cart_count']);
+                swal({
+                title: "Good job!",
+                text: data['message'],
+                icon: "success",
+                button: "ok!",
+                });
+               }
+           },
+           error:function(err){
+            console.log(err);
+           }
+
+       });
+
+   });
+    </script>
 @endsection
