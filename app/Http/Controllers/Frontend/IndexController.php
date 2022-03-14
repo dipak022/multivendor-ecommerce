@@ -97,7 +97,7 @@ class IndexController extends Controller
         }else{
             $notification = array(
                 'message' => 'Invalid Email & Password',
-                'alert-type' => 'success'
+                'alert-type' => 'error'
             );
             return redirect()->back()->with($notification);
         }
@@ -118,7 +118,7 @@ class IndexController extends Controller
         }else{
             $notification = array(
                 'message' => 'Please check your Credentials',
-                'alert-type' => 'success'
+                'alert-type' => 'error'
             );
             return redirect()->back()->with($notification);
         }
