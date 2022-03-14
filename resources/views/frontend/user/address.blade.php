@@ -61,19 +61,19 @@
                                                     </div>
                                                     <div class="form-group">
                                                         <level for="">Country</level>
-                                                        <input type="text" class="form-control" name="country" placeholder="Enter your country">{{ $user->country }}</input>
+                                                        <input type="text" class="form-control" name="country" placeholder="Enter your country" value="{{ $user->country }}"></input>
                                                     </div>
                                                     <div class="form-group">
                                                         <level for="">Postcode</level>
-                                                        <input  type="number" class="form-control" name="postcode" placeholder="Enter your postcode">{{ $user->postcode }}</input>
+                                                        <input  type="number" class="form-control" name="postcode" placeholder="Enter your postcode" value="{{ $user->postcode }}"></input>
                                                     </div>
                                                     <div class="form-group">
                                                         <level for="">State</level>
-                                                        <input type="text" class="form-control" name="state" placeholder="Enter your state">{{ $user->state }}</input>
+                                                        <input type="text" class="form-control" name="state" placeholder="Enter your state" value="{{ $user->state }}"></input>
                                                     </div>
                                                     <div class="form-group">
                                                         <level for="">City</level>
-                                                        <input type="text" class="form-control" name="city" placeholder="Enter your city">{{ $user->city }}</input>
+                                                        <input type="text" class="form-control" name="city" placeholder="Enter your city" value="{{ $user->city }}"></input>
                                                     </div>
                                             </div>
                                             <div class="modal-footer">
@@ -89,7 +89,10 @@
                             <div class="col-12 col-lg-6">
                                 <h6 class="mb-3">Shipping Address</h6>
                                 <address>
-                                    You have not set up this type of address yet.
+                                {{$user->saddress}} <br>
+                                    {{$user->sstate}},  {{$user->scity}} <br>
+                                    {{$user->scountry}} <br>
+                                    {{$user->spostcode}}
                                 </address>
                                 <a href="#" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#shipingAddress">Edit Address</a>
                                 <!-- Shipping Address modal -->
@@ -103,33 +106,34 @@
                                             <span aria-hidden="true">&times;</span>
                                             </button>
                                         </div>
-                                        <form action="">
-                                        <div class="modal-body">
-                                                <div class="form-group">
-                                                    <level for="">Shipping Address</level>
-                                                    <textarea type="text" class="form-control" name="saddress" placeholder="Enter your Shipping address" >{{ $user->saddress }}</textarea>
-                                                </div>
-                                                <div class="form-group">
-                                                    <level for="">Shipping Country</level>
-                                                    <input type="text" class="form-control" name="scountry" placeholder="Enter your Shipping country">{{ $user->scountry }}</input>
-                                                </div>
-                                                <div class="form-group">
-                                                    <level for="">Shipping Postcode</level>
-                                                    <input type="number" class="form-control" name="spostcode" placeholder="Enter your Shipping postcode">{{ $user->spostcode }}</input>
-                                                </div>
-                                                <div class="form-group">
-                                                    <level for="">Shipping State</level>
-                                                    <input type="text" class="form-control" name="sstate" placeholder="Enter your Shipping state">{{ $user->sstate }}</input>
-                                                </div>
-                                                <div class="form-group">
-                                                    <level for="">Shipping City</level>
-                                                    <input type="text" class="form-control" name="scity" placeholder="Enter your Shipping city">{{ $user->scity }}</input>
-                                                </div>
-                                        </div>
-                                        <div class="modal-footer">
-                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                            <button type="submit" class="btn btn-primary">Update Shipping Address</button>
-                                        </div>
+                                        <form action="{{ route('shipping.address',$user->id) }}" method="post">
+                                            @csrf
+                                            <div class="modal-body">
+                                                    <div class="form-group">
+                                                        <level for="">Shipping Address</level>
+                                                        <textarea type="text" class="form-control" name="saddress" placeholder="Enter your Shipping address" >{{ $user->saddress }}</textarea>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <level for="">Shipping Country</level>
+                                                        <input type="text" class="form-control" name="scountry" placeholder="Enter your Shipping country" value="{{ $user->scountry }}"></input>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <level for="">Shipping Postcode</level>
+                                                        <input type="number" class="form-control" name="spostcode" placeholder="Enter your Shipping postcode" value="{{ $user->spostcode }}"></input>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <level for="">Shipping State</level>
+                                                        <input type="text" class="form-control" name="sstate" placeholder="Enter your Shipping state" value="{{ $user->sstate }}"></input>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <level for="">Shipping City</level>
+                                                        <input type="text" class="form-control" name="scity" placeholder="Enter your Shipping city" value="{{ $user->scity }}"></input>
+                                                    </div>
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                                <button type="submit" class="btn btn-primary">Update Shipping Address</button>
+                                            </div>
                                         </form>
                                         </div>
                                     </div>

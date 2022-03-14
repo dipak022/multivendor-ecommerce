@@ -167,7 +167,7 @@ class IndexController extends Controller
 
     public function BillingAddress(Request $request,$id){
         //return $request->all();
-        $user = User::where('id',$id)->update(['country'=>$request->country,'city'=>$request->city,'state'=>$request->state,'postcode'=>$request->postcode,'address'=>$request->adderss]);
+        $user = User::where('id',$id)->update(['country'=>$request->country,'city'=>$request->city,'state'=>$request->state,'postcode'=>$request->postcode,'address'=>$request->address]);
         if($user){
             $notification = array(
                 'message' => 'Address Update Successfully',
@@ -183,6 +183,27 @@ class IndexController extends Controller
         }
         
     }
+
+    public function ShippingAddress(Request $request,$id){
+        //return $request->all();
+        $user = User::where('id',$id)->update(['scountry'=>$request->scountry,'scity'=>$request->scity,'sstate'=>$request->sstate,'spostcode'=>$request->spostcode,'saddress'=>$request->saddress]);
+        if($user){
+            $notification = array(
+                'message' => 'Shipping Address Update Successfully',
+                'alert-type' => 'success'
+            );
+            return redirect()->back()->with($notification);
+        }else{
+            $notification = array(
+                'message' => 'Shipping Address Update Unsuccessfully',
+                'alert-type' => 'error'
+            );
+            return redirect()->with($notification);
+        }
+        
+    }
+
+    
 
     
 
