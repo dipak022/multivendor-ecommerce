@@ -76,6 +76,7 @@ class IndexController extends Controller
     }
 
     public function UserAuth(){
+        Session::put('url.intended',URL::previous());
         return view('frontend.auth.auth');
     }
 

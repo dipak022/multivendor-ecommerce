@@ -237,7 +237,11 @@
                                     <li>
                                         <span>Total:</span>
                                         @if(session()->has('coupon'))
+                                        <!--
                                         <span>{{ filter_var(\Gloudemans\Shoppingcart\Facades\Cart::subtotal(),FILTER_SANITIZE_NUMBER_INT) - session('coupon')['value'] }} TK</span>
+                                        <span>{{ (float) str_replace(',','',\Gloudemans\Shoppingcart\Facades\Cart::subtotal()) - session('coupon')['value'] }} TK</span>
+                                        -->
+                                        <span>{{number_format((float) str_replace(',','',\Gloudemans\Shoppingcart\Facades\Cart::subtotal()) - session('coupon')['value'],2) }} TK</span>
                                         @else
                                         <span>{{ \Gloudemans\Shoppingcart\Facades\Cart::subtotal() }} TK</span>
                                         @endif
@@ -246,7 +250,7 @@
                             </div>
                             <div class="cart-box d-flex">
                                 <a href="{{ route('cart') }}" class="btn btn-sm btn-primary" style="margin-right:5px;">View Cart</a>
-                                <a href="checkout-1.html" class="btn btn-sm btn-secondary float-right">Checkout</a>
+                                <a href="{{ route('checkout1') }}" class="btn btn-sm btn-secondary float-right">Checkout</a>
                             </div>
                         </div>
                     </div>

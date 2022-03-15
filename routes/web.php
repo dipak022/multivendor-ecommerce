@@ -39,8 +39,12 @@ Route::post('wishlist/move/cart/', [App\Http\Controllers\Frontend\WishlistContro
 Route::post('wishlist/delete/', [App\Http\Controllers\Frontend\WishlistController::class, 'WishlistDelete'])->name('wishlist.delete');
 
 
+//checkout route 
+Route::get('checkout1', [App\Http\Controllers\Frontend\CheckoutController::class, 'Checkout1'])->name('checkout1')->middleware('user');
+
 
 // Frontend route end
+
 
 
 //authantication route
