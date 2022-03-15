@@ -35,6 +35,9 @@ Route::post('user/register/', [App\Http\Controllers\Frontend\IndexController::cl
 Route::get('user/logout/', [App\Http\Controllers\Frontend\IndexController::class, 'UserLogout'])->name('user.logout');
 
 
+//coupon.add
+Route::post('coupon/add/', [App\Http\Controllers\Frontend\CartController::class, 'couponAdd'])->name('coupon.add');
+
 // Backend all route here 
 Auth::routes(['register'=>false]);
 

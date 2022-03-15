@@ -9,6 +9,7 @@ use App\Models\Banner;
 use App\Models\Brand;
 use App\Models\Product;
 use App\Models\User;
+use App\Models\Coupon;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
@@ -98,6 +99,34 @@ class CartController extends Controller
         }
         return $response;
        
+
+    }
+
+    public function couponAdd(Request $request){
+        //return $request->all();
+        $coupon = Coupon::where('code',$request->input('code'))->first();
+        //return $coupon;
+        if(!$coupon){
+            $notification = array(
+                'message' => 'Envalid coupon code  !! please enter valid coupon code !!!try Again! ',
+                'alert-type' => 'error'
+            );
+            return redirect()->back()->with($notification);
+        }
+        if($coupon){
+            $total_price = Cart::instance('shopping')->subtotal();
+            //return $total_price;
+            session()->put('coupon',[
+                'id'=>$coupon->id,
+                'code'=>$coupon->code,
+                'value'=>$coupon->discount($total_price),
+            ]);
+            $notification = array(
+                'message' => 'Coupon apply Successfull ',
+                'alert-type' => 'success'
+            );
+            return redirect()->back()->with($notification);
+        }
 
     }
 

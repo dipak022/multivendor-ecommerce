@@ -35,10 +35,11 @@
                         <h6>Have a Coupon?</h6>
                         <p>Enter your coupon code here &amp; get awesome discounts!</p>
                         <!-- Form -->
-                        <div class="coupon-form">
-                            <form action="#">
-                                <input type="text" class="form-control" placeholder="Enter Your Coupon Code">
-                                <button type="submit" class="btn btn-primary">Apply Coupon</button>
+                        <div class="coupon-form" >
+                            <form action="{{ route('coupon.add') }}" method="post" id="coupon-form">
+                                @csrf
+                                <input type="text" class="form-control" name="code" placeholder="Enter Your Coupon Code">
+                                <button type="submit" class="btn btn-primary coupon-btn" >Apply Coupon</button>
                             </form>
                         </div>
                     </div>
@@ -162,13 +163,13 @@
                 $('body #header-ajax').html(data['header']);
                 $('body #cart-counter').html(data['cart_count']);
                 $('body #cart_list').html(data['cart_list']);
-                //swal({
-                //title: "Good job!",
-                //text: data['message'],
-                //icon: "success",
-                //button: "ok!",
-                //});
-                alert(data['message']);
+                swal({
+                title: "Good job!",
+                text: data['message'],
+                icon: "success",
+                button: "ok!",
+                });
+                //alert(data['message']);
                }else{
                    alert(data['message']);
                }
@@ -181,4 +182,15 @@
 
        }
     </script>
+
+    <script>
+       $(document).on('click','.coupon-btn',function(e){
+           e.preventDefault();
+           var code = $('input[name=code]').val();
+           //alert(code);
+           $('.coupon-btn').html('<i class="fa fa-spinner fa-spin"></i> Applying...');
+           $('#coupon-form').submit(); 
+       });
+    </script>
+
 @endsection

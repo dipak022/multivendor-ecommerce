@@ -11,4 +11,18 @@ class Coupon extends Model
     protected $fillable = [
         'code','type','status','value',
     ];
+
+    public function discount($total){
+        //dd ($total);
+        if($this->type=="fixed"){
+            return $this->value;
+        }
+        elseif($this->type=="percent"){
+            return ($this->value/100)*$total;
+        }else{
+            return 0;
+        }
+        //dd($this->type);
+
+    }
 }
