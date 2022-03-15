@@ -90,11 +90,13 @@ class CartController extends Controller
         }
         if($request->ajax()){
             $header = view('frontend.layouts.header')->render();
+            $cart_list = view('frontend.layouts.cart-list')->render();
             $response['header']=$header;
+            $response['cart_list']=$cart_list;
             $response['message']=$message;
-            $response['status']=true;
+            //$response['status']=true;
         }
-        return json_encode($response);
+        return $response;
        
 
     }
