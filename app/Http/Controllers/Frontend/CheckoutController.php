@@ -30,7 +30,7 @@ class CheckoutController extends Controller
 
     public function Checkout1Store(Request $request){
         //return $request->all();
-        Session::put('checkout1',[
+        Session::put('checkout',[
             'first_name'=>$request->first_name,
             'last_name'=>$request->last_name,
             'email'=>$request->email,
@@ -58,4 +58,18 @@ class CheckoutController extends Controller
         return view('frontend.pages.checkout.checkout2',compact('shipping'));
 
     }
+
+    public function Checkout2Store(Request $request){
+        return $request->all();
+        Session::push('checkout',[
+            'delivery_charge'=>$request->delivery_charge,
+        ]);
+
+        //$shipping = Shipping::where('status','active')->orderBy('shipping_address','ASC')->get();
+
+        return view('frontend.pages.checkout.checkout3');
+
+    }
+
+    
 }
