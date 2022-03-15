@@ -32,111 +32,50 @@
                                         <th scope="col">Image</th>
                                         <th scope="col">Product</th>
                                         <th scope="col">Unit Price</th>
+                                        <!--
                                         <th scope="col">Quantity</th>
+                                        -->
                                         <th scope="col">Favorite List Add To Cart</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr>
-                                        <th scope="row">
-                                            <i class="icofont-close"></i>
-                                        </th>
-                                        <td>
-                                            <img src="img/product-img/onsale-1.png" alt="Product">
-                                        </td>
-                                        <td>
-                                            <a href="#">Bluetooth Speaker</a>
-                                        </td>
-                                        <td>$9</td>
-                                        <td>
-                                            <div class="quantity">
-                                                <input type="number" class="qty-text" id="qty2" step="1" min="1" max="99" name="quantity" value="1">
-                                            </div>
-                                        </td>
-                                        <td><a href="#" class="btn btn-primary btn-sm">Add to Cart</a></td>
-                                    </tr>
-                                    <tr>
-                                        <th scope="row">
-                                            <i class="icofont-close"></i>
-                                        </th>
-                                        <td>
-                                            <img src="img/product-img/onsale-2.png" alt="Product">
-                                        </td>
-                                        <td>
-                                            <a href="#">Roof Lamp</a>
-                                        </td>
-                                        <td>$11</td>
-                                        <td>
-                                            <div class="quantity">
-                                                <input type="number" class="qty-text" id="qty3" step="1" min="1" max="99" name="quantity" value="1">
-                                            </div>
-                                        </td>
-                                        <td><a href="#" class="btn btn-primary btn-sm">Add to Cart</a></td>
-                                    </tr>
-                                    <tr>
-                                        <th scope="row">
-                                            <i class="icofont-close"></i>
-                                        </th>
-                                        <td>
-                                            <img src="img/product-img/onsale-6.png" alt="Product">
-                                        </td>
-                                        <td>
-                                            <a href="#">Cotton T-shirt</a>
-                                        </td>
-                                        <td>$6</td>
-                                        <td>
-                                            <div class="quantity">
-                                                <input type="number" class="qty-text" id="qty4" step="1" min="1" max="99" name="quantity" value="1">
-                                            </div>
-                                        </td>
-                                        <td><a href="#" class="btn btn-primary btn-sm">Add to Cart</a></td>
-                                    </tr>
-                                    <tr>
-                                        <th scope="row">
-                                            <i class="icofont-close"></i>
-                                        </th>
-                                        <td>
-                                            <img src="img/product-img/onsale-4.png" alt="Product">
-                                        </td>
-                                        <td>
-                                            <a href="#">Water Bottle</a>
-                                        </td>
-                                        <td>$17</td>
-                                        <td>
-                                            <div class="quantity">
-                                                <input type="number" class="qty-text" id="qty5" step="1" min="1" max="99" name="quantity" value="1">
-                                            </div>
-                                        </td>
-                                        <td><a href="#" class="btn btn-primary btn-sm">Add to Cart</a></td>
-                                    </tr>
-                                    <tr>
-                                        <th scope="row">
-                                            <i class="icofont-close"></i>
-                                        </th>
-                                        <td>
-                                            <img src="img/product-img/onsale-5.png" alt="Product">
-                                        </td>
-                                        <td>
-                                            <a href="#">Alka Sliper</a>
-                                        </td>
-                                        <td>$13</td>
-                                        <td>
-                                            <div class="quantity">
-                                                <input type="number" class="qty-text" id="qty6" step="1" min="1" max="99" name="quantity" value="1">
-                                            </div>
-                                        </td>
-                                        <td><a href="#" class="btn btn-primary btn-sm">Add to Cart</a></td>
-                                    </tr>
+                                    @if(\Gloudemans\Shoppingcart\Facades\Cart::instance('wishlist')->count())
+                                        @foreach(\Gloudemans\Shoppingcart\Facades\Cart::instance('wishlist')->content() as $item)
+                                            <tr>
+                                                <th scope="row">
+                                                    <i class="icofont-close"></i>
+                                                </th>
+                                                <td>
+                                                    <img src="{{$item->model->photo}}" alt="{{ $item->model->slug }}">
+                                                </td>
+                                                <td>
+                                                    <a href="{{ route('product.detail',$item->model->slug) }}">{{$item->name}}</a>
+                                                </td>
+                                                <td>{{ number_format($item->price,2) }} TK</td>
+                                                <!--
+                                                <td>
+                                                    <div class="quantity">
+                                                        <input type="number" class="qty-text" id="qty2" step="1" min="1" max="99" name="quantity" value="1">
+                                                    </div>
+                                                </td>
+                                                -->
+                                                <td><a href="javascript:void(0)" data-id="{{ $item->rowId }}" class="move-to-cart btn btn-primary btn-sm">Add to Cart</a></td>
+                                            </tr>
+                                        @endforeach
+                                    @else
+                                        <p>You don't have any wishlist product!!</p>
+                                    @endif
                                 </tbody>
                             </table>
                         </div>
                     </div>
-
+                    <!--
                     <div class="cart-footer text-right">
                         <div class="back-to-shop">
                             <a href="#" class="btn btn-primary">Add All Item</a>
                         </div>
                     </div>
+                    -->
                 </div>
             </div>
         </div>

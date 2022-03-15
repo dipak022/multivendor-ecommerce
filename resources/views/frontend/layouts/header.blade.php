@@ -196,7 +196,7 @@
 
                     <!-- Wishlist -->
                     <div class="wishlist-area">
-                        <a href="{{ route('wishlist') }}" class="wishlist-btn"><i class="icofont-heart"></i></a>
+                        <a href="{{ route('wishlist') }}" class="wishlist-btn" id="wishlist_count"><i class="icofont-heart"></i>({{ \Gloudemans\Shoppingcart\Facades\Cart::instance('wishlist')->count() }})</a>
                     </div>
 
                     <!-- Cart -->

@@ -368,10 +368,8 @@
    });
 
 </script>
-
+<!--add to cart  -->
 <script>
-   
-
    $(document).on('click','.add_to_cart',function(e){
        e.preventDefault();
        var product_id = $(this).data('product-id');
@@ -406,6 +404,69 @@
                 icon: "success",
                 button: "ok!",
                 });
+               }
+           }
+
+       });
+
+   });
+</script>
+<!--add to wishlist -->
+<script>
+   $(document).on('click','.add_to_wishlist',function(e){
+       e.preventDefault();
+       var product_id = $(this).data('id');
+       //alert(product_id);
+       var product_qty = $(this).data('quantity');
+       //alert(product_qty);
+       var token = "{{csrf_token()}}";
+       var path = "{{ route('wishlist.store') }}";
+
+       $.ajax({
+           url:path,
+           type:"POST",
+           dataType:"JSON",
+           data:{
+               product_id : product_id,
+               product_qty : product_qty,
+               _token : token,
+           },
+           beforeSend:function(){
+               $('#add_to_wishlist_'+product_id).html('<i class="fa fa-spinner fa-spin"></i>');
+           },
+           complete:function(){
+               $('#add_to_wishlist_'+product_id).html('<i class="fas fa-heart"></i>');
+           },
+           success:function(data){
+               //console.log(dara);
+               
+               if(data['status']){
+                    $('body #header-ajax').html(data['header']);
+                    $('body #wishlist_count').html(data['wishlist_count']);
+                    swal({
+                        title: "Good job!",
+                        text: data['message'],
+                        icon: "success",
+                        button: "ok!",
+                    });
+               }else if(data['present']){
+                    $('body #header-ajax').html(data['header']);
+                    $('body #wishlist_count').html(data['wishlist_count']);
+                    swal({
+                        title: "Opps!",
+                        text: data['message'],
+                        icon: "warning",
+                        button: "ok!",
+                    });
+
+               }else{
+                    swal({
+                        title: "Sorry!",
+                        text: "can't add that product !! try again!",
+                        icon: "error",
+                        button: "ok!",
+                    });
+
                }
            }
 
