@@ -49,4 +49,29 @@ class WishlistController extends Controller
         return json_encode($response);
 
     }
+
+    public function WishlistMoveCart(Request $request){
+        //return $request->all();
+        $item = Cart::instance('wishlist')->get( $request->input('rowId'));
+        //dd($item);
+        Cart::instance('wishlist')->remove($request->input('rowId'));
+        $result= Cart::instance('shopping')->add($item->id,$item->name,1,$item->price)->associate('App\Models\Product');
+        if($result){
+            
+            $response['status']=true;
+            $response['cart_count']=Cart::instance('shopping')->count();
+            $response['message']="Item has been Move Cart";
+
+        }
+        if($request->ajax()){
+            $header = view('frontend.layouts.header')->render();
+            $wishlist_list = view('frontend.layouts.wishlist')->render();
+            $response['header']=$header;
+            $response['wishlist_list']=$wishlist_list;
+        }
+        return $response;
+
+
+
+    }
 }

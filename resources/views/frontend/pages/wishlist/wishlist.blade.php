@@ -24,49 +24,8 @@
             <div class="row">
                 <div class="col-12">
                     <div class="cart-table wishlist-table">
-                        <div class="table-responsive">
-                            <table class="table table-bordered mb-30">
-                                <thead>
-                                    <tr>
-                                        <th scope="col"><i class="icofont-ui-delete"></i></th>
-                                        <th scope="col">Image</th>
-                                        <th scope="col">Product</th>
-                                        <th scope="col">Unit Price</th>
-                                        <!--
-                                        <th scope="col">Quantity</th>
-                                        -->
-                                        <th scope="col">Favorite List Add To Cart</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    @if(\Gloudemans\Shoppingcart\Facades\Cart::instance('wishlist')->count())
-                                        @foreach(\Gloudemans\Shoppingcart\Facades\Cart::instance('wishlist')->content() as $item)
-                                            <tr>
-                                                <th scope="row">
-                                                    <i class="icofont-close"></i>
-                                                </th>
-                                                <td>
-                                                    <img src="{{$item->model->photo}}" alt="{{ $item->model->slug }}">
-                                                </td>
-                                                <td>
-                                                    <a href="{{ route('product.detail',$item->model->slug) }}">{{$item->name}}</a>
-                                                </td>
-                                                <td>{{ number_format($item->price,2) }} TK</td>
-                                                <!--
-                                                <td>
-                                                    <div class="quantity">
-                                                        <input type="number" class="qty-text" id="qty2" step="1" min="1" max="99" name="quantity" value="1">
-                                                    </div>
-                                                </td>
-                                                -->
-                                                <td><a href="javascript:void(0)" data-id="{{ $item->rowId }}" class="move-to-cart btn btn-primary btn-sm">Add to Cart</a></td>
-                                            </tr>
-                                        @endforeach
-                                    @else
-                                        <p>You don't have any wishlist product!!</p>
-                                    @endif
-                                </tbody>
-                            </table>
+                        <div class="table-responsive" id="wishlist_list">
+                        @include('frontend.layouts.wishlist')
                         </div>
                     </div>
                     <!--
@@ -87,6 +46,59 @@
 
 @section('scripts')
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+    <script>
+       $('.move-to-cart').on('click',function(e){
+           e.preventDefault();
+           var rowId = $(this).data('id');
+           //alert(rowId);
+           var token = "{{csrf_token()}}";
+           var path = "{{ route('wishlist.move.cart') }}";
+
+           $.ajax({
+           url:path,
+           type:"POST",
+           data:{
+               _token : token,
+               rowId : rowId,
+           },
+           beforeSend:function(){
+               $('.move-to-cart').html('<i class="fa fa-spinner fa-spin"></i> Moveing To Cart...');
+           },
+           
+           success:function(data){
+               if(data['status']){
+                    $('body #header-ajax').html(data['header']);
+                    $('body #cart-counter').html(data['cart_count']);
+                    $('body #wishlist_list').html(data['wishlist_list']);
+                    swal({
+                        title: "Success!",
+                        text: data['message'],
+                        icon: "success",
+                        button: "ok!",
+                    });
+                   //alert(data['message']);
+               }else{
+                    swal({
+                        title: "Opps!",
+                        text: "Something went to wrong",
+                        icon: "warning",
+                        button: "ok!",
+                    });
+               }
+           },
+           error:function(err){
+                swal({
+                    title: "Error!",
+                    text: "Something went to Error",
+                    icon: "error",
+                    button: "ok!",
+                });
+           }
+
+       });
+
+       })
+    </script>
   
 
 @endsection
