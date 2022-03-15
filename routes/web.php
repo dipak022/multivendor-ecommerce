@@ -43,6 +43,8 @@ Route::post('wishlist/delete/', [App\Http\Controllers\Frontend\WishlistControlle
 Route::get('checkout1', [App\Http\Controllers\Frontend\CheckoutController::class, 'Checkout1'])->name('checkout1')->middleware('user');
 
 
+
+
 // Frontend route end
 
 
@@ -90,6 +92,11 @@ Route::group(['prefix'=>'admin','middleware'=>['auth','admin']],function(){
     //coupon route here 
     Route::resource('/coupon', App\Http\Controllers\CouponController::class);
     Route::post('/coupon_status', [App\Http\Controllers\CouponController::class, 'couponStatus'])->name('coupon.status');
+
+
+     //shipping route here 
+     Route::resource('/shipping', App\Http\Controllers\ShippingController::class);
+     Route::post('/shipping_status', [App\Http\Controllers\ShippingController::class, 'ShippingsStatus'])->name('shipping.status');
 
 
 

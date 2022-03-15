@@ -91,10 +91,10 @@
                             </li>
 
                             <li>
-                                <a href="#App" class="has-arrow"><i class="icon-basket"></i> <span>Cart Management</span></a>
+                                <a href="#App" class="has-arrow"><i class="icon-basket"></i> <span>Shipping Management</span></a>
                                 <ul>
-                                    <li><a href="app-inbox.html">Inbox</a></li>
-                                    <li><a href="app-chat.html">Chat</a></li>
+                                    <li><a href="{{ route('shipping.index') }}">All Shipping</a></li>
+                                    <li><a href="{{ route('shipping.create') }}">Create Shipping</a></li>
                                 </ul>
                             </li>
 
