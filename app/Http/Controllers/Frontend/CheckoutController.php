@@ -60,7 +60,7 @@ class CheckoutController extends Controller
     }
 
     public function Checkout2Store(Request $request){
-        return $request->all();
+        //return $request->all();
         Session::push('checkout',[
             'delivery_charge'=>$request->delivery_charge,
         ]);
