@@ -52,10 +52,10 @@
                                             <td>
                                                 <div class="quantity">
                                                     <input type="number" class="qty-text" data-id="{{ $item->rowId }}" id="qty-input-{{ $item->rowId }}" step="1" min="1" max="99" name="quantity" value="{{ $item->qty }}">
-                                                    <input type="hidden"  data-id="{{ $item->rowId }}" data-product-quantity="{{ $item->model->stock }}" id="update-cart-{{ $item->rowId }}" >
+                                                    <input type="hidden"  data-id="{{ $item->rowId }}" data-product-quantity="{{ $item->model->strock }}" id="updates-cart-{{ $item->rowId }}" >
                                                 </div>
                                             </td>
-                                            <td>{{ \Gloudemans\Shoppingcart\Facades\Cart::subtotal() }} TK</td>
+                                            <td>{{ number_format($item->price*$item->qty,2) }} TK</td>
                                         </tr>
                                     @endforeach
                                     
@@ -115,7 +115,7 @@
 @endsection
 
 @section('scripts')
-<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
     <script>
      $(document).on('click','.cart_delete',function(e){
        e.preventDefault();
@@ -138,7 +138,7 @@
                //console.log(dara);
                if(data['status']){
                 $('body #header-ajax').html(data['header']);
-                $('body #cart_counter').html(data['cart_count']);
+                $('body #cart-counter').html(data['cart_count']);
                 swal({
                 title: "Good job!",
                 text: data['message'],
@@ -169,9 +169,47 @@
         if(input.val() !=1){
             var newVal= parseFloat(input.val());
             $('#qty-input-'+id).val(newVal);
+            //alert(newVal);
         }
+        var ProductQuantity = $("#updates-cart-"+id).data('product-quantity');
+        //alert(ProductQuantity);
+        update_cart(id,ProductQuantity);
 
 
        });
+       function update_cart(id,ProductQuantity){
+           var rowId = id;
+           var product_qty = $('#qty-input-'+rowId).val();
+           var token = "{{csrf_token()}}";
+           var path = "{{ route('cart.update') }}";
+
+           $.ajax({
+           url:path,
+           type:"POST",
+           data:{
+               _token : token,
+               product_qty : product_qty,
+               rowId : rowId,
+               ProductQuantity: ProductQuantity,
+           },
+           success:function(data){
+               if(data['status']){
+                $('body #header-ajax').html(data['header']);
+                $('body #cart-counter').html(data['cart_count']);
+                swal({
+                title: "Good job!",
+                text: data['message'],
+                icon: "success",
+                button: "ok!",
+                });
+               }
+           },
+           error:function(err){
+            console.log(err);
+           }
+
+       });
+
+       }
     </script>
 @endsection

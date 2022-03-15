@@ -68,5 +68,36 @@ class CartController extends Controller
 
     }
 
+    public function CartUpdate(Request $request){
+        $rowId = $request->input('rowId');
+        $request_quantity = $request->input('product_qty');
+        $ProductQuantity = $request->input('ProductQuantity');
+        //dd($ProductQuantity);
+        if($request_quantity > $ProductQuantity){
+            $message="We carefully do not have enough item in stock";
+            $response['status']=false;
+        }
+        elseif($request_quantity < 1){
+            $message="You can not add less then 1 quantity";
+            $response['status']=false;
+        }
+        else{
+            Cart::instance('shopping')->update($rowId,$request_quantity);
+            $message="You quantity update successfully";
+            $response['status']=true;
+            $response['total']=Cart::subtotal();
+            $response['cart_count']=Cart::instance('shopping')->count();
+        }
+        if($request->ajax()){
+            $header = view('frontend.layouts.header')->render();
+            $response['header']=$header;
+            $response['message']=$message;
+            $response['status']=true;
+        }
+        return json_encode($response);
+       
+
+    }
+
     
 }
