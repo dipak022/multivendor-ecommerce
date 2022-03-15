@@ -15,6 +15,9 @@ use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
 //use Session;
+//use App\Url;
+use Redirect;
+use URL;
 use DB;
 class IndexController extends Controller
 {
