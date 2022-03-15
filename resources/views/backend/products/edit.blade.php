@@ -78,7 +78,7 @@
                             </br>
                             <select class="form-control show-tick" name="vandor_id">
                                 <option selected disable>--Select Vendors--</option>
-                                @foreach(\App\Models\User::where('role','vendor')->get() as $vendor)
+                                @foreach(\App\Models\User::where('role','seller')->get() as $vendor)
                                     <option value="{{ $vendor->id }}" {{ $vendor->id == $product->vandor_id ? 'selected' : '' }} >{{$vendor->full_name}}</option>
                                 @endforeach
                             </select>

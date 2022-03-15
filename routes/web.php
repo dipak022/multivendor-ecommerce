@@ -25,6 +25,18 @@ Route::get('cart', [App\Http\Controllers\Frontend\CartController::class, 'Cart']
 Route::post('cart/store', [App\Http\Controllers\Frontend\CartController::class, 'CartStore'])->name('cart.store');
 Route::post('cart/delete', [App\Http\Controllers\Frontend\CartController::class, 'CartDelete'])->name('cart.delete');
 Route::post('cart/update', [App\Http\Controllers\Frontend\CartController::class, 'CartUpdate'])->name('cart.update');
+
+
+
+//coupon.add
+Route::post('coupon/add/', [App\Http\Controllers\Frontend\CartController::class, 'couponAdd'])->name('coupon.add');
+
+//Wishlist 
+Route::get('wishlist', [App\Http\Controllers\Frontend\WishlistController::class, 'Wishlist'])->name('wishlist');
+
+
+
+
 // Frontend route end
 
 
@@ -35,8 +47,8 @@ Route::post('user/register/', [App\Http\Controllers\Frontend\IndexController::cl
 Route::get('user/logout/', [App\Http\Controllers\Frontend\IndexController::class, 'UserLogout'])->name('user.logout');
 
 
-//coupon.add
-Route::post('coupon/add/', [App\Http\Controllers\Frontend\CartController::class, 'couponAdd'])->name('coupon.add');
+
+
 
 // Backend all route here 
 Auth::routes(['register'=>false]);
