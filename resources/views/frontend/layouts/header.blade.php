@@ -236,7 +236,11 @@
                                     -->
                                     <li>
                                         <span>Total:</span>
+                                        @if(session()->has('coupon'))
+                                        <span>{{ filter_var(\Gloudemans\Shoppingcart\Facades\Cart::subtotal(),FILTER_SANITIZE_NUMBER_INT) - session('coupon')['value'] }} TK</span>
+                                        @else
                                         <span>{{ \Gloudemans\Shoppingcart\Facades\Cart::subtotal() }} TK</span>
+                                        @endif
                                     </li>
                                 </ul>
                             </div>
@@ -250,8 +254,7 @@
                     <!-- Account -->
                     <div class="account-area">
                         <div class="user-thumbnail">
-                            
-                            @if(auth()->user()->photo)
+                            @if(Auth::check())
                             <img src="{{ auth()->user()->photo }}" alt="">
                             @else
                             <img src="{{ Helpers::UserDefaultImage() }}" alt="">
