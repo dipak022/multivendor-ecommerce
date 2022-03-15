@@ -46,6 +46,7 @@
 
 @section('scripts')
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+    <!-- wishlist product move to cart-->
     <script>
        $('.move-to-cart').on('click',function(e){
            e.preventDefault();
@@ -63,6 +64,60 @@
            },
            beforeSend:function(){
                $('.move-to-cart').html('<i class="fa fa-spinner fa-spin"></i> Moveing To Cart...');
+           },
+           
+           success:function(data){
+               if(data['status']){
+                    $('body #header-ajax').html(data['header']);
+                    $('body #cart-counter').html(data['cart_count']);
+                    $('body #wishlist_list').html(data['wishlist_list']);
+                    swal({
+                        title: "Success!",
+                        text: data['message'],
+                        icon: "success",
+                        button: "ok!",
+                    });
+                   //alert(data['message']);
+               }else{
+                    swal({
+                        title: "Opps!",
+                        text: "Something went to wrong",
+                        icon: "warning",
+                        button: "ok!",
+                    });
+               }
+           },
+           error:function(err){
+                swal({
+                    title: "Error!",
+                    text: "Something went to Error",
+                    icon: "error",
+                    button: "ok!",
+                });
+           }
+
+       });
+
+       })
+    </script>
+    <!--delete wishlist-->
+    <script>
+       $('.delete_wishlist').on('click',function(e){
+           e.preventDefault();
+           var rowId = $(this).data('id');
+           //alert(rowId);
+           var token = "{{csrf_token()}}";
+           var path = "{{ route('wishlist.delete') }}";
+
+           $.ajax({
+           url:path,
+           type:"POST",
+           data:{
+               _token : token,
+               rowId : rowId,
+           },
+           beforeSend:function(){
+               $('.delete_wishlist').html('<i class="fa fa-spinner fa-spin"></i> Deleting wishlist...');
            },
            
            success:function(data){

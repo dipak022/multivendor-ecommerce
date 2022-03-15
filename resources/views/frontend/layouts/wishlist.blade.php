@@ -16,7 +16,7 @@
         @foreach(\Gloudemans\Shoppingcart\Facades\Cart::instance('wishlist')->content() as $item)
             <tr>
                 <th scope="row">
-                    <i class="icofont-close"></i>
+                    <i class="icofont-close delete_wishlist" data-id="{{ $item->rowId }}"></i>
                 </th>
                 <td>
                     <img src="{{$item->model->photo}}" alt="{{ $item->model->slug }}">

@@ -70,8 +70,21 @@ class WishlistController extends Controller
             $response['wishlist_list']=$wishlist_list;
         }
         return $response;
+    }
 
+    public function WishlistDelete(Request $request){
+        $id = $request->input('rowId');
+        $result = Cart::instance('wishlist')->remove($id);
+        $response['status']=true;
+        $response['cart_count']=Cart::instance('shopping')->count();
+        $response['message']="Item has beensuccessfully remove form your wishlist";
 
-
+        if($request->ajax()){
+            $header = view('frontend.layouts.header')->render();
+            $wishlist_list = view('frontend.layouts.wishlist')->render();
+            $response['header']=$header;
+            $response['wishlist_list']=$wishlist_list;
+        }
+        return $response;
     }
 }

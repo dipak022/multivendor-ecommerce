@@ -36,6 +36,7 @@ Route::get('wishlist', [App\Http\Controllers\Frontend\WishlistController::class,
 Route::post('wishlist/store/', [App\Http\Controllers\Frontend\WishlistController::class, 'StoreWishlist'])->name('wishlist.store');
 //wishlist.move.cart
 Route::post('wishlist/move/cart/', [App\Http\Controllers\Frontend\WishlistController::class, 'WishlistMoveCart'])->name('wishlist.move.cart');
+Route::post('wishlist/delete/', [App\Http\Controllers\Frontend\WishlistController::class, 'WishlistDelete'])->name('wishlist.delete');
 
 
 
