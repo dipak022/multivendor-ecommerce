@@ -37,7 +37,8 @@
                         @php
                            $name = explode(' ',auth()->user()->full_name);
                         @endphp
-                        <form action="#" method="post">
+                        <form action="{{ route('checkout1.store') }}" method="post">
+                            @csrf
                             <div class="row">
                                 <div class="col-md-6 mb-3">
                                     <label for="first_name">First Name</label>
@@ -132,16 +133,17 @@
                                 </div>
                                 </div>
                             </div>
-                        </form>
+                        
                     </div>
                 </div>
 
                 <div class="col-12">
                     <div class="checkout_pagination d-flex justify-content-end mt-50">
-                        <a href="checkout-1.html" class="btn btn-primary mt-2 ml-2">Go Back</a>
-                        <a href="checkout-3.html" class="btn btn-primary mt-2 ml-2">Continue</a>
+                        <a href="{{route('cart')}}" class="btn btn-primary mt-2 ml-2">Go Back</a>
+                        <button type="submit" class="btn btn-primary mt-2 ml-2">Continue</button>
                     </div>
                 </div>
+                </form>
             </div>
         </div>
     </div>

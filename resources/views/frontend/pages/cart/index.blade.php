@@ -60,7 +60,7 @@
                                         <td>@if(Illuminate\Support\Facades\Session::has('coupon')){{ number_format(\Illuminate\Support\Facades\Session::get('coupon')['value']) }} TK @else 0 @endif</td>
                                     </tr>
                                     <tr>
-                                        <td>VAT (10%)</td>
+                                        <td>VAT ({{Session::get('coupon')['value']}})</td>
                                          @if(Illuminate\Support\Facades\Session::has('coupon'))
                                         <td>{{number_format((float) str_replace(',','',\Gloudemans\Shoppingcart\Facades\Cart::subtotal()) - session('coupon')['value'],2) }} TK</td>
                                         @else
@@ -69,7 +69,11 @@
                                     </tr>
                                     <tr>
                                         <td>Total</td>
-                                        <td>$71.60</td>
+                                        @if(Illuminate\Support\Facades\Session::has('coupon'))
+                                        <td>{{number_format((float) str_replace(',','',\Gloudemans\Shoppingcart\Facades\Cart::subtotal()) - session('coupon')['value'],2) }} TK</td>
+                                        @else
+                                        <td>{{ \Gloudemans\Shoppingcart\Facades\Cart::subtotal() }}TK</td>
+                                        @endif
                                     </tr>
                                 </tbody>
                             </table>
