@@ -16,6 +16,8 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Facades\Mail;
+use App\Mail\OredrMail;
 use Response;
 use Cart;
 //use Session;
@@ -132,9 +134,12 @@ class CheckoutController extends Controller
         $order['scity'] =Session::get('checkout')['scity'];
         $order['sstreet'] =Session::get('checkout')['sstreet'];
         $order['spostcode'] =Session::get('checkout')['spostcode'];
+        Mail::to($order['email'])->bcc($order['semail'])->cc('dipakdebnath4022@mail.com')->send(new OredrMail($order));
+        dd('Mail is send');
 
         $status = $order->save();
         if($status){
+            
             Cart::instance('shopping')->destroy();
             Session::forget('coupon');
             Session::forget('checkout');
