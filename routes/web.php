@@ -43,6 +43,7 @@ Route::post('wishlist/delete/', [App\Http\Controllers\Frontend\WishlistControlle
 Route::get('checkout1', [App\Http\Controllers\Frontend\CheckoutController::class, 'Checkout1'])->name('checkout1')->middleware('user');
 Route::post('checkout-first/', [App\Http\Controllers\Frontend\CheckoutController::class, 'Checkout1Store'])->name('checkout1.store');
 Route::post('checkout-second/', [App\Http\Controllers\Frontend\CheckoutController::class, 'Checkout2Store'])->name('checkout2.store');
+Route::post('checkout-three/', [App\Http\Controllers\Frontend\CheckoutController::class, 'Checkout3Store'])->name('checkout3.store');
 
 
 

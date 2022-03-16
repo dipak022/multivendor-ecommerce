@@ -71,5 +71,20 @@ class CheckoutController extends Controller
 
     }
 
+    public function Checkout3Store(Request $request){
+        //return $request->all();
+        Session::push('checkout',[
+            'payment_method'=>$request->payment_method,
+            'payment_status'=>"paid",
+        ]);
+
+        //return Session::get('checkout');
+
+        return view('frontend.pages.checkout.checkout4');
+
+    }
+
+    
+
     
 }
