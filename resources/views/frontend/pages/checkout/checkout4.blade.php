@@ -39,7 +39,6 @@
                                 <table class="table table-bordered mb-30">
                                     <thead>
                                         <tr>
-                                            <th scope="col">Edit</th>
                                             <th scope="col">Image</th>
                                             <th scope="col">Product</th>
                                             <th scope="col">Unit Price</th>
@@ -50,22 +49,20 @@
                                     <tbody>
                                         @foreach(\Gloudemans\Shoppingcart\Facades\Cart::instance('shopping')->content() as $item)
                                             <tr>
-                                                <th scope="row">
-                                                    <a href="#" class="btn btn-primary"><i class="icofont-ui-edit"></i></a>
-                                                </th>
+                                               
                                                 <td>
-                                                    <img src="img/product-img/onsale-1.png" alt="Product">
+                                                    <img src="{{$item->model->photo}}" alt="Product">
                                                 </td>
                                                 <td>
-                                                    <a href="#">Bluetooth Speaker</a>
+                                                    <a href="#">{{ $item->name }}</a>
                                                 </td>
-                                                <td>$9</td>
+                                                <td>{{ number_format($item->price,2) }} TK</td>
                                                 <td>
                                                     <div class="quantity">
-                                                        <input type="number" class="qty-text" id="qty2" step="1" min="1" max="99" name="quantity" value="1">
+                                                        <input type="number" class="qty-text" id="qty2" step="1" min="1" max="99" name="quantity" value="{{ $item->qty }}">
                                                     </div>
                                                 </td>
-                                                <td>$9</td>
+                                                <td>{{ number_format($item->price*$item->qty,2) }} TK</td>
                                             </tr>
                                        @endforeach
                                     </tbody>
