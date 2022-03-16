@@ -265,7 +265,8 @@ class IndexController extends Controller
 
     public function Shop(){
         $product = Product::where('status','active')->paginate(12);
-        return view('frontend.pages.product.shop',compact('product'));
+        $cats=Category::where(['status'=>'active','is_parent'=>1])->with('products')->orderBy('title','ASC')->get();
+        return view('frontend.pages.product.shop',compact('product','cats'));
     }
 
     

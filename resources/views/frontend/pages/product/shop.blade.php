@@ -23,38 +23,21 @@
             <div class="row">
                 <div class="col-12 col-sm-5 col-md-4 col-lg-3">
                     <div class="shop_sidebar_area">
-
-                        <!-- Single Widget -->
-                        <div class="widget catagory mb-30">
-                            <h6 class="widget-title">Product Categories</h6>
-                            <div class="widget-desc">
-                                <!-- Single Checkbox -->
-                                <div class="custom-control custom-checkbox d-flex align-items-center mb-2">
-                                    <input type="checkbox" class="custom-control-input" id="customCheck1">
-                                    <label class="custom-control-label" for="customCheck1">Men <span class="text-muted">(109)</span></label>
-                                </div>
-                                <!-- Single Checkbox -->
-                                <div class="custom-control custom-checkbox d-flex align-items-center mb-2">
-                                    <input type="checkbox" class="custom-control-input" id="customCheck2">
-                                    <label class="custom-control-label" for="customCheck2">Women <span class="text-muted">(67)</span></label>
-                                </div>
-                                <!-- Single Checkbox -->
-                                <div class="custom-control custom-checkbox d-flex align-items-center mb-2">
-                                    <input type="checkbox" class="custom-control-input" id="customCheck3">
-                                    <label class="custom-control-label" for="customCheck3">Kids <span class="text-muted">(89)</span></label>
-                                </div>
-                                <!-- Single Checkbox -->
-                                <div class="custom-control custom-checkbox d-flex align-items-center mb-2">
-                                    <input type="checkbox" class="custom-control-input" id="customCheck4">
-                                    <label class="custom-control-label" for="customCheck4">Accessories <span class="text-muted">(425)</span></label>
-                                </div>
-                                <!-- Single Checkbox -->
-                                <div class="custom-control custom-checkbox d-flex align-items-center">
-                                    <input type="checkbox" class="custom-control-input" id="customCheck5">
-                                    <label class="custom-control-label" for="customCheck5">Fashion <span class="text-muted">(73)</span></label>
+                        @if(count($cats)>0)
+                            <!-- Single Widget -->
+                            <div class="widget catagory mb-30">
+                                <h6 class="widget-title">Product Categories</h6>
+                                <div class="widget-desc">
+                                    @foreach($cats as $cat)
+                                    <!-- Single Checkbox -->
+                                    <div class="custom-control custom-checkbox d-flex align-items-center mb-2">
+                                        <input type="checkbox" class="custom-control-input" id="{{$cat->slug}}">
+                                        <label class="custom-control-label" for="{{$cat->slug}}">{{ucfirst($cat->title)}} <span class="text-muted">({{count($cat->products)}})</span></label>
+                                    </div>
+                                    @endforeach
                                 </div>
                             </div>
-                        </div>
+                        @endif
 
                         <!-- Single Widget -->
                         <div class="widget price mb-30">
@@ -228,7 +211,7 @@
                                             <a href="#" data-toggle="modal" data-target="#quickview"><i class="icofont-eye-alt"></i> Quick View</a>
                                         </div>
 
-                                        <p class="brand_name">Top</p>
+                                        <p class="brand_name">{{\App\Models\Brand::where('id',$item->brand_id)->value('title')}}</p>
                                         <a href="{{ route('product.detail',$item->slug) }}">{{$item->title}}/a>
                                         <h6 class="product-price">{{number_format($item->offer_price,2)}} TK <span><del class="text-danger">{{number_format($item->price,2)}} TK</del></span></h6>
                                     </div>
