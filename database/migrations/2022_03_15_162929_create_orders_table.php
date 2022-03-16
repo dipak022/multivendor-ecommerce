@@ -29,26 +29,26 @@ return new class extends Migration
             $table->float('delivery_charge')->default(0)->nullable();
             $table->integer('quantity')->default(0);
 
-            $table->string('first_name');
-            $table->string('last_name');
+            $table->string('first_name')->nullable();
+            $table->string('last_name')->nullable();
             $table->string('email')->unique();
             $table->string('phone')->unique();
-            $table->string('country');
-            $table->string('address');
-            $table->string('city');
-            $table->string('street');
-            $table->integer('postcode');
+            $table->string('country')->nullable();
+            $table->string('address')->nullable();
+            $table->string('city')->nullable();
+            $table->string('street')->nullable();
+            $table->integer('postcode')->nullable();
             $table->mediumText('note')->nullable();
 
-            $table->string('sfirst_name');
-            $table->string('slast_name');
+            $table->string('sfirst_name')->nullable();
+            $table->string('slast_name')->nullable();
             $table->string('semail')->unique();
             $table->string('sphone')->unique();
-            $table->string('scountry');
-            $table->string('saddress');
-            $table->string('scity');
-            $table->string('sstreet');
-            $table->integer('spostcode');
+            $table->string('scountry')->nullable();
+            $table->string('saddress')->nullable();
+            $table->string('scity')->nullable();
+            $table->string('sstreet')->nullable();
+            $table->integer('spostcode')->nullable();
 
             $table->timestamps();
         });
