@@ -54,13 +54,11 @@
                                                     <img src="{{$item->model->photo}}" alt="Product">
                                                 </td>
                                                 <td>
-                                                    <a href="#">{{ $item->name }}</a>
+                                                    <a href="{{ route('product.detail',$item->model->slug) }}">{{ $item->name }}</a>
                                                 </td>
                                                 <td>{{ number_format($item->price,2) }} TK</td>
                                                 <td>
-                                                    <div class="quantity">
-                                                        <input type="number" class="qty-text" id="qty2" step="1" min="1" max="99" name="quantity" value="{{ $item->qty }}">
-                                                    </div>
+                                                {{ $item->qty }}
                                                 </td>
                                                 <td>{{ number_format($item->price*$item->qty,2) }} TK</td>
                                             </tr>
@@ -111,7 +109,7 @@
                         </div>
                         <div class="checkout_pagination d-flex justify-content-end mt-3">
                             <a href="checkout-4.html" class="btn btn-primary mt-2 ml-2 d-none d-sm-inline-block">Go Back</a>
-                            <a href="checkout-complate.html" class="btn btn-primary mt-2 ml-2">Confirm</a>
+                            <a href="{{ route('checkout.store') }}" class="btn btn-primary mt-2 ml-2">Confirm</a>
                         </div>
                     </div>
                 </div>

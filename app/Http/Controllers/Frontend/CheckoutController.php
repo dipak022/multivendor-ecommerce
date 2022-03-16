@@ -8,6 +8,7 @@ use App\Models\Category;
 use App\Models\Banner;
 use App\Models\Brand;
 use App\Models\Product;
+use App\Models\Order;
 use App\Models\User;
 use App\Models\Shipping;
 use Illuminate\Support\Str;
@@ -15,6 +16,8 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
+use Response;
+use Cart;
 //use Session;
 //use App\Url;
 use Redirect;
@@ -51,6 +54,9 @@ class CheckoutController extends Controller
             'scity'=>$request->scity,
             'sstreet'=>$request->sstreet,
             'spostcode'=>$request->spostcode,
+            'sub_total'=> $request->sub_total,
+            //'quantity'=>$request->quantity,
+            'total_amount'=>$request->total_amount,
         ]);
 
         $shipping = Shipping::where('status','active')->orderBy('shipping_address','ASC')->get();
@@ -81,6 +87,57 @@ class CheckoutController extends Controller
         //return Session::get('checkout');
 
         return view('frontend.pages.checkout.checkout4');
+
+    }
+
+    public function CheckoutStore(){
+        //'user_id','','','','total_amount','coupon','delivery_charge','quantity','first_name','last_name','email','phone','country','address','city',
+        //'street','postcode','note','sfirst_name','slast_name','semail','sphone','scountry','saddress','scity','sstreet','spostcode','payment_method','payment_status','condition',
+        //dd("sdf");
+        $order = new Order();
+        $order['user_id'] =auth()->user()->id;
+        $order['order_number'] =Str::upper('ORD-'.Str::random(8));
+        //return Session::get('checkout');
+        
+        if(Session::has('coupon')){
+            $order['coupon'] =Session::get('coupon')['value'];
+        }else{
+            $order['coupon'] =0;
+        }
+        $order['sub_total'] =Session::get('checkout')['sub_total'];
+        $order['total_amount'] =number_format((float) str_replace(',','',Session::get('checkout')['total_amount'])+ + ((float)Session::get('checkout')[0]['delivery_charge']) -((float) $order['coupon']),2);
+        //number_format((float) str_replace(',','',\Gloudemans\Shoppingcart\Facades\Cart::subtotal()) - session('coupon')['value'],2)
+        //$order['charge']=number_format((float) str_replace(',','',Session::get('checkout')['total_amount']),2)+(());
+        //$order['total_amount'] =((float)Session::get('checkout')['total_amount']) + ((float)$order['charge']) ;
+        //return $order;
+        $order['payment_method'] =Session::get('checkout')[1]['payment_method'];
+        $order['payment_status'] =Session::get('checkout')[1]['payment_status'];
+        $order['condition'] ='pending';
+        $order['delivery_charge'] =Session::get('checkout')[0]['delivery_charge'];
+        $order['first_name'] =Session::get('checkout')['first_name'];
+        $order['last_name'] =Session::get('checkout')['last_name'];
+        $order['email'] =Session::get('checkout')['email'];
+        $order['phone'] =Session::get('checkout')['phone'];
+        $order['country'] =Session::get('checkout')['country'];
+        $order['address'] =Session::get('checkout')['address'];
+        $order['city'] =Session::get('checkout')['city'];
+        $order['street'] =Session::get('checkout')['street'];
+        $order['postcode'] =Session::get('checkout')['postcode'];
+        $order['note'] =Session::get('checkout')['note'];
+
+        $order['sfirst_name'] =Session::get('checkout')['sfirst_name'];
+        $order['slast_name'] =Session::get('checkout')['slast_name'];
+        $order['semail'] =Session::get('checkout')['semail'];
+        $order['sphone'] =Session::get('checkout')['sphone'];
+        $order['scountry'] =Session::get('checkout')['scountry'];
+        $order['saddress'] =Session::get('checkout')['saddress'];
+        $order['scity'] =Session::get('checkout')['scity'];
+        $order['sstreet'] =Session::get('checkout')['sstreet'];
+        $order['spostcode'] =Session::get('checkout')['spostcode'];
+
+
+    
+        return $order;
 
     }
 
