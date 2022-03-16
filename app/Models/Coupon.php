@@ -18,6 +18,7 @@ class Coupon extends Model
             return $this->value;
         }
         elseif($this->type=="percent"){
+            //dd((float) str_replace(',','',$this->value))
             return ($this->value/100)*$total;
         }else{
             return 0;

@@ -31,8 +31,8 @@ return new class extends Migration
 
             $table->string('first_name')->nullable();
             $table->string('last_name')->nullable();
-            $table->string('email')->unique();
-            $table->string('phone')->unique();
+            $table->string('email')->nullable();
+            $table->string('phone')->nullable();
             $table->string('country')->nullable();
             $table->string('address')->nullable();
             $table->string('city')->nullable();
@@ -42,8 +42,8 @@ return new class extends Migration
 
             $table->string('sfirst_name')->nullable();
             $table->string('slast_name')->nullable();
-            $table->string('semail')->unique();
-            $table->string('sphone')->unique();
+            $table->string('semail')->nullable();
+            $table->string('sphone')->nullable();
             $table->string('scountry')->nullable();
             $table->string('saddress')->nullable();
             $table->string('scity')->nullable();

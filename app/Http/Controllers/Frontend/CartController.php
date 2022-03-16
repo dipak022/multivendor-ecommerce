@@ -114,7 +114,7 @@ class CartController extends Controller
             return redirect()->back()->with($notification);
         }
         if($coupon){
-            $total_price = Cart::instance('shopping')->subtotal();
+            $total_price = ((float) str_replace(',','',Cart::instance('shopping')->subtotal()));
             //return $total_price;
             session()->put('coupon',[
                 'id'=>$coupon->id,

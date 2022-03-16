@@ -90,19 +90,24 @@
                                     @if(\Illuminate\Support\Facades\Session::has('coupon'))
                                     <tr>
                                         <td>Coupon Discount</td>
-                                        <td>{{number_format((float) str_replace(',','',\Gloudemans\Shoppingcart\Facades\Cart::subtotal()) - session('coupon')['value'],2) }} TK</td>
+                                        <td>{{number_format((float) str_replace(',','',\Illuminate\Support\Facades\Session::get('coupon')['value']),2) }} TK</td>
                                     </tr>
                                     @else
 
                                     @endif
                                    
                                     <td>Total</td>
-                                    @if(\Illuminate\Support\Facades\Session::has('coupon'))
-                                    <td>{{number_format((float) str_replace(',','',\Gloudemans\Shoppingcart\Facades\Cart::subtotal()) - session('coupon')['value'],2) }} TK</td>
+                                    @if(\Illuminate\Support\Facades\Session::has('coupon') && \Illuminate\Support\Facades\Session::has('checkout'))
+                                    <td>{{number_format((float) str_replace(',','',\Gloudemans\Shoppingcart\Facades\Cart::subtotal()) +
+                                         ((float) \Illuminate\Support\Facades\Session::get('checkout')[0]['delivery_charge']) - 
+                                         ((float)\Illuminate\Support\Facades\Session::get('coupon')['value']),2) }} TK</td>
+                                   
                                     @elseif(\Illuminate\Support\Facades\Session::has('checkout'))
                                     <td>{{number_format((float) str_replace(',','',\Gloudemans\Shoppingcart\Facades\Cart::subtotal()) + \Illuminate\Support\Facades\Session::get('checkout')[0]['delivery_charge'],2) }} TK</td>
-                                    @elseif(\Illuminate\Support\Facades\Session::has('coupon') && \Illuminate\Support\Facades\Session::has('checkout'))
-                                    <td>{{number_format((float) str_replace(',','',\Gloudemans\Shoppingcart\Facades\Cart::subtotal()) + \Illuminate\Support\Facades\Session::get('checkout')[0]['delivery_charge'],2) - \Illuminate\Support\Facades\Session::get('coupon')['value'] }} TK</td>
+                                    @elseif(\Illuminate\Support\Facades\Session::has('coupon'))
+                                    <td>{{number_format((float) str_replace(',','',\Gloudemans\Shoppingcart\Facades\Cart::subtotal()) - session('coupon')['value'],2) }} TK</td>
+                                    @else
+                                    <td>{{number_format((float) str_replace(',','',\Gloudemans\Shoppingcart\Facades\Cart::subtotal()),2) }} TK</td>
                                     @endif
                                 </tbody>
                             </table>

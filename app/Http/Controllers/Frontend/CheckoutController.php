@@ -135,6 +135,7 @@ class CheckoutController extends Controller
 
         $status = $order->save();
         if($status){
+            Cart::instance('shopping')->destroy();
             Session::forget('coupon');
             Session::forget('checkout');
             $notification = array(
