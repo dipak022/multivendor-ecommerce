@@ -48,6 +48,9 @@ Route::get('checkout-store', [App\Http\Controllers\Frontend\CheckoutController::
 Route::get('complete/{order}', [App\Http\Controllers\Frontend\CheckoutController::class, 'Complete'])->name('complete');
 
 
+//shop
+Route::get('shop', [App\Http\Controllers\Frontend\IndexController::class, 'Shop'])->name('shop');
+
 
 
 // Frontend route end

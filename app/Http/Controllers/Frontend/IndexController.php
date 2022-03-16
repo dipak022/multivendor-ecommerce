@@ -262,6 +262,12 @@ class IndexController extends Controller
         
     }
 
+
+    public function Shop(){
+        $product = Product::where('status','active')->paginate(12);
+        return view('frontend.pages.product.shop',compact('product'));
+    }
+
     
 
     
