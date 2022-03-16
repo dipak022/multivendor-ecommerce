@@ -16,10 +16,12 @@ return new class extends Migration
         Schema::create('orders', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('user_id');
-            $table->string('order_number',10)->unique();
+            $table->string('order_number',255)->unique();
             $table->unsignedBigInteger('product_id')->nullable();
-            $table->float('sub_total')->default(0);
-            $table->float('total_amount')->default(0);
+            //$table->float('sub_total')->default(0);
+            //$table->float('total_amount')->default(0);
+            $table->string('sub_total');
+            $table->string('total_amount');
             $table->float('coupon')->default(0)->nullable();
             $table->string('payment_method')->default('cod');
             $table->enum('payment_status',['paid','unpaid'])->default('unpaid');
@@ -36,7 +38,7 @@ return new class extends Migration
             $table->string('city');
             $table->string('street');
             $table->integer('postcode');
-            $table->mediumText('note');
+            $table->mediumText('note')->nullable();
 
             $table->string('sfirst_name');
             $table->string('slast_name');

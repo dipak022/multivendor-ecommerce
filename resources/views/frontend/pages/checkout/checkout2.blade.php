@@ -58,7 +58,7 @@
                                                             <td>{{number_format($item->delivery_charge,2)}} TK</td>
                                                             <td>
                                                                 <div class="custom-control custom-radio">
-                                                                    <input type="radio" id="customRadio1{{$key}}" name="delivery_charge" value="{{$item->delivery_charge}}" class="custom-control-input">
+                                                                    <input type="radio" id="customRadio1{{$key}}" required name="delivery_charge" value="{{$item->delivery_charge}}" class="custom-control-input">
                                                                     <label class="custom-control-label" for="customRadio1{{$key}}"></label>
                                                                 </div>
                                                             </td>

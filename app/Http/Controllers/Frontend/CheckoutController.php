@@ -91,9 +91,7 @@ class CheckoutController extends Controller
     }
 
     public function CheckoutStore(){
-        //'user_id','','','','total_amount','coupon','delivery_charge','quantity','first_name','last_name','email','phone','country','address','city',
-        //'street','postcode','note','sfirst_name','slast_name','semail','sphone','scountry','saddress','scity','sstreet','spostcode','payment_method','payment_status','condition',
-        //dd("sdf");
+        
         $order = new Order();
         $order['user_id'] =auth()->user()->id;
         $order['order_number'] =Str::upper('ORD-'.Str::random(8));
@@ -135,10 +133,29 @@ class CheckoutController extends Controller
         $order['sstreet'] =Session::get('checkout')['sstreet'];
         $order['spostcode'] =Session::get('checkout')['spostcode'];
 
+        $status = $order->save();
+        if($status){
+            Session::forget('coupon');
+            Session::forget('checkout');
+            $notification = array(
+                'message' => 'Order Complete Successfully',
+                'alert-type' => 'success'
+            );
+            return redirect()->route('complete',$order['order_number'])->with($notification);
+        }else{
+            $notification = array(
+                'message' => 'Order Complete Unsuccessfully',
+                'alert-type' => 'error'
+            );
+            return redirect()->route('checkout1')->with($notification);
+        }
 
-    
-        return $order;
 
+    }
+
+    public function Complete($order){
+        $order = $order;
+        return view('frontend.pages.checkout.complate',compact('order'));
     }
 
     
