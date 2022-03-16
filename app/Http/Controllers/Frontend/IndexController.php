@@ -265,15 +265,32 @@ class IndexController extends Controller
 
     public function Shop(){
 
-        $product =Product::query();
+        $products =Product::query();
         if(!empty($_GET['category'])){
             $slugs=explode(',',$_GET['category']);
             $cat_ids = Category::select('id')->whereIn('slug',$slugs)->pluck('id')->toArray();
             //return $cat_ids;
-            $products =$product->whereIn('cat_id',$cat_ids)->paginate(12);
+            $products =$products->whereIn('cat_id',$cat_ids)->paginate(12);
             //return $products;
-        }else{
-            $products = Product::where('status','active')->paginate(12);
+        }
+        if(!empty($_GET['sortBy'])){
+            $sort=$_GET['sortBy'];
+            if($sort=="priceAsc"){
+                $products = $products->where(['status'=>'active'])->orderBy('offer_price','ASC')->paginate(12);
+            }if($sort=="priceDesc"){
+                $products = $products->where(['status'=>'active'])->orderBy('offer_price','DESC')->paginate(12);
+            }if($sort=="discAsc"){
+                $products = $products->where(['status'=>'active'])->orderBy('price','ASC')->paginate(12);
+            }if($sort=="discDesc"){
+                $products = $products->where(['status'=>'active'])->orderBy('price','DESC')->paginate(12);
+            }if($sort=="titelAsc"){
+                $products = $products->where(['status'=>'active'])->orderBy('title','ASC')->paginate(12);
+            }if($sort=="titelDesc"){
+                $products = $products->where(['status'=>'active'])->orderBy('title','DESC')->paginate(12);
+            }
+        }
+        else{
+            $products = $products->where('status','active')->paginate(12);
         }
 
         $cats=Category::where(['status'=>'active','is_parent'=>1])->with('products')->orderBy('title','ASC')->get();
@@ -282,6 +299,7 @@ class IndexController extends Controller
 
     public function ShopFilter(Request $request){
         //dd($request->all());
+        //category filter
         $data = $request->all();
         $catUrl ='';
         if(!empty($data['category'])){
@@ -293,7 +311,12 @@ class IndexController extends Controller
                 }
             }
         }
-       return \redirect()->route('shop', $catUrl);
+        //sort filter
+        $sortByUrl="";
+        if(!empty($data['sortBy'])){
+            $sortByUrl .="&sortBy=".$data['sortBy'];
+        }
+       return \redirect()->route('shop', $catUrl.$sortByUrl);
 
 
 

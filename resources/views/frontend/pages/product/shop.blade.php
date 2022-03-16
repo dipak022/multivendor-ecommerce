@@ -20,11 +20,12 @@
 
     <section class="shop_grid_area section_padding_100">
         <div class="container">
+        <form action="{{ route('shop.filter') }}" method="post">
+            @csrf 
             <div class="row">
                 
                 <div class="col-12 col-sm-5 col-md-4 col-lg-3">
-                <form action="{{ route('shop.filter') }}" method="post">
-                    @csrf 
+                
                     <div class="shop_sidebar_area">
                         @if(count($cats)>0)
                             <!-- Single Widget -->
@@ -158,11 +159,8 @@
                             </div>
                         </div>
                     </div>
-                    </form>
+                    
                 </div>
-
-               
-                
 
                 <div class="col-12 col-sm-7 col-md-8 col-lg-9">
                     <!-- Shop Top Sidebar -->
@@ -175,11 +173,18 @@
                                 <a href="shop-list-left-sidebar.html" data-toggle="tooltip" data-placement="top" title="List View"><i class="icofont-listine-dots"></i></a>
                             </div>
                         </div>
-                        <select class="small right">
-                            <option selected>Short by Popularity</option>
-                            <option value="1">Short by Newest</option>
+                        <select id="sortBy" name="sortBy" onchange="this.form.submit();" class="small right">
+                            <option >Short by Default</option>
+                            <option value="priceAsc" @if(!empty($_GET['sortBy']) && $_GET['sortBy']=="priceAsc") selected @endif>Short by Price - Lower To Higher</option>
+                            <option value="priceDesc" @if(!empty($_GET['sortBy']) && $_GET['sortBy']=="priceDesc") selected @endif>Short by Price - Higher To Lower</option>
+                            <option value="titelAsc" @if(!empty($_GET['sortBy']) && $_GET['sortBy']=="titelAsc") selected @endif>Short by Alphabetical Ascending</option>
+                            <option value="titelDesc" @if(!empty($_GET['sortBy']) && $_GET['sortBy']=="titelDesc") selected @endif>Short by Alphabetical Descending</option>
+                            <option value="discAsc" @if(!empty($_GET['sortBy']) && $_GET['sortBy']=="discAsc")) selected @endif>Short by Discount - Lower To Higher</option>
+                            <option value="discDesc" @if(!empty($_GET['sortBy']) && $_GET['sortBy']=="discDesc") selected @endif>Short by Discount - Higher To Lower</option>
+                            <!--
                             <option value="2">Short by Sales</option>
                             <option value="3">Short by Ratings</option>
+                            -->
                         </select>
                     </div>
 
@@ -246,6 +251,7 @@
 
                 </div>
             </div>
+        </form>    
         </div>
     </section>
 
