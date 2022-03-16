@@ -21,17 +21,25 @@
     <section class="shop_grid_area section_padding_100">
         <div class="container">
             <div class="row">
+                
                 <div class="col-12 col-sm-5 col-md-4 col-lg-3">
+                <form action="{{ route('shop.filter') }}" method="post">
+                    @csrf 
                     <div class="shop_sidebar_area">
                         @if(count($cats)>0)
                             <!-- Single Widget -->
                             <div class="widget catagory mb-30">
                                 <h6 class="widget-title">Product Categories</h6>
                                 <div class="widget-desc">
+                                    @if(!empty($_GET['category']))
+                                        @php
+                                            $filter_cats= explode(',',$_GET['category']);
+                                        @endphp
+                                    @endif
                                     @foreach($cats as $cat)
                                     <!-- Single Checkbox -->
                                     <div class="custom-control custom-checkbox d-flex align-items-center mb-2">
-                                        <input type="checkbox" class="custom-control-input" id="{{$cat->slug}}">
+                                        <input type="checkbox" @if(!empty($filter_cats) && in_array($cat->slug,$filter_cats))) checked @endif class="custom-control-input" id="{{$cat->slug}}" name="category[]" onchange="this.form.submit();" value="{{ $cat->slug }}">
                                         <label class="custom-control-label" for="{{$cat->slug}}">{{ucfirst($cat->title)}} <span class="text-muted">({{count($cat->products)}})</span></label>
                                     </div>
                                     @endforeach
@@ -150,7 +158,11 @@
                             </div>
                         </div>
                     </div>
+                    </form>
                 </div>
+
+               
+                
 
                 <div class="col-12 col-sm-7 col-md-8 col-lg-9">
                     <!-- Shop Top Sidebar -->
@@ -174,8 +186,8 @@
                     <div class="shop_grid_product_area">
                         <div class="row justify-content-center">
                             <!-- Single Product -->
-                            @if(count($product)>0)
-                            @foreach($product as $item)
+                            @if(count($products)>0)
+                            @foreach($products as $item)
                             <div class="col-9 col-sm-12 col-md-6 col-lg-4">
                                 <div class="single-product-area mb-30">
                                     <div class="product_image">
@@ -226,9 +238,9 @@
                         </div>
                     </div>
                     <!-- Shop Pagination Area 
-                    Laravel defaulr Pagination{{$product->links()}}
+                    Laravel defaulr Pagination{{$products->links()}}
                     -->
-                    {{$product->links('vendor.pagination.custom')}}
+                    {{$products->appends($_GET)->links('vendor.pagination.custom')}}
 
                    
 

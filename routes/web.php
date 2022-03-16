@@ -50,6 +50,8 @@ Route::get('complete/{order}', [App\Http\Controllers\Frontend\CheckoutController
 
 //shop
 Route::get('shop', [App\Http\Controllers\Frontend\IndexController::class, 'Shop'])->name('shop');
+Route::post('shop-filter', [App\Http\Controllers\Frontend\IndexController::class, 'ShopFilter'])->name('shop.filter');
+
 
 
 

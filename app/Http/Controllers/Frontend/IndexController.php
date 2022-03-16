@@ -264,9 +264,39 @@ class IndexController extends Controller
 
 
     public function Shop(){
-        $product = Product::where('status','active')->paginate(12);
+
+        $product =Product::query();
+        if(!empty($_GET['category'])){
+            $slugs=explode(',',$_GET['category']);
+            $cat_ids = Category::select('id')->whereIn('slug',$slugs)->pluck('id')->toArray();
+            //return $cat_ids;
+            $products =$product->whereIn('cat_id',$cat_ids)->paginate(12);
+            //return $products;
+        }else{
+            $products = Product::where('status','active')->paginate(12);
+        }
+
         $cats=Category::where(['status'=>'active','is_parent'=>1])->with('products')->orderBy('title','ASC')->get();
-        return view('frontend.pages.product.shop',compact('product','cats'));
+        return view('frontend.pages.product.shop',compact('products','cats'));
+    }
+
+    public function ShopFilter(Request $request){
+        //dd($request->all());
+        $data = $request->all();
+        $catUrl ='';
+        if(!empty($data['category'])){
+            foreach($data['category'] as $category){
+                if(empty($catUrl)){
+                    $catUrl .='&category='.$category;
+                }else{
+                    $catUrl .=','.$category;
+                }
+            }
+        }
+       return \redirect()->route('shop', $catUrl);
+
+
+
     }
 
     
