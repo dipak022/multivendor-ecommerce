@@ -70,10 +70,23 @@
                     </tr>
                     <tr>
                         <td>Save Amount</td>
-                        <td>@if(Illuminate\Support\Facades\Session::has('coupon')){{ number_format(\Illuminate\Support\Facades\Session::get('coupon')['value']) }} TK @else 0 @endif</td>
+                        <td>@if(Illuminate\Support\Facades\Session::has('coupon'))
+                            {{ number_format(\Illuminate\Support\Facades\Session::get('coupon')['value']) }} TK 
+                            @else 
+                            0
+                            @endif
+                        </td>
                     </tr>
                     <tr>
-                        <td>VAT (10%)</td>
+                        <td>VAT 
+                            <!--
+                            @if(Illuminate\Support\Facades\Session::has('coupon') && Illuminate\Support\Facades\Session::get('coupon')['type'] == "percent")
+                            ({{ number_format(\Illuminate\Support\Facades\Session::get('coupon')['value']) }}) % 
+                            @else 
+                            ({{ number_format(\Illuminate\Support\Facades\Session::get('coupon')['value']) }}) TK
+                            @endif
+                            -->
+                        </td>
                             @if(Illuminate\Support\Facades\Session::has('coupon'))
                         <td>{{number_format((float) str_replace(',','',\Gloudemans\Shoppingcart\Facades\Cart::subtotal()) - session('coupon')['value'],2) }} TK</td>
                         @else

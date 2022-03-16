@@ -118,9 +118,11 @@ class CartController extends Controller
             //return $total_price;
             session()->put('coupon',[
                 'id'=>$coupon->id,
+                'type'=>$coupon->type,
                 'code'=>$coupon->code,
                 'value'=>$coupon->discount($total_price),
             ]);
+            //return Session::get('coupon');
             $notification = array(
                 'message' => 'Coupon apply Successfull ',
                 'alert-type' => 'success'
