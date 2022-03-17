@@ -266,12 +266,21 @@ class IndexController extends Controller
     public function Shop(){
 
         $products =Product::query();
+
+        //category 
         if(!empty($_GET['category'])){
             $slugs=explode(',',$_GET['category']);
             $cat_ids = Category::select('id')->whereIn('slug',$slugs)->pluck('id')->toArray();
             //return $cat_ids;
             $products =$products->whereIn('cat_id',$cat_ids)->paginate(12);
             //return $products;
+        }
+        //brand 
+        if(!empty($_GET['brand'])){
+            $slugs=explode(',',$_GET['brand']);
+            $brand_ids = Brand::select('id')->whereIn('slug',$slugs)->pluck('id')->toArray();
+            $products =$products->whereIn('brand_id',$brand_ids)->paginate(12);
+            
         }
         if(!empty($_GET['sortBy'])){
             $sort=$_GET['sortBy'];
@@ -292,10 +301,10 @@ class IndexController extends Controller
         else{
             $products = $products->where('status','active')->paginate(12);
         }
-
+        $brands=Brand::where(['status'=>'active'])->with('products')->orderBy('title','ASC')->get();
         $cats=Category::where(['status'=>'active','is_parent'=>1])->with('products')->orderBy('title','ASC')->get();
         //return $products;
-        return view('frontend.pages.product.shop',compact('products','cats'));
+        return view('frontend.pages.product.shop',compact('products','cats','brands'));
     }
 
     public function ShopFilter(Request $request){
@@ -322,7 +331,20 @@ class IndexController extends Controller
         if(!empty($data['price_range'])){
             $price_range_Url .="&price=".$data['price_range'];
         }
-       return \redirect()->route('shop', $catUrl.$sortByUrl);
+        // brand filter
+        
+
+        $brandUrl ='';
+        if(!empty($data['brand'])){
+            foreach($data['brand'] as $brand){
+                if(empty($brandUrl)){
+                    $brandUrl .='&brand='.$brand;
+                }else{
+                    $brandUrl .=','.$brand;
+                }
+            }
+        }
+        return \redirect()->route('shop', $catUrl.$sortByUrl.$brandUrl);
 
 
 
