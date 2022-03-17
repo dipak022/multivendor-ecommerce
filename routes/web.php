@@ -100,6 +100,11 @@ Route::group(['prefix'=>'admin','middleware'=>['auth','admin']],function(){
     Route::post('/product_status', [App\Http\Controllers\ProductController::class, 'productStatus'])->name('product.status');
     Route::post('category/{id}/child', [App\Http\Controllers\CategoryController::class, 'getChildByParentId']);
 
+    //product.attribute
+    Route::post('product-attribute/{id}', [App\Http\Controllers\ProductController::class, 'AddProductAttribute'])->name('product.attribute');
+    Route::delete('product-destroy/{id}', [App\Http\Controllers\ProductController::class, 'AddProductAttributeDestroy'])->name('product.attribute.destroy');
+    
+
     //user route here 
     Route::resource('/user', App\Http\Controllers\UserController::class);
     Route::post('/user_status', [App\Http\Controllers\UserController::class, 'userStatus'])->name('user.status');

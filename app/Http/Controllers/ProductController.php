@@ -7,6 +7,7 @@ use App\Models\Category;
 use App\Models\Banner;
 use App\Models\Brand;
 use App\Models\Product;
+use App\Models\ProductAttribute;
 use Illuminate\Support\Str;
 use DB;
 class ProductController extends Controller
@@ -99,8 +100,9 @@ class ProductController extends Controller
     public function show($id)
     {
         $product = Product::find($id);
+        $productattr=ProductAttribute::where('product_id',$id)->get();
         if($product){
-            return view('backend.products.index',compact('product'));
+            return view('backend.products.product-attribute',compact('product','productattr'));
         }else{
             $notification = array(
                 'message' => 'Data Not Found',
@@ -193,5 +195,49 @@ class ProductController extends Controller
             );
             return redirect()->back()->with($notification);
         }
+    }
+
+    //AddProductAttribute
+    public function AddProductAttribute(Request $request, $id){
+        //return $request->all();
+        $data= $request->all();
+        foreach($data['original_price'] as $key=>$val){
+            if(!empty($val)){
+                $attribute = new ProductAttribute;
+                $attribute['original_price']=$val;
+                $attribute['offer_price']=$data['offer_price'][$key];
+                $attribute['stock']=$data['stock'][$key];
+                $attribute['product_id']=$id;
+                $attribute['size']=$data['size'][$key];
+                $attribute->save();
+            }
+        }
+        $notification = array(
+            'message' => 'Product attribute add Successfully.',
+            'alert-type' => 'success'
+        );
+        return redirect()->back()->with($notification);
+
+    }
+
+    public function AddProductAttributeDestroy($id){
+        $productattribute = ProductAttribute::find($id);
+        if($productattribute){
+            $status = $productattribute->delete();
+            if ($status) {
+                $notification = array(
+                    'message' => 'Product Attribute Delete Successfully.',
+                    'alert-type' => 'success'
+                );
+                return redirect()->route('product.index')->with($notification);
+            }
+        }else{
+            $notification = array(
+                'message' => 'Product Attribute Delete Unsuccessfully',
+                'alert-type' => 'danger'
+            );
+            return redirect()->back()->with($notification);
+        }
+
     }
 }

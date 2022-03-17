@@ -76,6 +76,7 @@
 
                                         </td>
                                         <td>
+                                            <a href="{{route('product.show',$item->id)}}"  class="btn btn-info" href="#defaultModal" ><i class="float-left fa fa-plus"></i></a>
                                             <a type="button"  class="btn btn-secondary" href="#defaultModal" data-toggle="modal" data-target="#ProductID{{$item->id}}"><i class="float-left fa fa-eye"></i></a>
                                             <a type="button" href="{{route('product.edit',$item->id)}}" class="btn btn-info" title="Edit"><i class="float-left fa fa-edit"></i></a>
                                             <form class="float-left px-2" action="{{ route('product.destroy',$item->id) }}" method="POST">
