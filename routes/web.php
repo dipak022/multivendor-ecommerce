@@ -52,6 +52,11 @@ Route::get('complete/{order}', [App\Http\Controllers\Frontend\CheckoutController
 Route::get('shop', [App\Http\Controllers\Frontend\IndexController::class, 'Shop'])->name('shop');
 Route::post('shop-filter', [App\Http\Controllers\Frontend\IndexController::class, 'ShopFilter'])->name('shop.filter');
 
+//search product and autosearch
+Route::get('autosearch', [App\Http\Controllers\Frontend\IndexController::class, 'AutoSearch'])->name('autosearch');
+Route::get('search', [App\Http\Controllers\Frontend\IndexController::class, 'search'])->name('search');
+
+
 
 
 

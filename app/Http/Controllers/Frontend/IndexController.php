@@ -350,6 +350,34 @@ class IndexController extends Controller
 
     }
 
+
+    public function AutoSearch(Request $request){
+        $quary = $request->get('term','');
+        //dd($quary);
+        $products= Product::where('title','LIKE','%'.$quary.'%')->get();
+        $data =array();
+        foreach($products as $product){
+            $data[]=array('value'=>$product->title,'id'=>$product->id);
+        }
+        return $data;
+        if(count($data)){
+            return $data;
+        }else{
+            return ['value'=>"Not Result Found.",'id'=>''];
+        }
+
+    }
+
+    public function search(Request $request){
+        $quary = $request->input('query');
+        $products= Product::where('title','LIKE','%'.$quary.'%')->orderBy('id','DESC')->paginate(12);
+        $brands=Brand::where(['status'=>'active'])->with('products')->orderBy('title','ASC')->get();
+        $cats=Category::where(['status'=>'active','is_parent'=>1])->with('products')->orderBy('title','ASC')->get();
+        return view('frontend.pages.product.shop',compact('products','cats','brands'));
+
+
+    }
+
     
 
     

@@ -28,6 +28,26 @@
     <!-- Footer Area -->
 
     @include('frontend.layouts.script')
+    <script>
+     $(document).ready(function(){
+         var path = {{route('autosearch')}};
+         $('#search_text').autocomplete({
+             source:function(request,response){
+                 $.ajax({
+                     url:path,
+                     dataType:"JSON",
+                     data:{
+                         term:request.term
+                     },
+                     success:function(data){
+                         response(data);
+                     }
+                 });
+             },
+             minLength:1,
+         });
+     });
+    </script>
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
     <script>
      $(document).on('click','.cart_delete',function(e){
@@ -68,6 +88,8 @@
 
    });
     </script>
+
+    
 
 </body>
 

@@ -148,10 +148,12 @@
                     <div class="search-area">
                         <div class="search-btn"><i class="icofont-search"></i></div>
                         <!-- Form -->
-                        <div class="search-form">
-                            <input type="search" class="form-control" placeholder="Search">
+                       <form action="{{route('search')}}" method="GET">
+                       <div class="search-form">
+                            <input type="search" id="search_text" name="query" class="form-control" placeholder="Search">
                             <input type="submit" class="d-none" value="Send">
                         </div>
+                       </form>
                     </div>
 
                     <!-- Wishlist -->

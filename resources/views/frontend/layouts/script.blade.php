@@ -16,7 +16,9 @@
     <script src="{{asset('frontend/')}}/js/jquery.nice-select.min.js"></script>
     <script src="{{asset('frontend/')}}/js/wow.min.js"></script>
     <script src="{{asset('frontend/')}}/js/default/active.js"></script>
+    <script src="https://code.jquery.com/ui/1.13.1/jquery-ui.js"></script>
     <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
+    
     <script>
     @if(Session::has('message'))
             var type="{{Session::get('alert-type','info')}}"

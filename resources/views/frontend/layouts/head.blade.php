@@ -14,4 +14,6 @@
     <link rel="stylesheet" href="{{asset('frontend/')}}/style.css">
     <link href="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.min.css" rel="stylesheet">
 
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.13.1/themes/base/jquery-ui.css">
+
     @yield('styles')
