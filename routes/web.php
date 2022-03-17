@@ -56,6 +56,9 @@ Route::post('shop-filter', [App\Http\Controllers\Frontend\IndexController::class
 Route::get('autosearch', [App\Http\Controllers\Frontend\IndexController::class, 'AutoSearch'])->name('autosearch');
 Route::get('search', [App\Http\Controllers\Frontend\IndexController::class, 'search'])->name('search');
 
+//product.review
+Route::post('product-review/{slug}', [App\Http\Controllers\ProductReviewController::class, 'productReview'])->name('product.review');
+
 
 
 

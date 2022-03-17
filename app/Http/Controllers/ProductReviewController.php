@@ -3,7 +3,14 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-
+use App\Models\Category;
+use App\Models\Banner;
+use App\Models\Brand;
+use App\Models\Product;
+use App\Models\ProductReview;
+use App\Models\ProductAttribute;
+use Illuminate\Support\Str;
+use DB;
 class ProductReviewController extends Controller
 {
     /**
@@ -11,6 +18,29 @@ class ProductReviewController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+
+    public function productReview(Request $request){
+        //dd($request->all());
+        $data = $request->all();
+
+        //return $data;
+        $status = ProductReview::create($data);
+
+        if ($status) {
+            $notification = array(
+                'message' => 'Product Review  Successfully.',
+                'alert-type' => 'success'
+            );
+            return redirect()->back()->with($notification);
+        }else{
+            $notification = array(
+                'message' => 'Product Review  Unuccessfully',
+                'alert-type' => 'danger'
+            );
+            return redirect()->back()->with($notification);
+        } 
+
+    }
     public function index()
     {
         //
