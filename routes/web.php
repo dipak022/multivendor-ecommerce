@@ -104,6 +104,10 @@ Route::group(['prefix'=>'admin','middleware'=>['auth','admin']],function(){
     Route::post('product-attribute/{id}', [App\Http\Controllers\ProductController::class, 'AddProductAttribute'])->name('product.attribute');
     Route::delete('product-destroy/{id}', [App\Http\Controllers\ProductController::class, 'AddProductAttributeDestroy'])->name('product.attribute.destroy');
     
+    //Route::delete('product-destroy/{id}', [App\Http\Controllers\ProductController::class, 'AddProductAttributeDestroy'])->name('product.attribute.destroy');
+    
+
+    
 
     //user route here 
     Route::resource('/user', App\Http\Controllers\UserController::class);
