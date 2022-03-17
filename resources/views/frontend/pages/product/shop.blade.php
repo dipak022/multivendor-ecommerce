@@ -53,12 +53,17 @@
                             <h6 class="widget-title">Filter by Price</h6>
                             <div class="widget-desc">
                                 <div class="slider-range">
-                                    <div data-min="0" data-max="1350" data-unit="$" class="slider-range-price ui-slider ui-slider-horizontal ui-widget ui-widget-content ui-corner-all" data-value-min="0" data-value-max="1350" data-label-result="Price:">
+                                    <div id="slider-range" data-min="{{Helpers::minPrice()}}" data-max="{{Helpers::maxPrice()}}" data-unit="$" class="slider-range-price ui-slider ui-slider-horizontal ui-widget ui-widget-content ui-corner-all" data-value-min="{{Helpers::minPrice()}}" data-value-max="{{Helpers::maxPrice()}}" data-label-result="Price:">
                                         <div class="ui-slider-range ui-widget-header ui-corner-all"></div>
                                         <span class="ui-slider-handle ui-state-default ui-corner-all" tabindex="0"></span>
                                         <span class="ui-slider-handle ui-state-default ui-corner-all" tabindex="0"></span>
                                     </div>
-                                    <div class="range-price">Price: 0 - 1350</div>
+                                    <input type="hidden" id="price_range" @if(!empty($_GET['price'])) {{$_GET['price']}}  @endif name="price_range">
+                                    <input type="text" readonly id="amount" style="border:0;width:50%;" value="{{Helpers::minPrice()}}-{{Helpers::maxPrice()}}">
+                                    <!--
+                                    <div class="range-price">Price: {{Helpers::minPrice()}} Tk - {{Helpers::maxPrice()}} Tk</div>
+                                    -->
+                                    <button type="submit" class="btn btn-sm btn-primary">filter</button>
                                 </div>
                             </div>
                         </div>
@@ -179,7 +184,7 @@
                             <option value="priceDesc" @if(!empty($_GET['sortBy']) && $_GET['sortBy']=="priceDesc") selected @endif>Short by Price - Higher To Lower</option>
                             <option value="titelAsc" @if(!empty($_GET['sortBy']) && $_GET['sortBy']=="titelAsc") selected @endif>Short by Alphabetical Ascending</option>
                             <option value="titelDesc" @if(!empty($_GET['sortBy']) && $_GET['sortBy']=="titelDesc") selected @endif>Short by Alphabetical Descending</option>
-                            <option value="discAsc" @if(!empty($_GET['sortBy']) && $_GET['sortBy']=="discAsc")) selected @endif>Short by Discount - Lower To Higher</option>
+                            <option value="discAsc"   @if(!empty($_GET['sortBy']) && $_GET['sortBy']=="discAsc")) selected @endif>Short by Discount - Lower To Higher</option>
                             <option value="discDesc" @if(!empty($_GET['sortBy']) && $_GET['sortBy']=="discDesc") selected @endif>Short by Discount - Higher To Lower</option>
                             <!--
                             <option value="2">Short by Sales</option>
@@ -258,5 +263,32 @@
 @endsection
 
 @section('scripts')
+
+<script>
+$(document).ready(function(){
+    if($('#slider-range').length > 0){
+        const max_price=parseInt($('#slider-range').data('max'));
+        const min_price=parseInt($('#slider-range').data('min')); 
+        let price_range = min_price+'-'+max_price;
+        //alert(price_range);
+        if($('#price_range'.length>0) && $('#price_range').val()){
+            price_range= $('#price_range').val().trim();
+        }
+        let price = price_range.split('-');
+        $('#slider-range').slider({
+            range:true;
+            min:min_value,
+            max:max_value,
+            values:price,
+            slide:function(event,ui){
+                $('#amount').val('$'+ui.values[0]+"-"+"$"+ui.values[1]);
+                $('#price_range').val(ui.values[0]+"-"+ui.values[1]);
+            }
+
+        });
+
+    }
+});
+</script>
 
 @endsection

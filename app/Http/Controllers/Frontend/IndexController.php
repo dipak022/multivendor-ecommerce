@@ -294,6 +294,7 @@ class IndexController extends Controller
         }
 
         $cats=Category::where(['status'=>'active','is_parent'=>1])->with('products')->orderBy('title','ASC')->get();
+        //return $products;
         return view('frontend.pages.product.shop',compact('products','cats'));
     }
 
@@ -315,6 +316,11 @@ class IndexController extends Controller
         $sortByUrl="";
         if(!empty($data['sortBy'])){
             $sortByUrl .="&sortBy=".$data['sortBy'];
+        }
+        //price filter
+        $price_range_Url= "";
+        if(!empty($data['price_range'])){
+            $price_range_Url .="&price=".$data['price_range'];
         }
        return \redirect()->route('shop', $catUrl.$sortByUrl);
 
