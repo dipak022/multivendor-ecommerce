@@ -182,14 +182,15 @@
                         <!-- Size Option -->
                         <div class="widget p-0 size mb-3">
                             <h6 class="widget-title">Size</h6>
-                            <div class="widget-desc">
-                                <ul>
-                                    <li><a href="#">XS</a></li>
-                                    <li><a href="#">S</a></li>
-                                    <li><a href="#">M</a></li>
-                                    <li><a href="#">L</a></li>
-                                    <li><a href="#">XL</a></li>
-                                </ul>
+                            <div class="widget-desc" style="display:block; width:45%;">
+                                @php
+                                 $productattribute= \App\Models\ProductAttribute::where('product_id',$products->id)->get();
+                                @endphp
+                              <select name="size" id="">
+                                  @foreach($productattribute as $size)
+                                    <option value="{{$size->size}}">{{$size->size}}</option>
+                                  @endforeach
+                              </select>
                             </div>
                         </div>
 
@@ -208,18 +209,7 @@
                             <a class="share_with_friend" href="#"><i class="fa fa-share" aria-hidden="true"></i> SHARE WITH FRIEND</a>
                         </div>
 
-                        <!-- Size Guide -->
-                        <div class="sizeguide">
-                            <h6>Size Guide</h6>
-                            <div class="size_guide_thumb d-flex">
-                                <a class="size_guide_img" href="img/bg-img/size-1.png" style="background-image: url({{asset('frontend/')}}/img/bg-img/size-1.png);">
-                                </a>
-                                <a class="size_guide_img" href="img/bg-img/size-2.png" style="background-image: url({{asset('frontend/')}}/img/bg-img/size-2.png);">
-                                </a>
-                                <a class="size_guide_img" href="img/bg-img/size-3.png" style="background-image: url({{asset('frontend/')}}/img/bg-img/size-3.png);">
-                                </a>
-                            </div>
-                        </div>
+                       
                     </div>
                 </div>
             </div>
@@ -461,4 +451,18 @@
     </section>
     <!-- Related Products Area -->
 
+@endsection
+@section('styles')
+<style>
+    .nice-select{
+        float:none;
+    }
+  
+    .widget.size .widget-desc li{
+        display:block;
+    }
+    .nice-select.open .list{
+        width:100%;
+    }
+</style>
 @endsection
