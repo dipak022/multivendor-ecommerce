@@ -9,7 +9,8 @@ class Product extends Model
 {
     use HasFactory;
     protected $fillable = [
-        'title','slug','sammary','description','strock','brand_id','cat_id','clild_cat_id','photo','price','offer_price','discount','size','conditions','vandor_id','status',
+        'title','slug','sammary','description','strock','brand_id','cat_id','clild_cat_id','photo','price',
+        'offer_price','discount','size','conditions','vandor_id','status','additional_info','return_cancellation','size_guide',
     ];
 
     public function brand(){

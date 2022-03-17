@@ -19,6 +19,8 @@ return new class extends Migration
             $table->string('slug')->unique();
             $table->mediumText('sammary')->nullable();
             $table->longText('description')->nullable();
+            $table->longText('additional_info')->nullable();
+            $table->longText('return_cancellation')->nullable();
             $table->integer('strock')->default(0);
             $table->unsignedBigInteger('brand_id');
             $table->unsignedBigInteger('cat_id');
@@ -28,6 +30,7 @@ return new class extends Migration
             $table->float('offer_price')->default(0);
             $table->float('discount')->default(0);
             $table->string('size');
+            $table->string('size_guide')->nullable();
             $table->enum('conditions',['new','popular','winter'])->default('new');
             $table->unsignedBigInteger('vandor_id')->nullable();
             $table->enum('status',['active','inactive'])->default('active');
