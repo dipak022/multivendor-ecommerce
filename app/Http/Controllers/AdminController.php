@@ -3,10 +3,12 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-
+use App\Models\Product;
+use App\Models\Order;
 class AdminController extends Controller
 {
     public function admin(){
-        return view('backend.index');
+        $orders=Order::orderBy('id','DESC')->get();
+        return view('backend.index',compact('orders'));
     }
 }

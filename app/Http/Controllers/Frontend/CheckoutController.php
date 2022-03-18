@@ -83,7 +83,7 @@ class CheckoutController extends Controller
         //return $request->all();
         Session::push('checkout',[
             'payment_method'=>$request->payment_method,
-            'payment_status'=>"paid",
+            'payment_status'=>"unpaid",
         ]);
 
         //return Session::get('checkout');
@@ -137,6 +137,16 @@ class CheckoutController extends Controller
         
 
         $status = $order->save();
+        
+        foreach( Cart::instance('shopping')->content() as $item){
+            $product_id[]=$item->id;
+            $product = Product::find($item->id);
+            $quantity=$item->qty;
+            $order->products()->attach($product,['quantity'=>$quantity]);
+        }
+
+
+
         if($status){
             Mail::to($order['email'])->bcc($order['semail'])->cc('dipakdebnath4022@mail.com')->send(new OredrMail($order));
             //dd('Mail is send');

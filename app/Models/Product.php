@@ -25,4 +25,8 @@ class Product extends Model
         return self::where('id',$id)->get()->toArray();
     }
 
+    public function oders(){
+        return $this->beLongsToMany(Order::class,'product_orders')->withPivot('quantity');
+    }
+
 }

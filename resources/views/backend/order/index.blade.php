@@ -1,93 +1,28 @@
 @extends('backend.layouts.master')
 @section('content')
+ 
 <div id="main-content">
         <div class="container-fluid">
             <div class="block-header">
                 <div class="row">
                     <div class="col-lg-5 col-md-8 col-sm-12">                        
-                        <h2><a href="javascript:void(0);" class="btn btn-xs btn-link btn-toggle-fullwidth"><i class="fa fa-arrow-left"></i></a> Dashboard</h2>
+                        <h2><a href="javascript:void(0);" class="btn btn-xs btn-link btn-toggle-fullwidth"><i class="fa fa-arrow-left"></i></a>Order Management List</h2>
                         <ul class="breadcrumb">
-                            <li class="breadcrumb-item"><a href="{{route('admin')}}"><i class="icon-home"></i></a></li>                            
-                            <li class="breadcrumb-item active">Dashboard</li>
+                            <li class="breadcrumb-item"><a href="index.html"><i class="icon-home"></i></a></li>                            
+                            <li class="breadcrumb-item">Order</li>
+                            <li class="breadcrumb-item active">Order Management</li>
                         </ul>
-                    </div>            
-                   
-                </div>
-            </div>
-
-            <div class="row clearfix">
-                <div class="col-lg-3 col-md-6 col-sm-6">
-                    <div class="card overflowhidden number-chart">
-                        <div class="body">
-                            <div class="number">
-                                <h6>Total Category</h6>
-                                <span>{{\App\Models\Category::where('status','active')->count()}} Categorys</span>
-                            </div>
-                           
-                        </div>
-                        <div class="sparkline" data-type="line" data-spot-Radius="0" data-offset="90" data-width="100%" data-height="50px"
-                        data-line-Width="1" data-line-Color="#f79647" data-fill-Color="#fac091">1,4,1,3,7,1</div>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-md-6 col-sm-6">
-                    <div class="card overflowhidden number-chart">
-                        <div class="body">
-                            <div class="number">
-                                 <h6>Total Product</h6>
-                                <span>{{\App\Models\Product::where('status','active')->count()}} Products</span>
-                            </div>
-                         
-                        </div>
-                        <div class="sparkline" data-type="line" data-spot-Radius="0" data-offset="90" data-width="100%" data-height="50px"
-                        data-line-Width="1" data-line-Color="#604a7b" data-fill-Color="#a092b0">1,4,2,3,6,2</div>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-md-6 col-sm-6">
-                    <div class="card overflowhidden number-chart">
-                        <div class="body">
-                            <div class="number">
-                            <h6>New Customer</h6>
-                                <span>{{\App\Models\User::where('status','active')->count()}} Products</span>
-                            </div>
-                           
-                        </div>
-                        <div class="sparkline" data-type="line" data-spot-Radius="0" data-offset="90" data-width="100%" data-height="50px"
-                        data-line-Width="1" data-line-Color="#4aacc5" data-fill-Color="#92cddc">1,4,2,3,1,5</div>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-md-6 col-sm-6">
-                    <div class="card overflowhidden number-chart">
-                        <div class="body">
-                            <div class="number">
-                                <h6>Profit</h6>
-                                <span>0 TK</span>
-                            </div>
-                           
-                        </div>
-                        <div class="sparkline" data-type="line" data-spot-Radius="0" data-offset="90" data-width="100%" data-height="50px"
-                        data-line-Width="1" data-line-Color="#4f81bc" data-fill-Color="#95b3d7">1,3,5,1,4,2</div>
-                    </div>
-                </div>
-            </div>
-
-        
-        <div class="container-fluid">
-            <div class="block-header">
-                <div class="row">
-                    <div class="col-lg-5 col-md-8 col-sm-12">                        
-                        <h2><a href="javascript:void(0);" class="btn btn-xs btn-link btn-toggle-fullwidth"><i class="fa fa-arrow-left"></i></a> Order List</h2>
-                       
                     </div>            
                     <div class="col-lg-7 col-md-4 col-sm-12 text-right">
                         <div class="inlineblock text-center m-r-15 m-l-15 hidden-sm">
-                            <h3 > Total Order :{{\App\Models\Order::count()}} </h3>
+                            <h3 > Total Order List :{{\App\Models\Order::count()}} </h3>
                         </div>
                         <div class="inlineblock text-center m-r-15 m-l-15 hidden-sm">
-                        <a class="btn btn-success" href="{{route('banner.create')}}">View All Order</a>
+                        <a class="btn btn-success" href="{{route('order.index')}}">View All Order</a>
                         </div>
                     </div>
                 </div>
-            
+            </div>
             
             <div class="row clearfix">
                 
@@ -140,8 +75,8 @@
                                         </td>
                                      
                                         <td>
-                                            <a type="button" href="{{route('banner.edit',$item->id)}}" class="btn btn-info" title="Edit"><i class="float-left fa fa-eye"></i></a>
-                                            <form class="float-left px-2" action="{{ route('banner.destroy',$item->id) }}" method="POST">
+                                            <a type="button" href="{{route('order.show',$item->id)}}" class="btn btn-info" title="Edit"><i class="float-left fa fa-eye"></i></a>
+                                            <form class="float-left px-2" action="{{ route('order.destroy',$item->id) }}" method="POST">
                                                 @csrf 
                                                 @method('delete')
                                                 <a type="button" data-type="confirm" class="dltBtn btn btn-danger js-sweetalert " title="Delete"><i class="float-left fa fa-trash-o"></i></a>
@@ -165,9 +100,48 @@
 
         </div>
     </div>
-       
-            
+@endsection
 
-        </div>
-    </div>
+@section('scripts')
+<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+<script>
+    $.ajaxSetup({
+    headers: {
+        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+    }
+    });
+    $('.dltBtn').click(function(e){
+       
+        var form = $(this).closest('form');
+        var dataId = $(this).data('id');
+        e.preventDefault();
+        Swal.fire({
+        title: 'Are you sure?',
+        text: "You won't be able to revert this!",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Yes, delete it!'
+        }).then((result) => {
+        if (result.isConfirmed) {
+            form.submit();
+            Swal.fire(
+            'Deleted!',
+            'Your file has been deleted.',
+            'success'
+            )
+        }
+        })
+        
+        
+
+    });
+
+</script>
+
+
+
+
 @endsection
