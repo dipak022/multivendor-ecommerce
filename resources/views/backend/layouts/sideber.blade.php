@@ -66,8 +66,8 @@
                             <li>
                                 <a href="#App" class="has-arrow"><i class="icon-layers"></i> <span>Order Management</span></a>
                                 <ul>
-                                <li><a href="{{ route('order.index') }}">All Order</a></li>
-                                    <li><a href="{{ route('order.create') }}">Create Order</a></li>
+                                    <li><a href="{{ route('order.index') }}">All Order</a></li>
+                                    
                                 </ul>
                             </li>
 
@@ -138,8 +138,8 @@
                             <li>
                                 <a href="#App" class="has-arrow"><i class="icon-settings"></i> <span>Setting</span></a>
                                 <ul>
-                                    <li><a href="app-inbox.html">Inbox</a></li>
-                                    <li><a href="app-chat.html">Chat</a></li>
+                                <li><a href="{{ route('seeting') }}">Setting</a></li>
+                                   
                                 </ul>
                             </li>
                         

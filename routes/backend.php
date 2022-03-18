@@ -53,6 +53,10 @@ Route::post('/coupon_status', [App\Http\Controllers\CouponController::class, 'co
  //order.status
  Route::post('order/status/', [App\Http\Controllers\OrderController::class, 'OrderStatus'])->name('order.status');
 
+ //seeting
+ Route::get('seeting', [App\Http\Controllers\SettingController::class, 'Seeting'])->name('seeting');
+ Route::post('update/seeting/{id}', [App\Http\Controllers\SettingController::class, 'SeetingUpdate'])->name('seeting.update');
+
 
 
 

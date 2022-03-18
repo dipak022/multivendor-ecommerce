@@ -6,7 +6,7 @@
             <div class="col-6">
                 <div class="welcome-note">
                     <span class="popover--text" data-toggle="popover" data-content="Welcome to Bigshop ecommerce template."><i class="icofont-info-square"></i></span>
-                    <span class="text">Welcome E-comarce.</span>
+                    <span class="text">{{\App\Models\Setting::value('meta_description')}}</span>
                 </div>
             </div>
             <div class="col-6">
@@ -48,7 +48,7 @@
             <nav class="classy-navbar" id="bigshopNav">
 
                 <!-- Nav Brand -->
-                <a href="{{route('home')}}" class="nav-brand"><img src="{{asset('frontend/')}}/img/core-img/logo.png" alt="logo"></a>
+                <a href="{{route('home')}}" class="nav-brand"><img src="{{\App\Models\Setting::value('logo')}}" style="height: 40px;width: 70px;" alt="logo"></a>
 
                 <!-- Toggler -->
                 <div class="classy-navbar-toggler">
