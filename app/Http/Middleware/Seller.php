@@ -4,7 +4,9 @@ namespace App\Http\Middleware;
 
 use Closure;
 use Illuminate\Http\Request;
-
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\Auth;
 class Seller
 {
     /**
@@ -17,10 +19,11 @@ class Seller
     public function handle(Request $request, Closure $next)
     {
         //dd(auth()->user()->role);
-        if(auth()->user()->role == 'seller'){
+         //dd(auth()->user()->role);
+         if(Auth::guard('seller')->check()){
             return $next($request);
         }else{
-            return redirect()->route(auth()->user()->role)->with('error',"You don't have access");
+            return redirect()->route('seller.login.form');
         }
        
     }

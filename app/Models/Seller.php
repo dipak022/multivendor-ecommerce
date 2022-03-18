@@ -20,6 +20,7 @@ class Seller extends Authenticatable
         'password',
         'photo',
         'phone',
+        'address',
         'status',
        
     ];
