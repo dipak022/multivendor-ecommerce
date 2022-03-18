@@ -4,7 +4,7 @@
                 <img src="{{asset('backend/')}}/assets/images/user.png" class="rounded-circle user-photo" alt="User Profile Picture">
                 <div class="dropdown">
                     <span>Welcome,</span>
-                    <a href="javascript:void(0);" class="dropdown-toggle user-name" data-toggle="dropdown"><strong>Alizee Thomas</strong></a>
+                    <a href="javascript:void(0);" class="dropdown-toggle user-name" data-toggle="dropdown"><strong>{{ucfirst(auth('admin')->user()->full_name)}}</strong></a>
                     <ul class="dropdown-menu dropdown-menu-right account">
                         <li><a href="page-profile2.html"><i class="icon-user"></i>My Profile</a></li>
                         <li><a href="app-inbox.html"><i class="icon-envelope-open"></i>Messages</a></li>
@@ -14,28 +14,9 @@
                     </ul>
                 </div>
                 <hr>
-                <ul class="row list-unstyled">
-                    <li class="col-4">
-                        <small>Sales</small>
-                        <h6>456</h6>
-                    </li>
-                    <li class="col-4">
-                        <small>Order</small>
-                        <h6>1350</h6>
-                    </li>
-                    <li class="col-4">
-                        <small>Revenue</small>
-                        <h6>$2.13B</h6>
-                    </li>
-                </ul>
+               
             </div>
-            <!-- Nav tabs -->
-            <ul class="nav nav-tabs">
-                <li class="nav-item"><a class="nav-link active" data-toggle="tab" href="#menu">Menu</a></li>
-                <li class="nav-item"><a class="nav-link" data-toggle="tab" href="#Chat"><i class="icon-book-open"></i></a></li>
-                <li class="nav-item"><a class="nav-link" data-toggle="tab" href="#setting"><i class="icon-settings"></i></a></li>
-                <li class="nav-item"><a class="nav-link" data-toggle="tab" href="#question"><i class="icon-question"></i></a></li>                
-            </ul>
+           
                 
             <!-- Tab panes -->
             <div class="tab-content p-l-0 p-r-0">
@@ -43,7 +24,7 @@
                     <nav id="left-sidebar-nav" class="sidebar-nav">
                         <ul id="main-menu" class="metismenu">
                             <li class="active">
-                                <a href="#" class="has-arrow"> <span>Dashboard</span></a>
+                                <a href="{{route('admin')}}" class="has-arrow"> <span>Dashboard</span></a>
                               
                             </li>
                             <li>

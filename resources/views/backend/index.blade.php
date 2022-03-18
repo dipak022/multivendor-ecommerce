@@ -7,22 +7,11 @@
                     <div class="col-lg-5 col-md-8 col-sm-12">                        
                         <h2><a href="javascript:void(0);" class="btn btn-xs btn-link btn-toggle-fullwidth"><i class="fa fa-arrow-left"></i></a> Dashboard</h2>
                         <ul class="breadcrumb">
-                            <li class="breadcrumb-item"><a href="index.html"><i class="icon-home"></i></a></li>                            
+                            <li class="breadcrumb-item"><a href="{{route('admin')}}"><i class="icon-home"></i></a></li>                            
                             <li class="breadcrumb-item active">Dashboard</li>
                         </ul>
                     </div>            
-                    <div class="col-lg-7 col-md-4 col-sm-12 text-right">
-                        <div class="inlineblock text-center m-r-15 m-l-15 hidden-sm">
-                            <div class="sparkline text-left" data-type="line" data-width="8em" data-height="20px" data-line-Width="1" data-line-Color="#00c5dc"
-                                data-fill-Color="transparent">3,5,1,6,5,4,8,3</div>
-                            <span>Visitors</span>
-                        </div>
-                        <div class="inlineblock text-center m-r-15 m-l-15 hidden-sm">
-                            <div class="sparkline text-left" data-type="line" data-width="8em" data-height="20px" data-line-Width="1" data-line-Color="#f4516c"
-                                data-fill-Color="transparent">4,6,3,2,5,6,5,4</div>
-                            <span>Visits</span>
-                        </div>
-                    </div>
+                   
                 </div>
             </div>
 
@@ -31,10 +20,10 @@
                     <div class="card overflowhidden number-chart">
                         <div class="body">
                             <div class="number">
-                                <h6>EARNINGS</h6>
-                                <span>$22,500</span>
+                                <h6>Total Category</h6>
+                                <span>{{\App\Models\Category::where('status','active')->count()}} Categorys</span>
                             </div>
-                            <small class="text-muted">19% compared to last week</small>
+                           
                         </div>
                         <div class="sparkline" data-type="line" data-spot-Radius="0" data-offset="90" data-width="100%" data-height="50px"
                         data-line-Width="1" data-line-Color="#f79647" data-fill-Color="#fac091">1,4,1,3,7,1</div>
@@ -44,10 +33,10 @@
                     <div class="card overflowhidden number-chart">
                         <div class="body">
                             <div class="number">
-                                <h6>SALES</h6>
-                                <span>$500</span>
+                                 <h6>Total Product</h6>
+                                <span>{{\App\Models\Product::where('status','active')->count()}} Products</span>
                             </div>
-                            <small class="text-muted">19% compared to last week</small>
+                         
                         </div>
                         <div class="sparkline" data-type="line" data-spot-Radius="0" data-offset="90" data-width="100%" data-height="50px"
                         data-line-Width="1" data-line-Color="#604a7b" data-fill-Color="#a092b0">1,4,2,3,6,2</div>
@@ -57,10 +46,10 @@
                     <div class="card overflowhidden number-chart">
                         <div class="body">
                             <div class="number">
-                                <h6>VISITS</h6>
-                                <span>$21,215</span>
+                            <h6>New Customer</h6>
+                                <span>{{\App\Models\User::where('status','active')->count()}} Products</span>
                             </div>
-                            <small class="text-muted">19% compared to last week</small>
+                           
                         </div>
                         <div class="sparkline" data-type="line" data-spot-Radius="0" data-offset="90" data-width="100%" data-height="50px"
                         data-line-Width="1" data-line-Color="#4aacc5" data-fill-Color="#92cddc">1,4,2,3,1,5</div>
