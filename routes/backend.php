@@ -49,7 +49,9 @@ Route::post('/coupon_status', [App\Http\Controllers\CouponController::class, 'co
 
  //Order Route here 
  Route::resource('/order', App\Http\Controllers\OrderController::class);
- Route::post('/shipping_status', [App\Http\Controllers\ShippingController::class, 'ShippingsStatus'])->name('shipping.status');
+
+ //order.status
+ Route::post('order/status/', [App\Http\Controllers\OrderController::class, 'OrderStatus'])->name('order.status');
 
 
 

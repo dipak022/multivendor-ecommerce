@@ -17,11 +17,11 @@
                             <h2>Order Information List </h2>                            
                         </div>
                         <div class="body">
-						<div class="table-responsive">
+						    <div class="table-responsive">
                             <table class="table table-bordered table-striped table-hover dataTable js-exportable">
                                 <thead>
                                     <tr>
-                                        <th>S.N.</th>
+                                      
                                         <th>Name</th>
                                         <th>Email</th>
                                         <th>Payment Method</th>
@@ -35,7 +35,7 @@
                                 <tbody>
                              
                                     <tr>
-                                        <td>{{$order->iteration}}</td>
+                                       
                                         <td>{{$order->first_name}} {{$order->last_name}}</td>
                                         <td>{{$order->email}}</td>
                                         <td>{{$order->payment_method}}</td>
@@ -50,7 +50,7 @@
                                         <td>
                                             @if($order->condition === 'pending')
                                             <span class="badge badge-success">{{$order->condition}}</span>
-                                            @elseif($orders->condition === 'processing')
+                                            @elseif($order->condition === 'processing')
                                             <span class="badge badge-primary">{{$order->condition}}</span>
                                             @elseif($order->condition === 'delivered')
                                             <span class="badge badge-info">{{$order->condition}}</span>
@@ -75,7 +75,77 @@
                                    
                                 </tbody>
                             </table>
+
+
+
+                            <table class="table table-bordered table-striped table-hover dataTable js-exportable">
+                                <thead>
+                                    <tr>
+                                        <th>S.N.</th>
+                                        <th>Product Image</th>
+                                        <th>Product Name</th>
+                                        <th>Quantity </th>
+                                        <th>Price</th>
+                                    </tr>
+                                </thead>
+                               
+                                <tbody>
+                                    @foreach($order->products as $item)
+                                    <tr>
+                                        <td>{{$loop->iteration}}</td>  
+                                        <td>
+                                        <img src="{{$item->photo}}" id="holder" style="margin-top:15px;max-height:100px;"></img>
+                                        </td>
+                                        <td>{{$item->title}}</td>
+                                        <td>{{$item->pivot->quantity}}</td>
+                                        <td>{{number_format($item->price,2)}} TK</td>
+                                    </tr>
+                                    @endforeach
+                                 
+                                  
+                                   
+                                </tbody>
+                            </table>
+                
 							</div>
+                        </div>
+                        <div class="row">
+                            <div class="col-6">
+
+                            </div>
+                            <div class="col-5 border py-3">
+                               <p>
+                                    <strong>Sub Total :</strong>{{  $order->sub_total  }} Tk
+                               </p>
+                               @if($order->delivery_charge>0)
+                               <p>
+                                    <strong>Shiping Cost :</strong>{{  $order->delivery_charge  }} Tk
+                               </p>
+                               @endif
+                               @if($order->coupon>0)
+                               <p>
+                                    <strong>Coupon :</strong>{{  $order->coupon  }} Tk
+                               </p>
+                               @endif
+                               <p>
+                                    <strong>Total :</strong>{{  $order->total_amount  }} Tk
+                               </p>
+                               <form action="{{route('order.status')}}" method="post">
+                                   @csrf
+                                   <input type="hidden" name="order_id" value={{$order->id}}>
+                                   <strong>Status</strong>
+                                   <select name="condition" class="form-control" id="">
+                                       <option value="pending" {{ $order->condition == 'delivered' ||  $order->condition == 'cancelled' ? 'disabled' : '' }} {{ $order->condition == 'pending' ? 'selected' : '' }}>Pending</option>
+                                       <option value="processing" {{ $order->condition == 'delivered' ||  $order->condition == 'cancelled' ? 'disabled' : '' }} {{ $order->condition == 'processing' ? 'selected' : '' }}>Processing</option>
+                                       <option value="delivered" {{ $order->condition == 'cancelled' ? 'disabled' : '' }} {{ $order->condition == 'delivered' ? 'selected' : '' }}>Delivered</option>
+                                       <option value="cancelled" {{ $order->condition == 'delivered' ? 'disabled' : '' }} {{ $order->condition == 'cancelled' ? 'selected' : '' }}>Cancelled</option>
+                                   </select>
+                                   <br/>
+                                   <button type="submit" class="btn btn-sm btn-success">Update Status</button>
+
+                               </form>
+                            </div>
+                            <div class="col-md-1"></div>
                         </div>
                     </div>
                 </div>
@@ -118,7 +188,7 @@
             'success'
             )
         }
-        })
+        });
         
         
 
