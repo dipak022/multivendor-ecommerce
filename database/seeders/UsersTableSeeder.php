@@ -51,7 +51,7 @@ class UsersTableSeeder extends Seeder
                     'username'=> 'seller',
                     'email'=> 'seller@gmail.com',
                     'password'=>Hash::make('11111111'),
-                    //'role'=> 'seller',
+                    'is_verified'=> 0,
                     'status'=> 'active',
 
                 ],

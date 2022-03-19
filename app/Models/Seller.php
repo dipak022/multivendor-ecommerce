@@ -22,6 +22,7 @@ class Seller extends Authenticatable
         'phone',
         'address',
         'status',
+        'is_verified',
        
     ];
 

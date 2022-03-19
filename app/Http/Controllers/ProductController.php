@@ -72,6 +72,8 @@ class ProductController extends Controller
             $slug .= time().'_'.$slug;
         }
         $data['slug']= $slug;
+        $data['user_id']= auth('admin')->user()->id;
+        $data['added_by']='admin';
         $data['offer_price'] = $request->price-(($request->price*$request->discount)/100);
         //return $data;
         $status = Product::create($data);
@@ -145,6 +147,8 @@ class ProductController extends Controller
         $product = Product::find($id);
         if($product){
             $data = $request->all();
+            $data['user_id']= auth('admin')->user()->id;
+            $data['added_by']='admin';
             $data['offer_price'] = $request->price-(($request->price*$request->discount)/100);
             $status = $product->fill($data)->save();
             if ($status) {

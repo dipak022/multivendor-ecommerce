@@ -32,13 +32,15 @@ return new class extends Migration
             $table->string('size');
             $table->string('size_guide')->nullable();
             $table->enum('conditions',['new','popular','winter'])->default('new');
-            $table->unsignedBigInteger('vandor_id')->nullable();
+            //$table->unsignedBigInteger('vandor_id')->nullable();
+            $table->unsignedBigInteger('user_id')->nullable();
             $table->enum('status',['active','inactive'])->default('active');
+            $table->string('added_by')->nullable();
 
             $table->foreign('brand_id')->references('id')->on('brands')->onDelete('cascade');
             $table->foreign('cat_id')->references('id')->on('categories')->onDelete('cascade');
             $table->foreign('clild_cat_id')->references('id')->on('categories')->onDelete('SET NULL');
-            $table->foreign('vandor_id')->references('id')->on('users')->onDelete('SET NULL');
+            //$table->foreign('vandor_id')->references('id')->on('users')->onDelete('SET NULL');
             $table->timestamps();
         });
     }

@@ -25,7 +25,7 @@ class ProductFactory extends Factory
             'return_cancellation' => $this->faker->sentences(5,true),
             'strock' => $this->faker->numberBetween(2,10),
             'brand_id' => $this->faker->randomElement(\App\Models\Brand::pluck('id')->toArray()),
-            'vandor_id' => $this->faker->randomElement(\App\Models\User::pluck('id')->toArray()),
+            //'vandor_id' => $this->faker->randomElement(\App\Models\User::pluck('id')->toArray()),
             'cat_id' => $this->faker->randomElement(\App\Models\Category::where('is_parent',1)->pluck('id')->toArray()),
             'clild_cat_id' => $this->faker->randomElement(\App\Models\Category::where('is_parent',0)->pluck('id')->toArray()),
             'photo' => $this->faker->imageUrl('400','400'),
@@ -36,6 +36,7 @@ class ProductFactory extends Factory
             'size' => $this->faker->randomElement(['S','M','L']),
             'conditions' => $this->faker->randomElement(['new','popular','winter']),
             'status' => $this->faker->randomElement(['active','inactive']),
+            'added_by'=>'admin',
           
 
         ];
