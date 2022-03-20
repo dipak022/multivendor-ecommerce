@@ -53,7 +53,16 @@ class ProductController extends Controller
      */
     public function create()
     {
-        return view('seller.products.create');
+        if(auth('seller')->user()->is_verified){
+            return view('seller.products.create');
+        }else{
+            $notification = array(
+                'message' => 'You need verified your account.',
+                'alert-type' => 'error'
+            );
+            return redirect()->back()->with($notification);
+        }
+        
     }
 
     /**
@@ -150,7 +159,7 @@ class ProductController extends Controller
             $data = $request->all();
             $data['user_id']= auth('seller')->user()->id;
 
-           dd($data);
+           //dd($data);
             $data['added_by']='seller';
             $data['offer_price'] = $request->price-(($request->price*$request->discount)/100);
             $status = $product->fill($data)->save();

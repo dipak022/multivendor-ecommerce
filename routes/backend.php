@@ -58,6 +58,12 @@ Route::post('/coupon_status', [App\Http\Controllers\CouponController::class, 'co
  Route::post('update/seeting/{id}', [App\Http\Controllers\SettingController::class, 'SeetingUpdate'])->name('seeting.update');
 
 
+  //Seller account verified
+  Route::resource('seller', App\Http\Controllers\BackendSellerController::class);
+  Route::post('/seller_status', [App\Http\Controllers\BackendSellerController::class, 'SellerStatus'])->name('seller.status');
+  Route::post('/is_verified_status', [App\Http\Controllers\BackendSellerController::class, 'is_verifiedSellerStatus'])->name('is_verified.seller.status');
+
+
 
 
 

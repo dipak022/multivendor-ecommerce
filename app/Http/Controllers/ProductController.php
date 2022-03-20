@@ -19,7 +19,9 @@ class ProductController extends Controller
      */
     public function index()
     {
-        $product=Product::orderBy('id','DESC')->get(); 
+        //$product=Product::orderBy('id','DESC')->get(); 
+        //$product=Product::where(['added_by'=>'admin','user_id'=>auth('admin')->user()->id])->orderBy('id','DESC')->get();
+        $product=Product::where(['added_by'=>'admin'])->orderBy('id','DESC')->get();
         return view('backend.products.index',compact('product'));
     }
 

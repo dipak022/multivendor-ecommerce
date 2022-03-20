@@ -15,7 +15,11 @@
                     </div>            
                     <div class="col-lg-7 col-md-4 col-sm-12 text-right">
                         <div class="inlineblock text-center m-r-15 m-l-15 hidden-sm">
+                            <!--
                             <h3 > Total Product :{{\App\Models\Product::count()}} </h3>
+                            -->
+                            <h3 > Total Product :{{$product->count()}} </h3>
+                            
                         </div>
                         <div class="inlineblock text-center m-r-15 m-l-15 hidden-sm">
                         <a class="btn btn-success" href="{{route('product.create')}}">Add Product</a>

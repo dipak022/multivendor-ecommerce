@@ -4,7 +4,10 @@
                 <img src="{{asset('backend/')}}/assets/images/user.png" class="rounded-circle user-photo" alt="User Profile Picture">
                 <div class="dropdown">
                     <span>Welcome,</span>
-                    <a href="javascript:void(0);" class="dropdown-toggle user-name" data-toggle="dropdown"><strong>{{ucfirst(auth('seller')->user()->full_name)}}</strong></a>
+                    <a href="javascript:void(0);" class="user-name" data-toggle="dropdown"><strong>{{ucfirst(auth('seller')->user()->full_name)}}</strong>
+                    <span>@if(auth('seller')->user()->is_verified) <i class="fa fa-check-circle text-success" data-toggle="tooltip" title="verified" data-placement="bottom"></i>
+                     @else <i class="fa fa-user-times text-danger" data-toggle="tooltip" title="unverified" data-placement="bottom"></i>
+                     @endif</span></a>
                     <ul class="dropdown-menu dropdown-menu-right account">
                         <li><a href="page-profile2.html"><i class="icon-user"></i>My Profile</a></li>
                         <li><a href="app-inbox.html"><i class="icon-envelope-open"></i>Messages</a></li>
