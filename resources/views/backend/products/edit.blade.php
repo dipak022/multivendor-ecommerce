@@ -76,13 +76,16 @@
                                 <option value="winter" {{ $product->conditions == "winter" ? "selected" : "" }}>Winter</option>
                             </select>
                             </br>
-                            <select class="form-control show-tick" name="vandor_id">
+                            {{-- 
+                                <select class="form-control show-tick" name="vandor_id">
                                 <option selected disable>--Select Vendors--</option>
                                 @foreach(\App\Models\User::where('role','seller')->get() as $vendor)
                                     <option value="{{ $vendor->id }}" {{ $vendor->id == $product->vandor_id ? 'selected' : '' }} >{{$vendor->full_name}}</option>
                                 @endforeach
                             </select>
                             </br>
+                            --}}
+                            
                             <select class="form-control show-tick" name="status">
                                 <option selected disable>--Select Status--</option>
                                 <option value="active" {{ $product->status == "active" ? "selected" : "" }}>Active</option>
