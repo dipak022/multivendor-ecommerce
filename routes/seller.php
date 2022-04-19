@@ -20,8 +20,8 @@ Route::group(['prefix'=>'seller','middleware'=>['seller']],function(){
     //Product  route here
     Route::resource('/seller_product', App\Http\Controllers\Seller\ProductController::class);
     Route::post('/seller_product_status', [App\Http\Controllers\Seller\ProductController::class, 'SellerProductStatus'])->name('seller.product.status');
-    
-    });
+
+});
 
 
 

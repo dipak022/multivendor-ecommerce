@@ -1,7 +1,12 @@
 
 <?php
 
+// admin Deshboard
+Route::group(['prefix'=>'admin'],function(){
 
+    Route::get('/login', [App\Http\Controllers\Auth\Admin\LoginController::class, 'ShowLoginForm'])->name('admin.login.form');
+    Route::post('/login', [App\Http\Controllers\Auth\Admin\LoginController::class, 'login'])->name('admin.login');
+}); 
 
 Route::group(['prefix'=>'admin','middleware'=>['admin']],function(){
 
@@ -63,21 +68,7 @@ Route::post('/coupon_status', [App\Http\Controllers\CouponController::class, 'co
   Route::post('/seller_status', [App\Http\Controllers\BackendSellerController::class, 'SellerStatus'])->name('seller.status');
   Route::post('/is_verified_status', [App\Http\Controllers\BackendSellerController::class, 'is_verifiedSellerStatus'])->name('is_verified.seller.status');
 
-
-
-
-
-
 });
-
-
-
-// admin Deshboard
-Route::group(['prefix'=>'admin'],function(){
-
-    Route::get('/login', [App\Http\Controllers\Auth\Admin\LoginController::class, 'ShowLoginForm'])->name('admin.login.form');
-    Route::post('/login', [App\Http\Controllers\Auth\Admin\LoginController::class, 'login'])->name('admin.login');
-}); 
 
 
 

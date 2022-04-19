@@ -282,7 +282,13 @@
 
                     <div class="shop_grid_product_area">
                         <div class="row justify-content-center" id="product-data">
-                          @include('frontend.layouts.single-product')
+
+                        @foreach($products as $nproduct)
+                        
+                        <div class="col-9 col-sm-6 col-md-4 col-lg-4">
+                           @include('frontend.layouts.single-product',['product'=>$nproduct])
+                        </div>
+                        @endforeach
                           
                         </div>
                     </div>

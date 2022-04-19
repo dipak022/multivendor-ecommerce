@@ -24,6 +24,7 @@ class ProductFactory extends Factory
             'additional_info' => $this->faker->sentences(5,true),
             'return_cancellation' => $this->faker->sentences(5,true),
             'strock' => $this->faker->numberBetween(2,10),
+            'is_featured' =>  $this->faker->boolean(),
             'brand_id' => $this->faker->randomElement(\App\Models\Brand::pluck('id')->toArray()),
             //'vandor_id' => $this->faker->randomElement(\App\Models\User::pluck('id')->toArray()),
             'cat_id' => $this->faker->randomElement(\App\Models\Category::where('is_parent',1)->pluck('id')->toArray()),
