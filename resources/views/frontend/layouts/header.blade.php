@@ -71,7 +71,7 @@
                             <li><a href="{{ route('shop') }}">Shop</a>
                                 
                             </li>
-                            <li><a href="#">Pages</a>
+                            {{-- <li><a href="#">Pages</a>
                                 <div class="megamenu">
                                     <ul class="single-mega cn-col-4">
                                         <li><a href="about-us.html">- About Us</a></li>
@@ -100,8 +100,8 @@
                                         </div>
                                     </div>
                                 </div>
-                            </li>
-                            <li><a href="#">Blog</a>
+                            </li> --}}
+                            {{-- <li><a href="#">Blog</a>
                                 <ul class="dropdown">
                                     <li><a href="blog-with-left-sidebar.html">Blog Left Sidebar</a></li>
                                     <li><a href="blog-with-right-sidebar.html">Blog Right Sidebar</a></li>
@@ -136,8 +136,8 @@
                                         <li><a href="tables.html">- Tables</a></li>
                                     </ul>
                                 </div>
-                            </li>
-                            <li><a href="contact.html">Contact</a></li>
+                            </li> --}}
+                            <li><a href="#">Contact</a></li>
                         </ul>
                     </div>
                 </div>

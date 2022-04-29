@@ -79,21 +79,21 @@
                                 </ul>
                             </li>
 
-                            <li>
+                            {{-- <li>
                                 <a href="#App" class="has-arrow"><i class="icon-grid"></i> <span>Post Category</span></a>
                                 <ul>
                                     <li><a href="app-inbox.html">Inbox</a></li>
                                     <li><a href="app-chat.html">Chat</a></li>
                                 </ul>
-                            </li>
+                            </li> --}}
 
-                            <li>
+                            {{-- <li>
                                 <a href="#App" class="has-arrow"><i class="icon-tag"></i> <span>Post Tag</span></a>
                                 <ul>
                                     <li><a href="app-inbox.html">Inbox</a></li>
                                     <li><a href="app-chat.html">Chat</a></li>
                                 </ul>
-                            </li>
+                            </li> --}}
 
                             <li>
                                 <a href="#App" class="has-arrow"><i class="icon-user"></i> <span>Seller Management</span></a>
@@ -103,21 +103,21 @@
                                 </ul>
                             </li>
 
-                            <li>
+                            {{-- <li>
                                 <a href="#App" class="has-arrow"><i class="icon-map"></i> <span>Post Management</span></a>
                                 <ul>
                                     <li><a href="app-inbox.html">Inbox</a></li>
                                     <li><a href="app-chat.html">Chat</a></li>
                                 </ul>
-                            </li>
-
+                            </li> --}}
+{{-- 
                             <li>
                                 <a href="#App" class="has-arrow"><i class="icon-star"></i> <span>Review Management</span></a>
                                 <ul>
                                     <li><a href="app-inbox.html">Inbox</a></li>
                                     <li><a href="app-chat.html">Chat</a></li>
                                 </ul>
-                            </li>
+                            </li> --}}
 
                             <li>
                                 <a href="#App" class="has-arrow"><i class="icon-star"></i> <span>Coupon Management</span></a>
@@ -135,13 +135,13 @@
                                 </ul>
                             </li>
 
-                            <li>
+                            {{-- <li>
                                 <a href="#App" class="has-arrow"><i class="icon-star"></i> <span>Comments Management</span></a>
                                 <ul>
                                     <li><a href="app-inbox.html">Inbox</a></li>
                                     <li><a href="app-chat.html">Chat</a></li>
                                 </ul>
-                            </li>
+                            </li> --}}
 
                             <li>
                                 <a href="#App" class="has-arrow"><i class="icon-settings"></i> <span>Setting</span></a>
