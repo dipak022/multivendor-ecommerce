@@ -9,6 +9,8 @@ use App\Models\Banner;
 use App\Models\Brand;
 use App\Models\Product;
 use App\Models\User;
+use App\Models\Order;
+use App\Models\ProductOrder;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
@@ -28,8 +30,24 @@ class IndexController extends Controller
         $new_products = Product::where(['status'=>'active','conditions'=>'new'])->orderBy('id','DESC')->limit('12')->get();
         $featured_products =Product::where(['status'=>'active','is_featured'=>1])->orderBy('id','DESC')->limit('12')->get();
         $brands =Brand::where(['status'=>'active'])->orderBy('id','DESC')->get();
+        //top sell
+        $items = DB::table('product_orders')->select('product_id',DB::raw('COUNT(product_id) as count'))->groupBy('product_id')->orderBy('count','DESC')->get();
+        $product_ids=[];
+        foreach($items as $item){
+            array_push($product_ids,$item->product_id);
+        }
+        $best_sellings = Product::whereIn('id',$product_ids)->get();
+        //return $best_selling;
+        // best reting
+        $items = DB::table('product_orders')->select('product_id',DB::raw('COUNT(product_id) as count'))->groupBy('product_id')->orderBy('count','DESC')->get();
+        $product_ids=[];
+        foreach($items as $item){
+            array_push($product_ids,$item->product_id);
+        }
+        $best_sellings = Product::whereIn('id',$product_ids)->get();
+        //return $best_selling;
 
-        return view('frontend.index',compact(['banners','categorys','new_products','featured_products','promo_banner','brands']));
+        return view('frontend.index',compact(['banners','categorys','new_products','featured_products','promo_banner','brands','best_sellings']));
     }
 
     public function ProductCategory(Request $request,$slug){
