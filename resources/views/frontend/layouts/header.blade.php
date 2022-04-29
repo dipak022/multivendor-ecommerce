@@ -48,7 +48,7 @@
             <nav class="classy-navbar" id="bigshopNav">
 
                 <!-- Nav Brand -->
-                <a href="{{route('home')}}" class="nav-brand"><img src="{{\App\Models\Setting::value('logo')}}" style="height: 40px;width: 70px;" alt="logo"></a>
+                <a href="{{route('home')}}" class="nav-brand"><img src="{{asset(\App\Models\Setting::value('logo'))}}" style="height: 40px;width: 70px;" alt="logo"></a>
 
                 <!-- Toggler -->
                 <div class="classy-navbar-toggler">

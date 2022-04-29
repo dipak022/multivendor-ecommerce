@@ -195,12 +195,20 @@
                         </div>
 
                         <!-- Add to Cart Form -->
-                        <form class="cart clearfix my-5 d-flex flex-wrap align-items-center" method="post">
+                        {{-- <form class="cart clearfix my-5 d-flex flex-wrap align-items-center" method="post">
                             <div class="quantity">
                                 <input type="number" class="qty-text form-control" id="qty2" step="1" min="1" max="12" name="quantity" value="1">
                             </div>
                             <button type="submit" name="addtocart" value="5" class="btn btn-primary mt-1 mt-md-0 ml-1 ml-md-3">Add to cart</button>
-                        </form>
+                        </form> --}}
+                        <span class="cart clearfix my-5 d-flex flex-wrap align-items-center" >
+                            <div class="quantity">
+                                <input type="number" class="qty-text form-control" id="qty2" step="1" min="1" max="12" name="quantity" value="1">
+                            </div>
+                            <a href="#" data-quantity="1" data-product-id="{{ $products->id }}" class="add_to_cart" id="add_to_cart{{ $products->id }}"><i class="icofont-shopping-cart"></i> Add to Cart</a>
+                        </span>
+
+                        
 
                         <!-- Others Info -->
                         <div class="others_info_area mb-3 d-flex flex-wrap">
@@ -419,7 +427,8 @@
                             <div class="product_description">
                                 <!-- Add to cart -->
                                 <div class="product_add_to_cart">
-                                    <a href="#"><i class="icofont-shopping-cart"></i> Add to Cart</a>
+                                    {{-- <a href="#"><i class="icofont-shopping-cart"></i> Add to Cart</a> --}}
+                                    <a href="#" data-quantity="1" data-product-id="{{ $item->id }}" class="add_to_cart" id="add_to_cart{{ $item->id }}"><i class="icofont-shopping-cart"></i> Add to Cart</a>
                                 </div>
 
                                 <!-- Quick View -->
@@ -444,6 +453,50 @@
         </div>
     </section>
     <!-- Related Products Area -->
+
+    <!--add to cart  -->
+<script>
+    $(document).on('click','.add_to_cart',function(e){
+        e.preventDefault();
+        var product_id = $(this).data('product-id');
+        //alert(product_id);
+        var product_qty = $(this).data('quantity');
+        //alert(product_qty);
+        var token = "{{csrf_token()}}";
+        var path = "{{ route('cart.store') }}";
+ 
+        $.ajax({
+            url:path,
+            type:"POST",
+            dataType:"JSON",
+            data:{
+                product_id : product_id,
+                product_qty : product_qty,
+                _token : token,
+            },
+            beforeSend:function(){
+                $('#add_to_cart'+product_id).html('<i class="fa fa-spinner fa-spin"></i> Loaging...');
+            },
+            complete:function(){
+                $('#add_to_cart'+product_id).html('<i class="fa fa-cart-plus"></i> Add To Cart');
+            },
+            success:function(data){
+                //console.log(dara);
+                $('body #header-ajax').html(data['header'])
+                if(data['status']){
+                 swal({
+                 title: "Good job!",
+                 text: data['message'],
+                 icon: "success",
+                 button: "ok!",
+                 });
+                }
+            }
+ 
+        });
+ 
+    });
+ </script>
 
 @endsection
 @section('styles')

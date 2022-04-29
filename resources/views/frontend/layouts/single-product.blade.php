@@ -81,7 +81,7 @@
                                     <div class="quantity">
                                         <input type="number" class="qty-text" id="qty" step="1" min="1" max="12" name="quantity" value="1">
                                     </div>
-                                    <a type="submit" href="#" data-quantity="1" data-product-id="{{ $product->id }}" class="add_to_cart cart-submit" id="add_to_cart{{ $product->id }}"><i class="icofont-shopping-cart">Add to Cart</i> </a>
+                                    <a href="#" data-quantity="1" data-product-id="{{ $product->id }}" class="add_to_cart" id="add_to_cart{{ $product->id }}"><i class="icofont-shopping-cart"></i> Add to Cart</a>
                                     
                                     <!-- Wishlist -->
                                     <div class="modal_pro_wishlist">
@@ -170,6 +170,50 @@
                          button: "ok!",
                      });
  
+                }
+            }
+ 
+        });
+ 
+    });
+ </script>
+
+ <!--add to cart  -->
+<script>
+    $(document).on('click','.add_to_cart',function(e){
+        e.preventDefault();
+        var product_id = $(this).data('product-id');
+        //alert(product_id);
+        var product_qty = $(this).data('quantity');
+        //alert(product_qty);
+        var token = "{{csrf_token()}}";
+        var path = "{{ route('cart.store') }}";
+ 
+        $.ajax({
+            url:path,
+            type:"POST",
+            dataType:"JSON",
+            data:{
+                product_id : product_id,
+                product_qty : product_qty,
+                _token : token,
+            },
+            beforeSend:function(){
+                $('#add_to_cart'+product_id).html('<i class="fa fa-spinner fa-spin"></i> Loaging...');
+            },
+            complete:function(){
+                $('#add_to_cart'+product_id).html('<i class="fa fa-cart-plus"></i> Add To Cart');
+            },
+            success:function(data){
+                //console.log(dara);
+                $('body #header-ajax').html(data['header'])
+                if(data['status']){
+                 swal({
+                 title: "Good job!",
+                 text: data['message'],
+                 icon: "success",
+                 button: "ok!",
+                 });
                 }
             }
  
