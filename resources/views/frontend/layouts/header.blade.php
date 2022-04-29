@@ -161,8 +161,13 @@
                         <a href="{{ route('wishlist') }}" class="wishlist-btn" id="wishlist_count"><i class="icofont-heart"></i>({{ \Gloudemans\Shoppingcart\Facades\Cart::instance('wishlist')->count() }})</a>
                     </div>
 
-                    <!-- Cart -->
+                    <!-- Comrare -->
                     <div class="cart-area">
+                        <div class="cart--btn"><a href="{{ route('compare') }}"> <i class="icofont-exchange"></i> </a> <span class="cart_quantity" id="compaer_counter">{{ \Gloudemans\Shoppingcart\Facades\Cart::instance('compare')->count() }}</span></div>
+                    </div>
+
+                     <!-- Cart -->
+                     <div class="cart-area">
                         <div class="cart--btn"><i class="icofont-cart"></i> <span class="cart_quantity" id="cart-counter">{{ \Gloudemans\Shoppingcart\Facades\Cart::instance('shopping')->count() }}</span></div>
 
                         <!-- Cart Dropdown Content -->

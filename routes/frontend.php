@@ -28,6 +28,14 @@ Route::post('wishlist/move/cart/', [App\Http\Controllers\Frontend\WishlistContro
 Route::post('wishlist/delete/', [App\Http\Controllers\Frontend\WishlistController::class, 'WishlistDelete'])->name('wishlist.delete');
 
 
+//Compare  
+Route::get('compare', [App\Http\Controllers\Frontend\CompareController::class, 'compare'])->name('compare');
+Route::post('compare/store/', [App\Http\Controllers\Frontend\CompareController::class, 'StoreCompareWishlist'])->name('compare.store');
+Route::post('compare/move/cart/', [App\Http\Controllers\Frontend\CompareController::class, 'compareMoveCart'])->name('compare.move.cart');
+Route::post('compare/move/wishlist/', [App\Http\Controllers\Frontend\CompareController::class, 'compareMoveWishlist'])->name('compare.move.wishlist');
+Route::post('compare/delete/', [App\Http\Controllers\Frontend\CompareController::class, 'compareDelete'])->name('compare.delete');
+
+
 //checkout route 
 Route::get('checkout1', [App\Http\Controllers\Frontend\CheckoutController::class, 'Checkout1'])->name('checkout1')->middleware('user');
 Route::post('checkout-first/', [App\Http\Controllers\Frontend\CheckoutController::class, 'Checkout1Store'])->name('checkout1.store');

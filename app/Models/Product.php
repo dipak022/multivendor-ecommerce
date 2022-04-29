@@ -17,6 +17,10 @@ class Product extends Model
         return $this->beLongsTo('App\Models\Brand');
     }
 
+    public function category(){
+        return $this->beLongsTo('App\Models\Category','cat_id','id');
+    }
+
     public function rel_prods(){
         return $this->hasMany('App\Models\Product','cat_id','cat_id')->where('status','active')->limit('10');
     }
@@ -27,6 +31,10 @@ class Product extends Model
 
     public function oders(){
         return $this->beLongsToMany(Order::class,'product_orders')->withPivot('quantity');
+    }
+
+    public function reviews(){
+        return $this->hasMany(ProductReview::class);
     }
 
 }

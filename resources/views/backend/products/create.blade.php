@@ -92,10 +92,15 @@
                             -->
                             </br>
                             <select class="form-control show-tick" name="status">
-                                <option selected disable>--Select Status--</option>
+                                <option selected disabled>--Select Status--</option>
                                 <option value="active" {{old("status") == "active" ? "selected" : "" }}>Active</option>
                                 <option value="inactive" {{old("status") == "inactive" ? "selected" : "" }}>Inactive</option>
-                               
+                            </select>
+                        </br>
+                            <select class="form-control show-tick" name="is_featured">
+                                <option selected disabled>--Featured Status--</option>
+                                <option value="active" {{old("is_featured") == 1 ? "selected" : "" }}>Active</option>
+                                <option value="inactive" {{old("is_featured") == 0 ? "selected" : "" }}>Inactive</option>
                             </select>
                             <div class="form-group m-t-20 m-b-20">
                                 <div class="input-group">

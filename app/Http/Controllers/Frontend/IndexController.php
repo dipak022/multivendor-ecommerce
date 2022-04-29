@@ -23,11 +23,13 @@ class IndexController extends Controller
 {
     public function home(){
         $banners = Banner::where(['status'=>'active','condition'=>'banner'])->orderBy('id','DESC')->limit('5')->get();
+        $promo_banner = Banner::where(['status'=>'active','condition'=>'promo'])->orderBy('id','DESC')->first();
         $categorys = Category::where(['status'=>'active','is_parent'=>1])->orderBy('id','DESC')->limit('3')->get();
         $new_products = Product::where(['status'=>'active','conditions'=>'new'])->orderBy('id','DESC')->limit('12')->get();
         $featured_products =Product::where(['status'=>'active','is_featured'=>1])->orderBy('id','DESC')->limit('12')->get();
+        $brands =Brand::where(['status'=>'active'])->orderBy('id','DESC')->get();
 
-        return view('frontend.index',compact(['banners','categorys','new_products','featured_products']));
+        return view('frontend.index',compact(['banners','categorys','new_products','featured_products','promo_banner','brands']));
     }
 
     public function ProductCategory(Request $request,$slug){

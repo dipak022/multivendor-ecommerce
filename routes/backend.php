@@ -75,3 +75,5 @@ Route::post('/coupon_status', [App\Http\Controllers\CouponController::class, 'co
 Route::group(['prefix' => 'filemanager', 'middleware' => ['web', 'auth:admin']], function () {
     \UniSharp\LaravelFilemanager\Lfm::routes();
 });
+
+

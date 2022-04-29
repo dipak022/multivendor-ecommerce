@@ -92,12 +92,11 @@
             <div class="row">
                 <!-- Featured Offer Area -->
                 <div class="col-12 col-lg-6">
-                    <div class="featured_offer_area d-flex align-items-center" style="background-image: url({{asset('frontend/')}}/img/bg-img/fea_offer.jpg);">
+                    <div class="featured_offer_area d-flex align-items-center" style="background-image: url({{asset($promo_banner->photo)}});">
                         <div class="featured_offer_text">
-                            <p>Summer 2018</p>
-                            <h2>30% OFF</h2>
-                            <h4>All kid’s items</h4>
-                            <a href="#" class="btn btn-primary btn-sm mt-3">Shop Now</a>
+                            <h4>{!! nl2br($promo_banner->description) !!}</h4>
+                            <h4>{{  $promo_banner->title  }}</h4>
+                            <a href="{{ $promo_banner->slug }}" class="btn btn-primary btn-sm mt-3">Shop Now</a>
                         </div>
                     </div>
                 </div>
@@ -1007,6 +1006,7 @@
     <!-- Offer Area End -->
 
     <!-- Popular Brands Area -->
+    @if(count($brands)>0)
     <section class="popular_brands_area section_padding_100">
         <div class="container">
             <div class="row">
@@ -1017,29 +1017,19 @@
                 </div>
                 <div class="col-12">
                     <div class="popular_brands_slide owl-carousel">
+                        @foreach($brands as $brand)
                         <div class="single_brands">
-                            <img src="{{asset('frontend/')}}/img/partner-img/1.jpg" alt="">
+                            <img src="{{ asset($brand->photo) }}" alt="{{ $brand->title }}">
                         </div>
-                        <div class="single_brands">
-                            <img src="{{asset('frontend/')}}/img/partner-img/2.jpg" alt="">
-                        </div>
-                        <div class="single_brands">
-                            <img src="{{asset('frontend/')}}/img/partner-img/3.jpg" alt="">
-                        </div>
-                        <div class="single_brands">
-                            <img src="{{asset('frontend/')}}/img/partner-img/4.jpg" alt="">
-                        </div>
-                        <div class="single_brands">
-                            <img src="{{asset('frontend/')}}/img/partner-img/5.jpg" alt="">
-                        </div>
-                        <div class="single_brands">
-                            <img src="{{asset('frontend/')}}/img/partner-img/6.jpg" alt="">
-                        </div>
+                      @endforeach
                     </div>
                 </div>
             </div>
         </div>
     </section>
+    @else
+    <p class="text-align:center">Brands are not available</p>
+    @endif
     <!-- Popular Brands Area -->
 
     <!-- Special Featured Area -->

@@ -148,7 +148,7 @@ class CheckoutController extends Controller
 
 
         if($status){
-            Mail::to($order['email'])->bcc($order['semail'])->cc('dipakdebnath4022@mail.com')->send(new OredrMail($order));
+           // Mail::to($order['email'])->bcc($order['semail'])->cc('dipakdebnath4022@mail.com')->send(new OredrMail($order));
             //dd('Mail is send');
             Cart::instance('shopping')->destroy();
             Session::forget('coupon');

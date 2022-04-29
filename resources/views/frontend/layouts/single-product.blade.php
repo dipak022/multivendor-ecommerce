@@ -20,7 +20,7 @@
 
         
         <div class="product_compare">
-            <a href="compare.html"><i class="icofont-exchange"></i></a>
+            <a href="cjavascript:void(0)" class="addd_to_compare" data-id="{{ $product->id }}" id="add_to_compare_{{ $product->id }}" ><i class="icofont-exchange"></i></a>
         </div>
     </div>
 
@@ -81,14 +81,15 @@
                                     <div class="quantity">
                                         <input type="number" class="qty-text" id="qty" step="1" min="1" max="12" name="quantity" value="1">
                                     </div>
-                                    <button type="submit" name="addtocart" value="5" class="cart-submit">Add to cart</button>
+                                    <a type="submit" href="#" data-quantity="1" data-product-id="{{ $product->id }}" class="add_to_cart cart-submit" id="add_to_cart{{ $product->id }}"><i class="icofont-shopping-cart">Add to Cart</i> </a>
+                                    
                                     <!-- Wishlist -->
                                     <div class="modal_pro_wishlist">
                                     <a href="javascript:void(0)" class="add_to_wishlist" data-quantity="1" data-id="{{ $product->id }}" id="add_to_wishlist_{{ $product->id }}"  ><i class="icofont-heart"></i></a>
                                     </div>
                                     <!-- Compare -->
                                     <div class="modal_pro_compare">
-                                        <a href="compare.html"><i class="icofont-exchange"></i></a>
+                                        <a href="cjavascript:void(0)" class="addd_to_compare" data-id="{{ $product->id }}" id="add_to_compare_{{ $product->id }}" ><i class="icofont-exchange"></i></a>
                                     </div>
                                 </form>
                                 <!-- Share -->
@@ -112,6 +113,71 @@
     </div>
 </div>
 <!-- Quick View Modal Area -->  
+
+
+
+@section('scripts')
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+<!--add to compare -->
+<script>
+    $(document).on('click','.addd_to_compare',function(e){
+        e.preventDefault();
+        var product_id = $(this).data('id');
+        var token = "{{csrf_token()}}";
+        var path = "{{ route('compare.store') }}";
+ 
+        $.ajax({
+            url:path,
+            type:"POST",
+            dataType:"JSON",
+            data:{
+                product_id : product_id,
+                _token : token,
+            },
+            beforeSend:function(){
+                $('#add_to_compare_'+product_id).html('<i class="fa fa-spinner fa-spin"></i>');
+            },
+            complete:function(){
+                $('#add_to_compare_'+product_id).html('<i class="fas fa-exchange"></i>');
+            },
+            success:function(data){
+                //console.log(dara);
+                
+                if(data['status']){
+                     $('body #header-ajax').html(data['header']);
+                     $('body #compaer_counter').html(data['compaer_count']);
+                     swal({
+                         title: "Good job!",
+                         text: data['message'],
+                         icon: "success",
+                         button: "ok!",
+                     });
+                }else if(data['present']){
+                     $('body #header-ajax').html(data['header']);
+                     $('body #wishlist_count').html(data['wishlist_count']);
+                     swal({
+                         title: "Opps!",
+                         text: data['message'],
+                         icon: "warning",
+                         button: "ok!",
+                     });
+ 
+                }else{
+                     swal({
+                         title: "Sorry!",
+                         text: data['message'],
+                         icon: "error",
+                         button: "ok!",
+                     });
+ 
+                }
+            }
+ 
+        });
+ 
+    });
+ </script>
+ @endsection
 
   
 
