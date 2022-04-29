@@ -39,15 +39,15 @@ class IndexController extends Controller
         $best_sellings = Product::whereIn('id',$product_ids)->get();
         //return $best_selling;
         // best reting
-        $items = DB::table('product_orders')->select('product_id',DB::raw('COUNT(product_id) as count'))->groupBy('product_id')->orderBy('count','DESC')->get();
+        $item_rateds = DB::table('product_reviews')->select('product_id',DB::raw('AVG(rate) as count'))->groupBy('product_id')->orderBy('count','DESC')->get();
         $product_ids=[];
-        foreach($items as $item){
+        foreach($item_rateds as $item_rated){
             array_push($product_ids,$item->product_id);
         }
-        $best_sellings = Product::whereIn('id',$product_ids)->get();
+        $best_rateds = Product::whereIn('id',$product_ids)->get();
         //return $best_selling;
 
-        return view('frontend.index',compact(['banners','categorys','new_products','featured_products','promo_banner','brands','best_sellings']));
+        return view('frontend.index',compact(['banners','categorys','new_products','featured_products','promo_banner','brands','best_sellings','best_rateds']));
     }
 
     public function ProductCategory(Request $request,$slug){
